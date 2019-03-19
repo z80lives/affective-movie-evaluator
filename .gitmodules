@@ -1,0 +1,3 @@
+[submodule "FER/emotionlib"]
+	path = FER/emotionlib
+	url = https://github.com/omar178/Emotion-recognition
