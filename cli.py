@@ -3,7 +3,8 @@ import click
 import os
 from src.youtube import YouTubeModule
 from src.playback import RecordSystem, VLCPlayer
-
+from src.openpose import PoseSystem
+from src.utils import SampleLoader
 
 @click.group()
 @click.version_option(version='1.0.0')
@@ -41,16 +42,20 @@ def record(**kwargs):
     args = kwargs
     all_fields = {**required_fields, **other_fields}
 
+    data = {}
     for k in all_fields:
         click.echo(k +": " + args[all_fields[k]])
+        data[k] = args[all_fields[k]]
 
     print("Playing")
     player = VLCPlayer(file_name)
     #player.play_movie()
     
     print("Recording")
-    sys = RecordSystem()    
-    sys.start_recording("test", player)
+    sys = RecordSystem()
+    filename = sys.createSampleDir()
+    sys.saveMetaData(filename, data)
+    sys.start_recording("test", player, False, filename)
 
 
 @greet.command()
@@ -68,6 +73,18 @@ def start_recording(**kwargs):
     sys = RecordSystem()
     print("Starting video capture")
     sys.start_recording(kwargs["filename"])
+
+
+@greet.command()
+@click.argument("filename")
+def analyse_body_keypoints(**kwargs):
+    click.echo("Initializing pose system")    
+    sys = PoseSystem()
+
+    click.echo("Analysing body keypoints ")
+    loader = SampleLoader(kwargs["filename"])
+    sys.analyse(loader.getVideoFile(), loader.getDir()+"body_points.npy")
+
 
 
 #@click.command()
