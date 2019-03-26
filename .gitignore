@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+BEGR/models/*.caffemodel
+
 # C extensions
 *.so
 
@@ -102,3 +104,4 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
