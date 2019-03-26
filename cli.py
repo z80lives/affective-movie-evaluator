@@ -77,13 +77,26 @@ def start_recording(**kwargs):
 
 @greet.command()
 @click.argument("filename")
+@click.option('--display', '-d', is_flag=True, help="Display camera video.")
 def analyse_body_keypoints(**kwargs):
     click.echo("Initializing pose system")    
     sys = PoseSystem()
 
     click.echo("Analysing body keypoints ")
     loader = SampleLoader(kwargs["filename"])
-    sys.analyse(loader.getVideoFile(), loader.getDir()+"body_points.npy")
+    sys.analyse(loader.getVideoFile(), loader.getDir()+"body_points.npy", kwargs['display'])
+
+
+@greet.command()
+@click.argument("filename")
+@click.option('--display', '-d', is_flag=True, help="Display camera video.")
+def view_body_keypoints(**kwargs):
+    click.echo("Initializing pose system")    
+    sys = PoseSystem()
+
+
+    #loader = SampleLoader(kwargs["filename"])
+    sys.viewKeypointsOnSample(kwargs["filename"])
 
 
 
