@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 import click
+import os
 from src.youtube import YouTubeModule
+from src.playback import RecordSystem, VLCPlayer
+
 
 @click.group()
 @click.version_option(version='1.0.0')
@@ -22,6 +25,7 @@ def askRequiredField(required_fields, args):
 @click.option('--genre', default="", help="Genre of the movie.")
 @click.option('--tags', default="", help="Extra tags for analytic purpose.")
 @click.option('--person', default="", help="Viewer name.")
+@click.option('--display', '-d', is_flag=True, help="Display camera video.")
 def record(**kwargs):
     required_fields = {
         "Movie Name": "name",
@@ -32,12 +36,21 @@ def record(**kwargs):
         "Tags": "tags",
         "Genre": "genre"
     }
+    file_name = kwargs["video_file"]
     kwargs = askRequiredField(required_fields, kwargs)
     args = kwargs
     all_fields = {**required_fields, **other_fields}
 
     for k in all_fields:
         click.echo(k +": " + args[all_fields[k]])
+
+    print("Playing")
+    player = VLCPlayer(file_name)
+    #player.play_movie()
+    
+    print("Recording")
+    sys = RecordSystem()    
+    sys.start_recording("test", player)
 
 
 @greet.command()
@@ -48,6 +61,13 @@ def download_youtube(**kwargs):
     yt_module = YouTubeModule()
     yt_module.download_video(kwargs['file_name'], kwargs['url'])
     click.echo("Done")
+
+@greet.command()
+@click.argument("filename")
+def start_recording(**kwargs):
+    sys = RecordSystem()
+    print("Starting video capture")
+    sys.start_recording(kwargs["filename"])
 
 
 #@click.command()
