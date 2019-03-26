@@ -1,6 +1,8 @@
 import cv2
 import os
 import threading
+import uuid
+import json
 
 class RecordSystem:        
     def select_file(self, filename):
@@ -12,10 +14,13 @@ class RecordSystem:
     def play_video(self):
         pass
 
-    def start_recording(self, filename, movie_player=None, showVideo=False):
+    def start_recording(self, filename, movie_player=None, showVideo=False, sampleFile=None):
         vidcam = cv2.VideoCapture(0)
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
-        outsrc = cv2.VideoWriter("./data/"+filename+".avi", fourcc, 20.0, (640, 480))
+        if sampleFile:
+            outsrc = cv2.VideoWriter("./data/"+sampleFile+"/"+filename+".avi", fourcc, 20.0, (640, 480))
+        else:
+            outsrc = cv2.VideoWriter("./data/"+filename+".avi", fourcc, 20.0, (640, 480))
     
         
         while True:
@@ -38,6 +43,23 @@ class RecordSystem:
         vidcam.release()
         outsrc.release()
 
+    def generateFileName(self):
+        return str(uuid.uuid4())
+
+    def createSampleDir(self):
+        filename = self.generateFileName()
+        os.mkdir("./data/"+filename)
+        return filename
+
+    def saveMetaData(self, filename, data):        
+        with open("./data/"+filename+'/meta.json', 'w') as fp:
+            json.dump(data, fp)
+        
+    def loadMetaData(self, filename):        
+        with open('data.json', 'r') as fp:
+            data = json.load(fp)
+        return data
+
         
 class VLCPlayer:
     def __init__(self, file_name):
@@ -52,7 +74,6 @@ class VLCPlayer:
         os.system("cvlc --fullscreen --play-and-exit "+file_name)
         print("Movie playback done")
         self.done = True
-        #self.thread.join()
         #if play_movie is not None:                
         #os.system("cvlc --full-screen --play-and-exit "+file_name)
         ##os.system("vlc -I dummy --play-and-stop"+file_name)
