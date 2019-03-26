@@ -50,7 +50,7 @@ class PoseSystem:
                 average_inference = last_inference_time
             remaining_time = (length - c) * average_inference
 
-            print(output)
+            #print(output)            
             data.append(output)
             if showVideo:
                 cv2.imshow("out", raw_img)
