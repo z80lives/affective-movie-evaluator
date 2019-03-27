@@ -8,6 +8,8 @@ BEGR/models/*.caffemodel
 # C extensions
 *.so
 
+data/
+
 # Distribution / packaging
 .Python
 build/
