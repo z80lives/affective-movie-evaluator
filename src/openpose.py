@@ -5,22 +5,7 @@ import time
 from datetime import timedelta
 import numpy as np
 
-class PoseSystem:
-    def __init__(self):
-        protoFile = "./BEGR/models/pose_deploy_linevec_faster_4_stages.prototxt"
-        weightsFile = "./BEGR/models/pose_iter_160000.caffemodel"
-        self.net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
-        self.inWidth = 368
-        self.inHeight = 368
-
-    def infer(self, img):
-        inpBlob = cv2.dnn.blobFromImage(img, 1.0 / 255,
-                                        (self.inWidth, self.inHeight),
-                                        (0, 0, 0), swapRB=False, crop=False)
-        self.net.setInput(inpBlob)
-        output = self.net.forward()
-        return output
-
+class KeyPointVisualizer:
     def drawKeypoints(self, frame, keypoints, threshold=0.5):
         H = keypoints.shape[2]
         W = keypoints.shape[3]
@@ -37,7 +22,6 @@ class PoseSystem:
 
             x = (frameWidth * point[0]) / W
             y = (frameHeight * point[1]) / H
-            print(i, x, prob)
 
             if prob > threshold :
                 cv2.circle(frame_out, (int(x), int(y)), 15, (0, 255, 255), thickness=-1, lineType=cv2.FILLED)
@@ -68,11 +52,32 @@ class PoseSystem:
 
             img = raw_img
 
-            kp = keypoints[c]
-            img = self.drawKeypoints(img, kp, threshold=0.2)
+            kp = keypoints[c-1]
+            img = self.drawKeypoints(img, kp, threshold=0.5)
+
+            cv2.imshow("keypoints", img)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
+
+
+
+class PoseSystem:
+    def __init__(self):
+        protoFile = "./BEGR/models/pose_deploy_linevec_faster_4_stages.prototxt"
+        weightsFile = "./BEGR/models/pose_iter_160000.caffemodel"
+        self.net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
+        self.inWidth = 368
+        self.inHeight = 368
+
+    def infer(self, img):
+        inpBlob = cv2.dnn.blobFromImage(img, 1.0 / 255,
+                                        (self.inWidth, self.inHeight),
+                                        (0, 0, 0), swapRB=False, crop=False)
+        self.net.setInput(inpBlob)
+        output = self.net.forward()
+        return output
+
 
 
     def analyse(self, video_file, out_file, showVideo=False):

@@ -91,14 +91,36 @@ def analyse_body_keypoints(**kwargs):
 @click.argument("filename")
 @click.option('--display', '-d', is_flag=True, help="Display camera video.")
 def view_body_keypoints(**kwargs):
-    click.echo("Initializing pose system")    
-    sys = PoseSystem()
+    click.echo("Initializing pose system")
+    from src.openpose import KeyPointVisualizer
+    sys = KeyPointVisualizer()
 
 
     #loader = SampleLoader(kwargs["filename"])
     sys.viewKeypointsOnSample(kwargs["filename"])
 
 
+@greet.command()
+@click.argument('command', default="")
+@click.option('--brightness', "-b", default="70", type=click.IntRange(0, 255))
+@click.option('--contrast', "-c", default="50", type=click.IntRange(0, 255))
+@click.option('--saturation', "-s", default="70", type=click.IntRange(0, 255))
+@click.option('--width', "-w", default="640", type=int)
+@click.option('--height', "-h", default="480", type=int)
+def webcam(**args):
+    from src.device import Webcam
+    click.echo("Webcam module")
+    command = args["command"]
+    if  command == "test":
+        wc = Webcam()
+        wc.setResolution(args["width"], args["height"])
+        wc.setLight(float(args["brightness"]),
+                    float(args["contrast"]),
+                    float(args["saturation"]))
+        wc.test_run()
+        
+        
+    
 
 #@click.command()
 def greeter(**kwargs):
