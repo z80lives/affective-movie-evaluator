@@ -107,6 +107,8 @@ def view_body_keypoints(**kwargs):
 @click.option('--saturation', "-s", default="70", type=click.IntRange(0, 255))
 @click.option('--width', "-w", default="640", type=int)
 @click.option('--height', "-h", default="480", type=int)
+@click.option('--hue', "-H", default="13", type=int)
+@click.option('--gain', "-G", default="50", type=int)
 def webcam(**args):
     from src.device import Webcam
     click.echo("Webcam module")
@@ -114,9 +116,12 @@ def webcam(**args):
     if  command == "test":
         wc = Webcam()
         wc.setResolution(args["width"], args["height"])
-        wc.setLight(float(args["brightness"]),
-                    float(args["contrast"]),
-                    float(args["saturation"]))
+        wc.setLight(args["brightness"],
+                    args["contrast"],
+                    args["saturation"],
+                    args["hue"],
+                    args["gain"]
+        )
         wc.test_run()
         
         

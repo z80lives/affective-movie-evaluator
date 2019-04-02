@@ -17,8 +17,8 @@ class Webcam:
 
         cap.set(13, hue   ) # hue         
         cap.set(14, gain   ) # gain           min: 0   , max: 127 , increment:1
-        cap.set(15, exposure   ) # exposure       min: -7  , max: -1  , increment:1
-        cap.set(17, white_balance ) # white_balance  min: 4000, max: 7000, increment:1
+        #cap.set(15, exposure   ) # exposure       min: -7  , max: -1  , increment:1
+        #cap.set(17, white_balance ) # white_balance  min: 4000, max: 7000, increment:1
 
     def setFocus(self, v):
         self.cap.set(28, v)
