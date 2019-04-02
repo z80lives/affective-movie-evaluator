@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 BEGR/models/*.caffemodel
+BEGR/models/dlib/*.data
 
 # C extensions
 *.so
