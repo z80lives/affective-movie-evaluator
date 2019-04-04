@@ -1,9 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 import click
 import os
 from src.youtube import YouTubeModule
 from src.playback import RecordSystem, VLCPlayer
 from src.openpose import PoseSystem
+from src.headpose import HeadPoseEstimator
 from src.utils import SampleLoader
 
 @click.group()
@@ -17,7 +18,6 @@ def askRequiredField(required_fields, args):
             args[required_fields[k]] = click.prompt("Please enter "+k, type=str)
 
     return args
-
 
 @greet.command()
 @click.argument('video_file')
@@ -86,6 +86,17 @@ def analyse_body_keypoints(**kwargs):
     loader = SampleLoader(kwargs["filename"])
     sys.analyse(loader.getVideoFile(), loader.getDir()+"body_points.npy", kwargs['display'])
 
+@greet.command()
+@click.argument("filename")
+@click.option('--display', '-d', is_flag=True, help="Display camera video.")
+def analyse_head_keypoints(**kwargs):
+    click.echo("Initializing pose system")    
+    sys = HeadPoseEstimator()
+
+    click.echo("Analysing body keypoints ")
+    loader = SampleLoader(kwargs["filename"])
+    sys.analyse(loader.getVideoFile(), loader.getDir()+"head_points.npy", kwargs['display'])
+
 
 @greet.command()
 @click.argument("filename")
@@ -94,8 +105,18 @@ def view_body_keypoints(**kwargs):
     click.echo("Initializing pose system")
     from src.openpose import KeyPointVisualizer
     sys = KeyPointVisualizer()
+    
+    #loader = SampleLoader(kwargs["filename"])
+    sys.viewKeypointsOnSample(kwargs["filename"])
 
-
+@greet.command()
+@click.argument("filename")
+@click.option('--display', '-d', is_flag=True, help="Display camera video.")
+def view_head_keypoints(**kwargs):
+    click.echo("Initializing pose system")
+    from src.headpose import HeadPoseVisualizer
+    sys = HeadPoseVisualizer()
+    
     #loader = SampleLoader(kwargs["filename"])
     sys.viewKeypointsOnSample(kwargs["filename"])
 
@@ -104,10 +125,10 @@ def view_body_keypoints(**kwargs):
 @click.argument('command', default="")
 @click.option('--brightness', "-b", default="70", type=click.IntRange(0, 255))
 @click.option('--contrast', "-c", default="50", type=click.IntRange(0, 255))
-@click.option('--saturation', "-s", default="70", type=click.IntRange(0, 255))
+@click.option('--hue', "-H", default="50", type=int)
+@click.option('--saturation', "-s", default="50", type=click.IntRange(0, 255))
 @click.option('--width', "-w", default="640", type=int)
 @click.option('--height', "-h", default="480", type=int)
-@click.option('--hue', "-H", default="13", type=int)
 @click.option('--gain', "-G", default="50", type=int)
 def webcam(**args):
     from src.device import Webcam
