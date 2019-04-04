@@ -120,6 +120,14 @@ def view_head_keypoints(**kwargs):
     #loader = SampleLoader(kwargs["filename"])
     sys.viewKeypointsOnSample(kwargs["filename"])
 
+@greet.command()
+@click.argument("fname")
+def analyse_fer(**arg):
+	print("Analysing facial expressions")
+	print("Recording is in "+arg["fname"])
+	video_file_name = arg["fname"] + "/test.avi"
+	##load your class
+	## run analysis
 
 @greet.command()
 @click.argument('command', default="")
