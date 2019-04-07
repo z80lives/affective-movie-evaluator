@@ -123,11 +123,14 @@ def view_head_keypoints(**kwargs):
 @greet.command()
 @click.argument("fname")
 def analyse_fer(**arg):
-	print("Analysing facial expressions")
-	print("Recording is in "+arg["fname"])
-	video_file_name = arg["fname"] + "/test.avi"
-	##load your class
-	## run analysis
+    #print("Analysing facial expressions")
+    #print("Recording is in "+arg["fname"])
+    from FER.ferAnalysis import FaceSystem
+    video_file_name = arg["fname"] + "/test.avi"
+    ##load your class
+    system = FaceSystem()
+    system.analyse(video_file_name)
+    ## run analysis
 
 @greet.command()
 @click.argument('command', default="")
