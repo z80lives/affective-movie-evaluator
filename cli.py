@@ -4,7 +4,6 @@ import os
 from src.youtube import YouTubeModule
 from src.playback import RecordSystem, VLCPlayer
 from src.openpose import PoseSystem
-from src.headpose import HeadPoseEstimator
 from src.utils import SampleLoader
 
 @click.group()
@@ -90,7 +89,8 @@ def analyse_body_keypoints(**kwargs):
 @click.argument("filename")
 @click.option('--display', '-d', is_flag=True, help="Display camera video.")
 def analyse_head_keypoints(**kwargs):
-    click.echo("Initializing pose system")    
+    click.echo("Initializing pose system")
+    from src.headpose import HeadPoseEstimator
     sys = HeadPoseEstimator()
 
     click.echo("Analysing body keypoints ")
