@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import dlib
 from imutils import face_utils
+from src.analysis_module import PoseAnalyser
 
 ## Template borrowed from Openface project (for author credits view README.md)
 ### https://github.com/cmusatyalab/openface/blob/master/openface/align_dlib.py
@@ -83,8 +84,7 @@ line_pairs = [[0, 1], [1, 2], [2, 3], [3, 0],
               [0, 4], [1, 5], [2, 6], [3, 7]]
 
 
-
-class HeadPoseEstimator:
+class HeadPoseEstimator(PoseAnalyser):
     # Read
     #: Landmark indices.
     INNER_EYES_AND_BOTTOM_LIP = [39, 42, 57]
@@ -126,10 +126,13 @@ class HeadPoseEstimator:
         for d in self.detected:
             shape = self.predictor(img, d)
             shape = face_utils.shape_to_np(shape)
-            reprojectdst, euler_angle = h.get_head_pose(shape)
+            reprojectdst, euler_angle = self.get_head_pose(shape)
             self.projections.append( (reprojectdst, euler_angle) )
             self.predicted.append(shape)
         return self.detected
+
+    def analyse(self, video_file, out_file, show_video=False):
+        super().analyse(video_file, out_file, show_video, infer_method=self.infer)
 
     def drawKeypoints(self, img, index):
         shape = self.predicted[index]
@@ -141,26 +144,38 @@ class HeadPoseEstimator:
         for start, end in line_pairs:
             cv2.line(img, reprojectdst[start], reprojectdst[end], col)
         
-
     def getShapes(self):
         return self.predicted
 
+class HeadPoseVisualizer(PoseAnalyser):
+    def drawKeypoints(self, img, shape):
+        for (x, y) in shape:
+            cv2.circle(img, (x, y), 1, (0, 0, 255), -1)
 
-h = HeadPoseEstimator("./BEGR/models/dlib/shape_predictor_68_face_landmarks.dat")
-cap = cv2.VideoCapture(0)
-while cap.isOpened():
-    ret, img = cap.read()
-    if ret:
-        result = h.infer(img)
-
-        if len(result) > 0:
-            for i, f in enumerate(result):
-                h.drawKeypoints(img, i)
-                h.drawProjection(img, i)
-                cv2.imshow("demo", img)
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-
-
+    def draw_func(self, img, kp, options={}):
+        if len(kp) > 0:            
+            for rect in kp:
+                print(rect)
+                #self.drawKeypoints(img, f)
+        return img
     
+    def viewKeypointsOnSample(self, sample_dir, options={}):
+        super().viewKeypointsOnSample(sample_dir, "head", self.draw_func, options)
+
+
+#h = HeadPoseEstimator("./BEGR/models/dlib/shape_predictor_68_face_landmarks.dat")
+#cap = cv2.VideoCapture(0)
+#while cap.isOpened():
+#    ret, img = cap.read()
+#    if ret:
+#        result = h.infer(img)
+#        if len(result) > 0:
+#            for i, f in enumerate(result):
+#                h.drawKeypoints(img, i)
+#                h.drawProjection(img, i)
+#                cv2.imshow("demo", img)
+#        if cv2.waitKey(1) & 0xFF == ord('q'):
+#            break
+
+
+

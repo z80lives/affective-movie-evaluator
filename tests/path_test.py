@@ -13,5 +13,11 @@ class TestSampleLoader(unittest.TestCase):
     def testGetVideoFile(self):
         assert sys.getVideoFile() == "./data/test/test.avi"
 
+    def testDir2(self):
+        s = SampleLoader("./data/1234")
+        #assert sys._dir == "./data/1234/"
+        #assert sys.getVideoFile() == "./data/1234/test.avi"
+        
+
 if __name__ == "__main__":
     unittest.main()

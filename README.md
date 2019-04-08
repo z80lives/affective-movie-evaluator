@@ -1,6 +1,8 @@
 # Affective Movie Evaluator
 A System to rate movie based on videos of audience reaction.
 
+## Required libraries
+ click
 
 # Developement Guide
 ## Unit Tests
