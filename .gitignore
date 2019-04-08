@@ -7,6 +7,7 @@ BEGR/models/*.caffemodel
 BEGR/models/dlib/*.data
 FER/haarcascade_files/*.xml
 FER/models/*.hdf5
+FER/models/*.dat
 
 # C extensions
 *.so
