@@ -178,7 +178,9 @@ As for the specific techniques we will use throughout the development, our idea 
 ** Gantt Chart
 * Requirement Analysis
 ** Introduction
-   Since the conception of the project plan, our initial goal was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, to actually 
+   Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
+
+   We also wanted to complete all the software design and engineering intensive tasks as early as possible so we can focus on the machine learning aspects of our project. 
 ** Requirement Summary
 ** Functional Requirements
 *** Use-Case Diagrams
