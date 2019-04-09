@@ -17,6 +17,7 @@ class RecordSystem:
     def start_recording(self, filename, movie_player=None, showVideo=False, sampleFile=None):
         vidcam = cv2.VideoCapture(0)
         fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        print("Recording sample: %s", sampleFile)
         if sampleFile:
             outsrc = cv2.VideoWriter("./data/"+sampleFile+"/"+filename+".avi", fourcc, 20.0, (640, 480))
         else:
@@ -40,8 +41,10 @@ class RecordSystem:
                 break
 
         print("Done")
+        print("sample_id: %s"% (sampleFile))
         vidcam.release()
         outsrc.release()
+        
 
     def generateFileName(self):
         return str(uuid.uuid4())
@@ -56,7 +59,7 @@ class RecordSystem:
             json.dump(data, fp)
         
     def loadMetaData(self, filename):        
-        with open('data.json', 'r') as fp:
+        with open('meta.json', 'r') as fp:
             data = json.load(fp)
         return data
 

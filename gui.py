@@ -3,6 +3,8 @@ import wx
 
 #import builtins as __builtin__
 #define
+from src.playback import RecordSystem, VLCPlayer
+from src.utils import SampleLoader, SampleController, MovieController
 
 
 
@@ -21,27 +23,79 @@ class CPanelEventHandlers:
         print("Creating a new record")
 
     def onNew(self, event):        
-        recordTab = RecordTabPanel(self.panel_notebook)
+        #file selector dialog
+        with wx.FileDialog(self, "Open a movie file", wildcard="mp4 files (*.mp5)|*.mp4",
+                           style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+            if fileDialog.ShowModal() == wx.ID_CANCEL:
+                return     
+            pathname = fileDialog.GetPath()
+            print("File %s found!"% (pathname))
+
+
+        sys = RecordSystem()
+        msys = MovieController()
+        msys.read_files()
+
+        mdata = msys.getMovieByFile(pathname)
+            
+        #try:
+        #    with open(pathname, 'r') as file:
+        #        self.doLoadDataOrWhatever(file)
+        #except IOError:
+        #    wx.LogError("Cannot open file '%s'." % newfile)
+
+        #open the tab later
+        recordTab = RecordTabPanel(self.panel_notebook, self)
         self.panel_notebook.AddPage(recordTab, "Record Screening")
+
+        #auto fill text fields
+        recordTab.form.txtMovieFile.SetValue(pathname)
+        inp_map = {
+            "name": recordTab.form.txtMovieName,
+            "year": recordTab.form.txtYear,
+            "genre": recordTab.form.txtGenre,
+            "tags": recordTab.form.txtTag
+        }        
+        for k in inp_map:
+            try:
+                inpField = inp_map[k]
+                inpField.SetValue(mdata[k])
+            except KeyError: #ignore if key doesnt exist
+                continue
+
         #self.do_layout()
         self.Layout()
+
+    def onCloseTab(self, event):
+        print("Closing tab..")
+        print(event)
+
+    def onRecord(self, event, form):
+        sys = RecordSystem()
+        msys = MovieController()
+        msys.read_files()
+
+        person = form.txtPerson.GetValue()
+        movie_path = form.txtMovieFile.GetValue()
+        mdata = msys.getMovieByFile(movie_path)
+
+        file_name = msys.get_dir() + msys.getMovieObjById(mdata['id']).filename
+        data = {"movie_id": "%s"%(mdata["id"]),"subject_name": person}
+
+        player = VLCPlayer(file_name)
+
+        sys = RecordSystem()
+        filename = sys.createSampleDir()
+    
+        sys.saveMetaData(filename, data)
+        sys.start_recording("test", player, False, filename)
+        print("Done")
+
         
-   #     with wx.FileDialog(self, "Open a movie file", wildcard="mp4 files (*.mp5)|*.mp4",
-   #                    style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
 
-   #         if fileDialog.ShowModal() == wx.ID_CANCEL:
-  #              return     # the user changed their mind
-
-            # Proceed loading the file chosen by the user
-  #          pathname = fileDialog.GetPath()
-  #          print("File %s found!"% (pathname))
-            
-            #try:
-            #    with open(pathname, 'r') as file:
-            #        self.doLoadDataOrWhatever(file)
-            #except IOError:
-            #    wx.LogError("Cannot open file '%s'." % newfile)
 import random
+
+
 class TestTabPanel(wx.Panel):
     #----------------------------------------------------------------------
     def __init__(self, parent):
@@ -61,7 +115,7 @@ class FormObj:
         
 class RecordTabPanel(wx.Panel):
     
-    def __init__(self, parent):
+    def __init__(self, parent, event_handler):
         super().__init__(parent, wx.ID_ANY)
         self.form = FormObj()
         #formObj.txtPerson
@@ -73,12 +127,18 @@ class RecordTabPanel(wx.Panel):
         self.form.txtGenre = wx.TextCtrl(self, wx.ID_ANY, "")
         self.form.txtTag = wx.TextCtrl(self, wx.ID_ANY, "")
         self.form.checkbox_1 = wx.CheckBox(self, wx.ID_ANY, "")
-        
-        self.do_layout()        
+        self.form.btnRecord = wx.Button(self, wx.ID_ANY, "Record")
+        self.form.btnCloseTab = wx.Button(self, wx.ID_ANY, "Close")
+
+        self.event_handler =  event_handler
+        self.parent = parent
+        self.do_layout()
+        self.do_bind()
+
 
     def do_layout(self):
         tab_context_sizer = wx.BoxSizer(wx.VERTICAL)
-        form_gridsizer = wx.GridSizer(7, 2, 0, 0)        
+        form_gridsizer = wx.GridSizer(8, 2, 0, 0)        
 
         fileOpenSizer = wx.BoxSizer(wx.HORIZONTAL)        
         lblPerson = wx.StaticText(self, wx.ID_ANY, "Person Name")
@@ -107,14 +167,23 @@ class RecordTabPanel(wx.Panel):
         lblPreview = wx.StaticText(self, wx.ID_ANY, "Preview \n(Not Recommended)")
         form_gridsizer.Add(lblPreview, 0, 0, 0)
         form_gridsizer.Add(self.form.checkbox_1, 0, 0, 0)
+        form_gridsizer.Add(self.form.btnCloseTab, 0, 0, 0)
+        form_gridsizer.Add(self.form.btnRecord, 0, 0, 0)
 
         tab_context_sizer.Add(form_gridsizer, 0, 0, 0)
         
         self.SetSizer(tab_context_sizer)        
-        self.Layout()        
+        self.Layout()
+
+        #event.Skip()
+        
+    def do_bind(self):
+        #self.form.btnCloseTab.Bind(wx.EVT_BUTTON, lambda event: self.event_handler.onCloseTab(event, self) )
+        #self.form.btnCloseTab.Bind(wx.EVT_BUTTON, self._destroy )
+        self.form.btnRecord.Bind(wx.EVT_BUTTON, lambda event: self.event_handler.onRecord(event, self.form) )
         
 
-class ControlPanelFrame(wx.Frame, CPanelEventHandlers):    
+class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
     def createMenus(self):
         filemenu = wx.Menu()
         newItem = filemenu.Append(wx.ID_NEW, "&New Record", "Create a new Recording")        

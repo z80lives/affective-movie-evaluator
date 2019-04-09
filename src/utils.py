@@ -1,4 +1,14 @@
-class SampleLoader:
+""" utils module contains code related to operating system functions. """
+import os
+import json
+import os.path
+from src.system_objects import Movie, Sample
+
+class SampleLoader(object):
+    """ SampleLoader is responsible for aiding the load process of individual
+    sample data from our directory.
+    """
+
     def __init__(self, filename):
         #self._dir = "./data/"+filename+"/"
         f = filename
@@ -11,3 +21,123 @@ class SampleLoader:
 
     def getDir(self):
         return self._dir
+
+
+class SampleController(object):
+    """Sample Controller handles crud operations for the sample dataset."""    
+    def __init__(self, sample_dir="./data/"):        
+        self.sample_dir = sample_dir
+        self._init = False
+        self.data = {}
+
+
+    def read_dirs(self):
+        """  Fetch all the directories in data folder and store it in class variables.    
+        """
+        self.dirs = [os.path.join(self.sample_dir, f) for f in os.listdir(self.sample_dir) 
+               if os.path.isdir(os.path.join(self.sample_dir,f))]
+        self._ids = [x[len(self.sample_dir):] for x in self.dirs if os.path.isfile(x+"/meta.json") ]
+       
+        for k in self._ids:
+            self.data[k] = (self.read_metadata(k))            
+
+        self.__init = True
+
+    def list_all(self):
+        if not self._init:
+            self.read_dirs()        
+        return self._ids
+
+    def read_metadata(self, _id):
+        #with openself.dir+_id
+        d = []
+        with open(self.sample_dir+_id+'/meta.json', 'r') as fp:
+            data = json.load(fp)
+            d.append(data)
+        return d[0]
+
+    def get_metadata(self, _id):
+        return self.data[_id]
+    
+class MovieController(object):
+    def __init__(self, movie_dir="./movies/"):
+        self.movie_dir = movie_dir
+        self.metadatafile = "movie_index.json"
+        self.files = []
+        self.metadata = None
+        self.data = []
+        self.__init = False
+        self.indexed_data = {}
+        self.indexed_data2 = {}
+
+    def get_dir(self):
+        return self.movie_dir
+
+    def read_files(self):
+        """  Fetch all the directories in data folder and store it in class variables.    
+        """
+        valid_filetypes = [".mp4", ".avi"]
+        self.files = [f for f in os.listdir(self.movie_dir) if f[-4:] in valid_filetypes ]
+        self.readMetadata()
+        
+        self.data = []
+        for f in self.files:
+            row = Movie(f)
+            try:
+                md  = self.metadata[f]
+                row = Movie(f, md['name'],
+                            md['genre'], md['year'],
+                            md["tags"]
+                )
+                self.indexed_data[md["id"]] = md
+                self.indexed_data2[md["id"]] = row
+            except KeyError:
+                pass
+            self.data.append(row)
+        return self.files
+
+    def getMovieByFile(self, filename):
+        if "/" in filename:
+            filename = filename[filename.rindex("/")+1:]
+            
+        try:
+            return self.metadata[filename]
+        except KeyError:
+            return self.indexed_data[filename]
+        
+    def getMovieObjById(self, _id):
+        return self.indexed_data2[_id]
+        
+    def updateMetadata(self):
+        with open(self.movie_dir+self.metadatafile, 'w') as fp:
+            json.dump(self.metadata, fp)            
+
+
+    """Adds the metadata of a movie given a movie file"""
+    def addMovie(self, movie):        
+        self.metadata[movie.movie] = movie.getAttributes()
+    
+    def readMetadata(self):
+        d = []
+        with open(self.movie_dir+self.metadatafile, 'r') as fp:
+            data = json.load(fp)
+            d.append(data)
+        self.metadata=d[0]
+        return d[0]
+
+    def listMovies(self):
+        if self.__init == False:
+            self.read_files()
+            self.__init = True
+        return [m.getAttributes() for m in self.data]
+            
+    
+if __name__ == "__main__":
+    #sys = SampleController()
+    #s = "1d989665-80ae-4bff-bf59-b5f7691fb3b9"
+    #sys.read_dirs()
+    #print(sys.get_metadata(s))
+
+    sys = MovieController()
+    sys.read_files()
+    #print(len(sys.readMetadata()))
