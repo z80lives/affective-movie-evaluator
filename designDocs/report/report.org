@@ -67,14 +67,14 @@ The problem we are trying to solve is that film studios screens movies to test a
 Affective Analysis is already used by marketing giants such as Coca-Cola to predict the effectiveness of their advertisement on target test audiences. Affective movie analysis could prove to be valuable to streaming services that distributes their own content and have more control over the productions such as NetFlix.
 
 ** Issues
-
+   
 Our system is not real-time but still requires heavy computing power in order to run. This means the admin will often have to run multiple processes for analysis and come back later for the result. Our system does not support multiple processes yet, while it is possible for our system to run a process on a remote server or a cloud computer service via ssh and http, the admin still have to wait for the analysis to be completed. 
 
 In order to minimize the scale of the problem, the first few iterations of the problem deals with only a single audience member. The largest audience we will be designing our system will be for a group of two to four person, under controlled lighting environment. Unless we have access to infrared cameras and better computing facilites, we will not be able to overcome these limitations. 
 
 Our video can only have one person in front of the camera. The application is not able to give proper result if there are faces in the background when the audience member is reacting. Presence of another person in the room currently effects the resulting data, and it is very time consuming for a human to verify whether the recorded data does not have any background face. However, as we wrote our detection algorithm to choose the largest region of interest in the image, the fail cases we have observed usually consists of background posters and wallpapers with larger face than our subject.
 
-One of the weakness we have is in the accuracy of the face detection algorithm. OpenCV's default facial detection algorithm, (Viola-Jones full frontal model) requires the audience member to face the camera directly. However, we have also implemented a more accurate face detection algorithm at the risk of increasing computing time.
+One of the weakness we have is in the accuracy of the face detection algorithm. OpenCV's default facial detection algorithm, (Viola-Jones full frontal model) requires the audience member to face the camera directly. However, we plan to implement a more accurate face detection algorithm at the risk of increasing computing time.
 
 Right now our system uses an externel media player known as VLC media player, to play the movie while being recorded in use case 1. The system admin is usually required to install the software manually. However on Windows based systems, it is sometimes not possible to find the 
 
@@ -176,14 +176,63 @@ As for the specific techniques we will use throughout the development, our idea 
 ** Work Breakdown Structure
 ** Risk Management
 ** Gantt Chart
+We created the work breakdown structure during our project plan, and we grouped each task under a phase in our methodology.
+Then we estimated time for each task and prioritsed them, finally creating a project timeline (Gantt CHart)
+
 * Requirement Analysis
 ** Introduction
    Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
 
-   We also wanted to complete all the software design and engineering intensive tasks as early as possible so we can focus on the machine learning aspects of our project. 
+   We also wanted to complete all the software design and engineering intensive tasks as early as possible so we can focus on the machine learning aspects of our project. Thus, a large portion of this iteration is writing the code for user interaction, and designing processes within the system that can perform independent of the type of user interface.
+
+Initially, we like we planned we worked on the facial analysis, and posture analysis portion of the code seperately. Later on we refactored and integrated the code as seperate modules into a single codebase with the help of object-oriented programming.
+
 ** Requirement Summary
+Our systems consists of mainly one user interacting with the application directly. Ideally this user is a system operator, hired by the production company with a knowledgeable background in IT and system administration. Throughout this document we refer to this user, simply as /Admin/. We should note that the user /admin/ is not really a recognized object within the system and thus does not have a login function. /Admin/ refers to whoever is operating the system.
+
+An /Admin/ can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
+
 ** Functional Requirements
 *** Use-Case Diagrams
+
+#+BEGIN_SRC plantuml :file ./img/auc.png
+actor admin
+admin -> (Record Video)
+admin -> (Analyse Video)
+#+END_SRC
+
+#+RESULTS:
+[[file:./img/auc.png]]
+
+#+NAME: table:auc1
+#+ATTR_LATEX: :align |l|l|lp{3cm}|
+#+CAPTION: Analysis usecases
+|-----------------+-------------------------------------------------------------|
+| *Use Case 1*    | Record Video                                                |
+|-----------------+-------------------------------------------------------------|
+| Goal in Context | To record an audience member's video and store it.          |
+|-----------------+-------------------------------------------------------------|
+| Primary Actors  | - Admin                                                     |
+| Secondary Actor | - Audience                                                  |
+|-----------------+-------------------------------------------------------------|
+| Description     | Use camera to record and store video session of an audience |
+|                 | watching a movie screening.                                 |
+|-----------------+-------------------------------------------------------------|
+|-----------------+-------------------------------------------------------------|
+| *Use Case 2*    | Analyse Video                                               |
+|-----------------+-------------------------------------------------------------|
+| Goal in Context | To analyse an audience reaction video and produce           |
+|                 | visualisations.                                             |
+|-----------------+-------------------------------------------------------------|
+| Primary Actors  | - Admin                                                     |
+| Secondary Actor | - Audience                                                  |
+|-----------------+-------------------------------------------------------------|
+| Description     | Use camera to record and store video session of an audience |
+|                 | watching a movie screening.                                 |
+|-----------------+-------------------------------------------------------------|
+
+
+
 *** High-Level Use Cases
 ** Non-Functional Requirements
 *** Technical Requirements
