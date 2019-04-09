@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+from __future__ import print_function
+
 import wx
 
 #import builtins as __builtin__
@@ -6,7 +8,16 @@ import wx
 from src.playback import RecordSystem, VLCPlayer
 from src.utils import SampleLoader, SampleController, MovieController
 
+ConsoleUI = None
 
+
+import builtins as __builtin__
+
+def print(*args, **kwargs):
+    if ConsoleUI is None:
+        return __builtin__.print(*args, **kwargs)
+    else:
+        ConsoleUI.print(*args, **kwargs)
 
 class CPanelEventHandlers:
     def onQuit(self, event):
@@ -92,24 +103,6 @@ class CPanelEventHandlers:
         print("Done")
 
         
-
-import random
-
-
-class TestTabPanel(wx.Panel):
-    #----------------------------------------------------------------------
-    def __init__(self, parent):
-        """"""
-        wx.Panel.__init__(self, parent=parent)
-
-        colors = ["red", "blue", "gray", "yellow", "green"]
-        self.SetBackgroundColour(random.choice(colors))
-
-        btn = wx.Button(self, label="Press Me")
-        sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(btn, 0, wx.ALL, 10)
-        self.SetSizer(sizer)
-
 class FormObj:
     pass
         
@@ -209,6 +202,7 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
         )
         #self.control = wx.TextCtrl(self, style=wx.TE_MULTILINE)
         self.panel_notebook = wx.Notebook(self, wx.ID_ANY)
+        self.txtConsole = wx.TextCtrl(self, wx.ID_ANY, "", style=wx.TE_MULTILINE | wx.TE_PROCESS_ENTER | wx.TE_PROCESS_TAB | wx.TE_READONLY)
         #self.text_area = wx.TextCtrl(self, wx.ID_ANY, "")
         
         self.CreateStatusBar()
@@ -221,11 +215,21 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
         self.SetMenuBar(menubar)        
         self.Show(True)
 
+        self.txtConsole.SetMinSize((90, 23))
+
         self.do_layout()
+
+        #ConsoleUI = self
+        
+
+    def print(self, *args, **kwargs):
+        self.txtConsole.SetValue("HELLO")
+        
 
     def do_layout(self):
         self.context_sizer = wx.BoxSizer(wx.VERTICAL)
         self.context_sizer.Add(self.panel_notebook, 0, wx.ALL | wx.EXPAND, 1)
+        self.context_sizer.Add(self.txtConsole, 2, wx.ALL | wx.EXPAND, 1)
         #self.context_sizer.Add(self.text_area, 0, wx.ALL, 0)
 
         #recordTab = RecordTabPanel(self.panel_notebook)
