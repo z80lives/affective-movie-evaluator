@@ -18,7 +18,8 @@
 
 \newpage
 \begin{abstract}
-   My literature review discusses how we can use a pose based emotion system, to evaluate a movie by analysing it's audience. We discuss what we found about one such series of research work based on the same idea, then we explain and justify why pose based emotion recognition is necessary. We came up with the conclusion, it will be more effective to combine pose based systems with facial emotion recognition, to analyse audience emotion for our proposed system. We also discussed on the current state of the art pose estimation systems, which are vital for a pose-based emotion recognition system.
+	Write Abstract here.  
+
 \end{abstract}
 \newpage
 
@@ -29,8 +30,10 @@ I hereby declare that the report presented here as part of the requirement of BI
 \\
 
 Student Names:\\
+Mohamed Shaatha Ibrahim (B1301746)
+Elebe Faith Alfred (B1301511)
 
-Date:
+Date: 12-04-2019
 \vspace*{\fill}
 
 \renewcommand{\abstractname}{Acknowledgement}
@@ -48,6 +51,11 @@ Date:
 
 * Proposal
 ** Introduction
+
+Movie production studios use test screening in order to determine whether their movies will succeed. Recently, internet movie distributors such as Netflix and Amazon have started taking more control of the production of their content, it is more beneficial for studios to re-edit their movie once they can predict that the product is going to fail. While there are automated sentiment analysis tools used to measure how well the audience reacts to test screening, most of the feedback is still taken from questionnaires and the audiences subjective evaluation.
+
+We aim to provide an automated, movie evaluation system which is going to analyse the audience watching the movie and predict an overall score. Our system is intended to supplement the existing manual process of test screenings. We are not proposing a system to replace the existing subjective evaluations given by the audience.
+
 The aim of this project is to develop a system that can evaluate how good a movie is, by analysing both face and body postures of the audience. In order for this to work we provide the system a video file consisting of audience reactions, and the system will tell us how good a movie is within a rating metrics, we will define later. It is important for us to state, that we are not proposing a real-time system here; the system accepts a recording of the raw data - which is currently defined as video file, and can be any other form of measurement - as the primary input.
 
 A system like this can aid us develop further, a more general system that can evaluate how good a certain product or presentation is by analysing the audience reaction limited by a certain context. In our case the product is a movie, and how the audience reacts may depend on what genre of movie they are watching, or what kind of experience they were expecting beforehand. It is likely that our system may not work well without knowing these information. Systems like these are also related to computer vision with Emotion AI technologies, such as face based lie detectors, which uses the same techniques to work.
@@ -66,8 +74,7 @@ The problem we are trying to solve is that film studios screens movies to test a
 
 Affective Analysis is already used by marketing giants such as Coca-Cola to predict the effectiveness of their advertisement on target test audiences. Affective movie analysis could prove to be valuable to streaming services that distributes their own content and have more control over the productions such as NetFlix.
 
-** Issues
-   
+** Issues   
 Our system is not real-time but still requires heavy computing power in order to run. This means the admin will often have to run multiple processes for analysis and come back later for the result. Our system does not support multiple processes yet, while it is possible for our system to run a process on a remote server or a cloud computer service via ssh and http, the admin still have to wait for the analysis to be completed. 
 
 In order to minimize the scale of the problem, the first few iterations of the problem deals with only a single audience member. The largest audience we will be designing our system will be for a group of two to four person, under controlled lighting environment. Unless we have access to infrared cameras and better computing facilites, we will not be able to overcome these limitations. 
@@ -79,8 +86,12 @@ One of the weakness we have is in the accuracy of the face detection algorithm. 
 Right now our system uses an externel media player known as VLC media player, to play the movie while being recorded in use case 1. The system admin is usually required to install the software manually. However on Windows based systems, it is sometimes not possible to find the 
 
 ** Benefits and Constraints
+For our current iteration the system can analyse only one audience member. The reason for this limitation is that we initially wanted to start the project with a smaller scope and also to reduce the amount of tasks we might have for the first iteration. Even in our future iterations, we will not be analysing and audience consisting of more than a handful of person, unless we get better camera equipments.
+
+Another issue faced by us is that facial emotion recogntion is not working that well, for now. In order to improve the accuracy of the FER model we plan to write separate test cases.
 
 Since our system takes a long time to analyse, we had to modify our "Analyse Video" use case into two seperate parts. Instead of directly providing a video file to run analysis and immediately getting the results and visualisations, our system actually requires the admin to run two seperate instance of analysis, facial emotion analysis (FER) and pose analysis (BEGR). Running an instance of analysis will produce the required data file, which can then be visualised as a time-series and processed to be sent for our movie evaluation ML model.
+
 
 ** Project Description
 
@@ -172,7 +183,7 @@ As for the specific techniques we will use throughout the development, our idea 
 
 * Project Management Plan
 ** Introduction
-   O
+   
 ** Work Breakdown Structure
 ** Risk Management
 ** Gantt Chart
@@ -183,26 +194,87 @@ Then we estimated time for each task and prioritsed them, finally creating a pro
 ** Introduction
    Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
 
+Like any other software developement project, our approach was to first of all analyse the system and identify. Practically, most of the requirement analysis was done while we were creating the project plan, while we did not thoroughly document it in the proposal itself. This part of the document was later updated to reflect the change in number of use-cases in our iteration 1, after we realised that we are not able to fit the three initial use-cases we planned into the first iteration.
+
+Along with the project's functional requirements and non-functional requirements, we will also try to give an overview of the requirements from the machine learning perspective. We will try to state the ML problem, and define the requirements and structure for the problem. It should be noted by now, our system will consist multiple ML algorithms interacting with each other and a portion of has to be designed by us. 
+
    We also wanted to complete all the software design and engineering intensive tasks as early as possible so we can focus on the machine learning aspects of our project. Thus, a large portion of this iteration is writing the code for user interaction, and designing processes within the system that can perform independent of the type of user interface.
 
 Initially, we like we planned we worked on the facial analysis, and posture analysis portion of the code seperately. Later on we refactored and integrated the code as seperate modules into a single codebase with the help of object-oriented programming.
 
+
+
 ** Requirement Summary
-Our systems consists of mainly one user interacting with the application directly. Ideally this user is a system operator, hired by the production company with a knowledgeable background in IT and system administration. Throughout this document we refer to this user, simply as /Admin/. We should note that the user /admin/ is not really a recognized object within the system and thus does not have a login function. /Admin/ refers to whoever is operating the system.
+The first thing we did during our first meeting was infact to identify all the stakeholders and actors who interacted with the system. While we discussed the naming conventions of the actors involved during the later meetings, it was early on established that only one user directly interacts with the system and can be considered to be the primary user.
+
+Our systems consists of mainly this one user controlling the application directly. Ideally this user is a system operator, hired by the production company with a knowledgeable background in IT and system administration. Throughout this document we refer to this user, simply as /Admin/. We should note that the user /Admin/ is not really a recognized object within the system and thus does not have a login function. /Admin/ refers to whoever is operating the system.
+
+*** Actors and Stakeholders
+**** Admin
+**** Subject
 
 An /Admin/ can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
 
+ - Admin is able to Record a video of a /Subject/ watching a movie.
+ - Admin is able to Analyse a video of a subject
+  - Produce time-series.
+
+While the UML for iteration 1 might not directly hint that subject is indeed a part of the system, it is going to be added as an Object in our future iteration. We did not include the /Subject/ as an object that is in the system, yet. 
+
+
+*** Object represented in the system
+ - Movies
+ - Samples
+
+*** Hardware Architecture / Layout
+
+*** Pipeline diagram
+
 ** Functional Requirements
 *** Use-Case Diagrams
+While designing of the use-cases we only thought from a logical/business perspective and not included the "technical" usecases, as our methodology and approach does not heavily rely on UML. 
 
+
+#+CAPTION: Iteration 1: Before integration
+#+NAME: fig:auc
 #+BEGIN_SRC plantuml :file ./img/auc.png
-actor admin
-admin -> (Record Video)
-admin -> (Analyse Video)
-#+END_SRC
+left to right direction
 
+actor admin
+rectangle AffectiveMEM{
+ admin -> (Record Video)
+
+ rectangle VASubsystem{
+  admin --> (Analyse Video)
+ }
+}
+#+END_SRC
 #+RESULTS:
 [[file:./img/auc.png]]
+
+
+In figure ref:fig:auc, you can see that the Analyse Video is bound within a subsystem of Affective Movie Evaluator. The reason
+
+While there is a weak implementation of other use cases, the two use-cases shown in the diagram ref:fig:auc, are the main goal of our current iteration until now.
+
+#+CAPTION: Analyse and it's subsystems
+#+NAME: fig:auc
+#+BEGIN_SRC dot :file ./img/auc_exp.png
+digraph g{
+ node[shape=rectangle; fillcolor=LightYellow; style=filled; color=maroon]
+ Analyse[shape=oval; ]
+ Analyse -> FER
+ Analyse -> BEGR
+ FER [label="Facial Expression\n Recognition (FER)"]
+ BEGR [label="Body Emotion \n & Gesture Recognition\n (BEGR)"]
+}
+#+END_SRC
+#+RESULTS: fig:auc
+[[file:./img/auc_exp.png]]
+
+
+It would have been ideal for the sake of this documentation for Analyse use case to include two "technical" use-cases, "Analyse FER" and "Analyse BEGR", so that it is easier to credit the two team members, but it would not have been accurate. Ideally a use case should show an added value to a system, and seperating them does not really contribute the value to from either logical or design perspective. 
+
 
 #+NAME: table:auc1
 #+ATTR_LATEX: :align |l|l|lp{3cm}|
@@ -221,8 +293,8 @@ admin -> (Analyse Video)
 |-----------------+-------------------------------------------------------------|
 | *Use Case 2*    | Analyse Video                                               |
 |-----------------+-------------------------------------------------------------|
-| Goal in Context | To analyse an audience reaction video and produce           |
-|                 | visualisations.                                             |
+| Goal in Context | To extract an audience's facial and body pose data from a   |
+|                 | video file and store it as readable data.                   |
 |-----------------+-------------------------------------------------------------|
 | Primary Actors  | - Admin                                                     |
 | Secondary Actor | - Audience                                                  |
@@ -236,12 +308,38 @@ admin -> (Analyse Video)
 *** High-Level Use Cases
 ** Non-Functional Requirements
 *** Technical Requirements
+    
 *** Usability Requirements
 *** Reliability Requirements
 *** Security Requirements
+
+
 * Iterations
-** Introduction
-** Purpose
-** Context
-** Scheule of Iteration Workflow
+*** Introduction
+ Note, that we combined SEMMA phases with SDLC phases in our project timeline. The SEMMA phase are not analogous to an SDLC phase, and we've learned that there may exist no standard for such analogy. For example most software engineers and feature engineers tend to write code during the Sample phase while ML engineers may work on something else.
+
+After our analysis phase we broke down the project into completable tasks. In-order to identify the completable tasks, we thought of the project in terms of user-story/use-case perspective and also by identifying the independent components of the system, from our analysis. We thought of the first input data that will pass through the pipeline, and how it will be processed along to get the results we wanted. For example, if our initial data is video files captured by a camera device, the system must have to at somepoint interact with a camera object, therefore it is very likely during our design phase that we may need to create a camera object for a module.
+
+
+We only have one Iteration for this part of our final year project.
+Initially the work was divided between the two part.
+Use case one was primarily developed by Ibrahim and designed by Faith.
+
+Use-case two's main two sub-components were developed and tested independently and later on we re-integrated our work into a single codebase.
+ 
+** Iteration 1
+*** Introduction
+    
+*** Purpose
+    The purpose of this iteration is only to produce:
+ 1. Capture Video
+ 2. Time-series data
+*** Context
+*** Scheule of Iteration Workflow
+*** Iteration Schedule Breakdown
+*** Resource Summary
+*** Evaluation Criterea
+*** Analysis and Design Artefacts
+*** Implementation and Testing
+*** Iteration Review and Evaluation
 
