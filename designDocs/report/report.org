@@ -1,12 +1,18 @@
 #+LaTeX_CLASS: report
+#+latex_class_options: [12pt,a4paper,man]
+#+LATEX_HEADER: \renewcommand{\baselinestretch}{1.5} 
 #+TITLE: Final Report I: Affective Movie Evaluator
 #+AUTHOR: Ibrahim
-#+LATEX_HEADER: \usepackage{apacite} \usepackage{algorithm} \usepackage{listings} \usepackage[noend]{algpseudocode}  \usepackage{indentfirst} \usepackage{geometry}  \geometry{ a4paper,  total={170mm,257mm}, left=20mm, top=20mm } 
+#+LATEX_HEADER: \usepackage{apacite} \usepackage{algorithm} \usepackage{listings} \usepackage[noend]{algpseudocode}  \usepackage{indentfirst}  \usepackage{fancyhdr} \usepackage{stringstrings}
+#+LATEX_HEADER: \usepackage{geometry} \geometry{ a4paper,  total={170mm,257mm}, left=20mm, top=1in, foot=0.3in}
 #+LATEX_HEADER:\usepackage[final]{pdfpages}
 #+LATEX_HEADER: \usepackage{placeins}
-#+LATEX_HEADER: \usepackage{cmap} \usepackage[T1]{fontenc}
+#+LATEX_HEADER: \usepackage{cmap} \usepackage[T1]{fontenc} 
+#+LATEX_HEADER: \usepackage[raggedright]{titlesec}
 #+OPTIONS: toc:nil title:nil
+
 #+BEGIN_EXPORT latex
+%set the first page
 \setboolean{@twoside}{false}
 \begin{titlepage}
 \includepdf[pages=-,pagecommand={},width=\textwidth]{FirstPage.pdf}
@@ -15,26 +21,53 @@
 \tableofcontents
 #+END_EXPORT
 
+#+BEGIN_EXPORT latex
+%FIX ISSUE WITH CHAPTER TITLE MARGIN
+\makeatletter
+\def\ttl@mkchap@i#1#2#3#4#5#6#7{%
+  \ttl@assign\@tempskipa#3\relax\beforetitleunit
+  %\vspace*{\@tempskipa}% NEW
+  \global\@afterindenttrue
+  \ifcase#5 \global\@afterindentfalse\fi
+  \ttl@assign\@tempskipb#4\relax\aftertitleunit
+  \ttl@topmode{\@tempskipb}{%
+    \ttl@select{#6}{#1}{#2}{#7}}%
+  \ttl@finmarks  % Outside the box!
+  \@ifundefined{ttlp@#6}{}{\ttlp@write{#6}}}
+\makeatother 
+#+END_EXPORT
+
+#+BEGIN_EXPORT latex
+%CHAPTER TITLE STYLE
+\titleformat{\chapter}[hang] 
+  {\normalfont\huge\bfseries}
+  {\chaptertitlename{ \thechapter : } }
+ {0in}
+  {} 
+#+END_EXPORT
+
+
 
 \newpage
 \begin{abstract}
 	Write Abstract here.  
 
 \end{abstract}
-\newpage
 
+#+BEGIN_EXPORT latex
+\newpage
 \topskip0pt
 \vspace*{\fill}
 \section*{Declarations}
 I hereby declare that the report presented here as part of the requirement of BIT304 is original and no parts of this report had been plagiarised from any other resources unless those indicated with proper referencing.  This report will be the property of HELP University and cannot be distributed in any form without the written consent of HELP University.
-\\
-
-Student Names:\\
-Mohamed Shaatha Ibrahim (B1301746)
-Elebe Faith Alfred (B1301511)
-
+\\\\Student Names:
+\begin{description}
+ \item Mohamed Shaatha Ibrahim (B1301746)
+ \item Elebe Faith Alfred (B1301511)
+\end{description}
 Date: 12-04-2019
 \vspace*{\fill}
+#+END_EXPORT
 
 \renewcommand{\abstractname}{Acknowledgement}
 \begin{abstract}
@@ -43,8 +76,32 @@ Date: 12-04-2019
 
 
 
+#+BEGIN_EXPORT latex
+%set the header
+\newcommand\SentenceCase[1]{
+  \caselower[e]{#1}
+  \capitalize[q]{\thestring}
+}
+\newcommand*\parttitle{}
+\let\origpart\part
+\renewcommand*{\part}[2][]{%
+   \ifx\\#1\\% optional argument not present?
+      \origpart{#2}%
+      \renewcommand*\parttitle{#2}%
+   \else
+      \origpart[#1]{#2}%
+      \renewcommand*\parttitle{#1}%
+   \fi
+}
 
-** COMMENT Aknowledgement
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\thepage}
+\lhead{\parttitle{}: \leftmark}
+\cfoot{\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+#+END_EXPORT
+ 
 
 ** COMMENT List of Tables
 
