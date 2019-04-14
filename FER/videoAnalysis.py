@@ -5,7 +5,7 @@ from keras.models import load_model
 import numpy as np
 
 test_movie = "C:\\Users\\USER\\Desktop\\affective-movie-evaluator\\data\\da012c7f-f39e-4b4b-89b8-76575b7b24d9\\test.avi"
-camera = cv2.VideoCapture(test_movie)
+camera = cv2.VideoCapture(0)
 
 detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
 emotion_model_path = 'models/_mini_XCEPTION.102-0.66.hdf5'
@@ -29,7 +29,7 @@ while camera.isOpened():
     if len(faces) > 0:
     	face = faces[0]
     	x,y, w,h = face
-    	cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0))
+    	cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 255))
 
 
     	#extract roi, get region of interest
@@ -47,6 +47,16 @@ while camera.isOpened():
     	label = EMOTIONS[preds.argmax()]
 
     	print(label, emotion_probability)
+
+    	cv2.putText(
+					frame,
+					"%s, %.2f"%(label, emotion_probability),
+					(x,y),
+					cv2.FONT_HERSHEY_SIMPLEX,
+					1,
+					(0,255,255),
+					2
+					)
 
     #output
     cv2.imshow("Probabilities", frame)
