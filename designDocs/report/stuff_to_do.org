@@ -1,7 +1,7 @@
 ** TODO IMPORTANT
-*** [16%] Faith
+*** [33%] Faith
  - [X] Download dataset for testing
- - [ ] Monthly Progress reports
+ - [X] Monthly Progress reports
  - [ ] Minutes of meetings
  - [ ] Supervisor Meeting Reports
  - [ ] Screenshot cli usecase 1

@@ -947,6 +947,8 @@ The valence arousal encoder is currently not built, instead we use a hard coded 
 
 #+CAPTION: Class diagram: usecase 1
 #+BEGIN_SRC plantuml :file img/class1.png
+
+package src{
 class Movie{
  - averageRating : float
  - currentRating : float
@@ -965,6 +967,9 @@ class Sample{
  - subject : str
 }
 
+
+RecordSystem -- VLCPlayer
+RecordSystem -- Webcam
 class RecordSystem{
   - set_metadata()
   - start_recording()
@@ -981,6 +986,8 @@ class SampleLoader{
  + getVideoFile()
 }
 
+SampleController --o Sample
+SampleController -- SampleLoader
 class SampleController{
  - dirs
  - sample_dir : str
@@ -989,15 +996,32 @@ class SampleController{
  + read_metadata()
 }
 
+class MovieController{
+  + read_files()
+  + getMovieByFileName(filename)
+  + getMovieObjectById(movie_id)
+  + get_dir()
+}
+
 class VLCPlayer{
  - done : bool
- - 
+ - thread : Thread
+ + isAlive()
+ + play_movie()
+}
+
+class Webcam{
+ + startCamera() : cv2.Camera
+}
+
 }
 
 #+END_SRC
 
 #+RESULTS:
 [[file:img/class1.png]]
+
+Webcam module helps setting up the camera.
 
 ** Iteration I: Implementation and Testing
    
