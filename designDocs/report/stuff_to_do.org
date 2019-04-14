@@ -7,7 +7,7 @@
  - [ ] Screenshot cli usecase 1
  - [ ] Screenshot cli usecase 2
 
-*** [0%] Ibrahim
+*** [9%] Ibrahim
  - [ ] Screenshot gui usecase 1
  - [ ] Screenshot gui usecase 2
  - [ ] Write accuracy testing 
@@ -16,6 +16,6 @@
  - [ ] Rewrite chapter 1
  - [ ] Rewrite chapter 2
  - [ ] Write Chapter 5
- - [ ] Pipeline diagram
+ - [X] Pipeline diagram
  - [ ] Class Diagram
  - [ ] Append gantt chart

@@ -989,6 +989,11 @@ class SampleController{
  + read_metadata()
 }
 
+class VLCPlayer{
+ - done : bool
+ - 
+}
+
 #+END_SRC
 
 #+RESULTS:
