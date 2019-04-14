@@ -743,27 +743,27 @@ On a grand scale, by the end of this iteration we will have a codebase and an fi
 |------------+-----------------------------------------------+------------+------------+------------|
 | *Use case* | *Task Name*                                   | *Start*    | *Finish*   | *Est Time* |
 |------------+-----------------------------------------------+------------+------------+------------|
-|            | *1.1 Design (Explore)*                        | 11/03/2019 | 16/03/2019 |         18 |
+|            | *1.1 Design (Explore)*                        | 11/03/2019 | 16/03/2019 |         5  |
 |          1 | 1.1.1 Class Diagram                           |            |            |            |
 |            | 1.1.2 Expanded Use-Case                       |            |            |            |
 |            | 1.1.3 Wireframes                              |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          1 | *1.2 Implement*                               | 16/03/19   | 24/03/19   |         18 |
+|          1 | *1.2 Implement*                               | 16/03/19   | 24/03/19   |        8   |
 |            | 1.2.1 Setup github environment                |            |            |            |
 |            | 1.2.2 Install OpenCV                          |            |            |            |
 |            | 1.2.3 Capture video in a folder               |            |            |            |
 |            | 1.2.4 CLI to capture video                    |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          1 | *1.3 Evaluate*                                | 22/03/19   | 28/03/19   |            |
+|          1 | *1.3 Evaluate*                                | 22/03/19   | 28/03/19   |     6      |
 |            | 1.3.1 AUT capture                             |            |            |            |
 |            | 1.3.2 AUT CLI                                 |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          1 | *1.4 Sample*                                  | 26/03/19   | 30/03/19   |            |
+|          1 | *1.4 Sample*                                  | 26/03/19   | 30/03/19   |      4     |
 |            | 1.4.1 Script to collect training dataset      |            |            |            |
 |            | 1.4.2 Collect Test Dataset 1                  |            |            |            |
 |            | 1.4.3 Write script to load test dataset       |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.1 Sample*                                  | 29/03/19   | 02/04/19   |            |
+|          2 | *2.1 Sample*                                  | 29/03/19   | 02/04/19   |       4    |
 |            | 2.1.1 Collect Test Dataset 2                  |            |            |            |
 |            | 2.1.1 Download FER dataset                    |            |            |            |
 |            | 2.1.2 Script to load FER dataset              |            |            |            |
@@ -771,12 +771,12 @@ On a grand scale, by the end of this iteration we will have a codebase and an fi
 |          2 | *2.2 Explore/Design*                          | 01/04/19   | 06/04/19   |            |
 |            | 2.2.1 Split and label Test Dataset 2          |            |            |            |
 |            | 2.2.2 Pipeline Diagram                        |            |            |            |
-|            | 2.2.3 Interaction Diagram (SSD)               |            |            |            |
+|            | 2.2.3 Interaction Diagram (SSD)               |            |            |      5     |
 |            | 2.2.4 Design Class Diagram                    |            |            |            |
 |            | 2.2.5 Wireframe                               |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
 |          2 | *Implement*                                   | 18/03/19   | 09/04/19   |            |
-|            | 2.3.1 Setup FER library                       |            |            |            |
+|            | 2.3.1 Setup FER library                       |            |            |       22   |
 |            | 2.3.2 Setup OpenPose Library                  |            |            |            |
 |            | 2.3.3 Generate FER time series                |            |            |            |
 |            | 2.3.4 Generate Pose time series               |            |            |            |
@@ -784,12 +784,12 @@ On a grand scale, by the end of this iteration we will have a codebase and an fi
 |            | 2.3.6 Integrate BEGR analysis to UI           |            |            |            |
 |            | 2.3.7 Analyse Video CLI                       |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.4 Modify*                                  | 07/04/19   | 09/04/19   |            |
+|          2 | *2.4 Modify*                                  | 07/04/19   | 09/04/19   |         2  |
 |            | 2.4.1 Define combined time-series file format |            |            |            |
 |            | 2.4.2 Code to Visualise Time Series           |            |            |            |
 |            | 2.4.3 Refactor code                           |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.5 Evaluate*                                | 07/04/19   | 07/04/19   |            |
+|          2 | *2.5 Evaluate*                                | 07/04/19   | 09/04/19   |      2     |
 |            | 2.5.1 Write automated unit test               |            |            |            |
 |            | 2.5.2 FER Accuracy test                       |            |            |            |
 |            | 2.5.3 Pose accuracy test                      |            |            |            |
