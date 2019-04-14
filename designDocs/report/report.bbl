@@ -1,0 +1,174 @@
+\begin{thebibliography}{}
+
+\bibitem [\protect \citeauthoryear {%
+Deng%
+\ \protect \BOthers {.}}{%
+Deng%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2017}}%
+}]{%
+Deng_2017}
+\APACinsertmetastar {%
+Deng_2017}%
+\begin{APACrefauthors}%
+Deng, Z.%
+, Navarathna, R.%
+, Carr, P.%
+, Mandt, S.%
+, Yue, Y.%
+, Matthews, I.%
+\BCBL {}\ \BBA {} Mori, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2017}{Jul}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Factorized Variational Autoencoders for Modeling
+  Audience Reactions to Movies} {Factorized variational autoencoders for
+  modeling audience reactions to movies}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{2017 IEEE Conference on Computer Vision and Pattern
+  Recognition (CVPR)}{}{}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1109/cvpr.2017.637}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1109/cvpr.2017.637} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Ratner%
+, Hancock%
+, Dunnmon%
+, Goldman%
+\BCBL {}\ \BBA {} R{\'e}%
+}{%
+Ratner%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+ratner2018snorkel}
+\APACinsertmetastar {%
+ratner2018snorkel}%
+\begin{APACrefauthors}%
+Ratner, A.%
+, Hancock, B.%
+, Dunnmon, J.%
+, Goldman, R.%
+\BCBL {}\ \BBA {} R{\'e}, C.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Snorkel MeTaL: Weak Supervision for Multi-Task Learning}
+  {Snorkel metal: Weak supervision for multi-task learning}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the Second Workshop on Data Management
+  for End-To-End Machine Learning} {Proceedings of the second workshop on data
+  management for end-to-end machine learning}\ (\BPG~3).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Saha%
+, Navarathna%
+, Helminger%
+\BCBL {}\ \BBA {} Weber%
+}{%
+Saha%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+saha2018unsupervised}
+\APACinsertmetastar {%
+saha2018unsupervised}%
+\begin{APACrefauthors}%
+Saha, S.%
+, Navarathna, R.%
+, Helminger, L.%
+\BCBL {}\ \BBA {} Weber, R\BPBI M.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Unsupervised deep representations for learning audience
+  facial behaviors} {Unsupervised deep representations for learning audience
+  facial behaviors}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the IEEE Conference on Computer Vision
+  and Pattern Recognition Workshops} {Proceedings of the ieee conference on
+  computer vision and pattern recognition workshops}\ (\BPGS\ 1132--1137).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Wu%
+\ \protect \BOthers {.}}{%
+Wu%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2008}}%
+}]{%
+wu2008interactive}
+\APACinsertmetastar {%
+wu2008interactive}%
+\begin{APACrefauthors}%
+Wu, T\BHBI L.%
+, Wang, H\BHBI K.%
+, Ho, C\BHBI C.%
+, Lin, Y\BHBI P.%
+, Hu, T\BHBI T.%
+, Weng, M\BHBI F.%
+\BDBL {}others%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2008}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Interactive content presentation based on expressed
+  emotion and physiological feedback} {Interactive content presentation based
+  on expressed emotion and physiological feedback}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {Proceedings of the 16th ACM international conference on
+  Multimedia} {Proceedings of the 16th acm international conference on
+  multimedia}\ (\BPGS\ 1009--1010).
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
+Zhang%
+, Tian%
+, Jiang%
+, Huang%
+\BCBL {}\ \BBA {} Gao%
+}{%
+Zhang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2008}}%
+}]{%
+Shiliang_Zhang_2008}
+\APACinsertmetastar {%
+Shiliang_Zhang_2008}%
+\begin{APACrefauthors}%
+Zhang, S.%
+, Tian, Q.%
+, Jiang, S.%
+, Huang, Q.%
+\BCBL {}\ \BBA {} Gao, W.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2008}{Jun}{}.
+\newblock
+{\BBOQ}\APACrefatitle {Affective MTV analysis based on arousal and valence
+  features} {Affective mtv analysis based on arousal and valence
+  features}.{\BBCQ}
+\newblock
+\APACjournalVolNumPages{2008 IEEE International Conference on Multimedia and
+  Expo}{}{}{}.
+\newblock
+\begin{APACrefURL} \url{http://dx.doi.org/10.1109/icme.2008.4607698}
+  \end{APACrefURL}
+\newblock
+\begin{APACrefDOI} \doi{10.1109/icme.2008.4607698} \end{APACrefDOI}
+\PrintBackRefs{\CurrentBib}
+
+\end{thebibliography}

@@ -1,0 +1,28 @@
+ Use Case 2: Analyse Video	2.1 Sample	03/24/2019	03/28/2019		18
+	 2.1.1 Collect Test Dataset 2 (2 subject)				8
+	 2.1.1 Download FER dataset				4
+	 2.1.2 Script to load FER dataset				6
+	2.2 Explore	03/28/2019	03/31/2019		26
+	 2.2.1 Split and label Test Dataset 2				8
+	 2.2.2 Pipeline Diagram			Ibrahim	4
+	 2.2.3 Interaction Diagram (SSD)			Ibrahim	6
+	 2.2.4 Design Class Diagram				4
+	 2.2.5 Wireframe			Ibrahim	4
+	2.3 Model	03/31/2019	04/06/2019		26
+	 2.3.1 Setup FER library 			Faith	4
+	 2.3.2 Setup OpenPose Library			Ibrahim	4
+	 2.3.3 Generate FER time series			Faith	7
+	 2.3.4 Generate Pose time series			Ibrahim	7
+	 2.3.5 Integrate FER analysis to UI			Faith	
+	 2.3.6 Integrate BEGR analysis to UI			Ibrahim	
+	 2.3.7 Analyse Video CLI			Ibrahim	4
+					
+	2.4 Modify	04/06/2019	04/12/2019		20
+	 2.4.1 Define combined time-series file format			Ibrahim	6
+	 2.4.2 Code to Visualise Time Series			Ibrahim	6
+	 2.4.3 Refrator code			Faith	8
+	2.5 Evaluate	04/12/2019	04/17/2019		26
+	 2.5.1 Write automated unit test			Ibrahim	6
+	 2.5.2 FER Accuracy test			Faith	10
+	 2.5.3 Pose accuracy test			Faith	10
+
