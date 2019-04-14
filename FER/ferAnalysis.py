@@ -1,4 +1,3 @@
-
 import cv2
 import numpy as np
 import imutils
@@ -6,13 +5,14 @@ from datetime import timedelta
 import time
 		
 
-class FaceSystem:
-	def __init__(self):
+class FaceSystem:        
+	def __init__(self, pwd="./FER/"):
 		from keras.preprocessing.image import img_to_array
 		from keras.models import load_model
+
 		self.img_to_array = img_to_array
-		detection_model_path = 'FER/haarcascade_files/haarcascade_frontalface_default.xml'
-		emotion_model_path = 'FER/models/_mini_XCEPTION.102-0.66.hdf5'
+		detection_model_path = pwd+'haarcascade_files/haarcascade_frontalface_default.xml'
+		emotion_model_path = pwd+'models/_mini_XCEPTION.102-0.66.hdf5'
 
 		self.face_detection = cv2.CascadeClassifier(detection_model_path)
 		self.emotion_classifier = load_model(emotion_model_path, compile=False)
@@ -32,7 +32,7 @@ class FaceSystem:
 		#extract roi
 		roi = gray[y:y + h, x:x + w]
 		roi = cv2.resize(roi, (64, 64))
-		roi = roi.astype("float") / 255.0
+		roi = roi.astype("float") / 255.0 #normalize floats
 		roi = self.img_to_array(roi)
 		roi = np.expand_dims(roi, axis=0)
 		return roi
@@ -41,7 +41,6 @@ class FaceSystem:
 	def analyse(self, video_file, showVideo=False):
 		cap = cv2.VideoCapture(video_file)
 		length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-
 
 		data =[]
 		c= 0
@@ -86,7 +85,7 @@ class FaceSystem:
 						2
 						)
 
-			if showVideo:
+			if showVideo:                                
 				cv2.imshow("EmotionPredictions", frame)
 				if cv2.waitKey(1) & 0xFF == ord('q'):
 					break
@@ -101,3 +100,4 @@ class FaceSystem:
 		
 		cap.release()
 		cv2.destroyAllWindows()
+                

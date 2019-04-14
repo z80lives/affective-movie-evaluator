@@ -3,6 +3,10 @@ import numpy as np
 import dlib
 from imutils import face_utils
 
+import math
+
+def sigmoid(x):
+  return 1 / (1 + math.exp(-x))
 
 from src.analysis_module import PoseAnalyser
     
@@ -121,6 +125,7 @@ class HeadPoseEstimator(PoseAnalyser):
         self.detected = []
         self.predicted = []
         self.projections = []
+        self.show_video = False
 
     def infer(self, img):
         self.detected = self.detector(img, 0)
@@ -132,10 +137,12 @@ class HeadPoseEstimator(PoseAnalyser):
             reprojectdst, euler_angle = self.get_head_pose(shape)
             self.projections.append( (reprojectdst, euler_angle) )
             self.predicted.append(shape)
-        return self.detected
+                          
+        return (self.detected, self.predicted, self.projections)
 
     def analyse(self, video_file, out_file, show_video=False):
-        super().analyse(video_file, out_file, show_video, infer_method=self.infer)
+      self.show_video = True
+      super().analyse(video_file, out_file, show_video, infer_method=self.infer)
 
     def drawKeypoints(self, img, index):
         shape = self.predicted[index]
@@ -155,11 +162,34 @@ class HeadPoseVisualizer(PoseAnalyser):
         for (x, y) in shape:
             cv2.circle(img, (x, y), 1, (0, 0, 255), -1)
 
+    def drawProjection(self, img, projections, col=(0,0,255) ):
+        reprojectdst, euler_angle = projections
+        for start, end in line_pairs:
+            cv2.line(img, reprojectdst[start], reprojectdst[end], col)
+
+
     def draw_func(self, img, kp, options={}):
-        if len(kp) > 0:            
-            for rect in kp:
-                print(rect)
-                #self.drawKeypoints(img, f)
+        if len(kp[1]) > 0:
+            k = kp[1][0]
+            self.drawKeypoints(img, k)
+            
+        if len(kp[2]) > 0:
+            k = kp[2][0]
+            self.drawProjection(img, k)
+            _x = k[1][0,0]
+            _y = k[1][1, 0]
+            _z = k[1][2,0]
+            #print("(%.2f, %.2f, %.2f)"%(_x, _y, _z))
+            
+            avg= (_x+_y+_z)/3
+            interest = 1-sigmoid(avg)
+            cv2.putText(img,
+                        "Interest=%.2f"%(interest),
+                        (10, 30),
+                        cv2.FONT_HERSHEY_SIMPLEX,
+                         0.75, (0, 0, 0), thickness=2)
+                
+            
         return img
     
     def viewKeypointsOnSample(self, sample_dir, options={}):
