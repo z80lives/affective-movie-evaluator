@@ -873,6 +873,9 @@ In this iteration we do not evaluate the speed and accuracy performance of the e
 *** COMMENT Analysis and Design Artefacts
 **** Pipeline diagrams
 
+#+ATTR_LATEX: :width 490px
+#+CAPTION: Analyse pipeline Overview
+#+NAME: fig:pipeline
 #+BEGIN_SRC dot :file img/pipeline.png
 digraph g{
  rankdir=LR;
@@ -892,13 +895,8 @@ digraph g{
 }
 #+END_SRC
 
-#+RESULTS:
+#+RESULTS: fig:pipeline
 [[file:img/pipeline.png]]
-
-#+ATTR_LATEX: :width 490px
-#+CAPTION: Analyse pipeline Overview
-#+NAME: fig:pipeline
-#+RESULTS: 
 
 
 Even though it is possible to run /FER/ and /BEGR/ simultaneous and in parallel by design, during the implementation phase we realised our development systems are not capable of  running the subsystems in parallel without running out of memory. Therefore, we decided that the video will pass through the analysis pipeline twice to exctract the time-series data.
