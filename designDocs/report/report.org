@@ -468,7 +468,6 @@ You can find our baseline gantt chart for estimated project plan in Appendix A. 
 #+RESULTS:
 [[./ext_img/gant1.png]]
 
-
 * Requirement Analysis
 ** Introduction
    Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
@@ -482,7 +481,6 @@ Along with the project's functional requirements and non-functional requirements
 Initially, we like we planned we worked on the facial analysis, and posture analysis portion of the code seperately. Later on we refactored and integrated the code as seperate modules into a single codebase with the help of object-oriented programming.
 
 
-
 ** Requirement Summary
 The first thing we did during our first meeting was infact to identify all the stakeholders and actors who interacted with the system. While we discussed the naming conventions of the actors involved during the later meetings, it was early on established that only one user directly interacts with the system and can be considered to be the primary user.
 
@@ -491,15 +489,16 @@ Our systems consists of mainly this one user controlling the application directl
 *** Actors and Stakeholders
 ****  Admin
 
-An /Admin/ can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
+     An /Admin/ can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
 
  - Admin is able to Record a video of a /Subject/ watching a movie.
- - Admin is able to Analyse a video of a subject
+ - Admin is able to Analyse a video of a /subject/
   - Produce time-series.
 
 ****  Subject
+Subject is not considered a primary actor in the system. The only interaction between the subject and the system occurs when the admin records the subject watching a movie in the first use-case. The admin initiates the use-case and subject passively sits infronts of the camera, until the movie is completed, whole while the admin actually have the control of the system such that they can terminate the recording process or wait until the movie is finished.
 
-While the UML for iteration 1 might not directly hint that subject is indeed a part of the system, it is going to be added as an Object in our future iteration. We did not include the /Subject/ as an object that is in the system, yet. 
+While the UML for iteration 1 might not directly hint that our system considers /Subject/ as a seperate entity for design purpose, it is going to be added as an Object in our future iteration. We did not include the /Subject/ as an object that is in the system, yet. 
 
 
 *** Object represented in the system
@@ -522,7 +521,6 @@ class Sample{
 #+RESULTS:
 [[file:./img/obj1.png]]
 
-TODO: This is supposed to be an object diagram not class diagram.
 
 *** COMMENT Hardware Architecture / Layout
 
@@ -616,8 +614,6 @@ It would have been ideal for the sake of this documentation for Analyse use case
 
 Almost all of our application is written using Python 3. We used the Anaconda distribution of python and it's environment and package management system because it reduced the compatibility issues associated with installing packages such as tensorflow across different systems. 
 
-Minimum Requirements
-
 #+NAME: table:minreq1
 #+ATTR_LATEX: :align |l|l|lp{3cm}|
 #+CAPTION: Minimum Software Requirements
@@ -699,11 +695,13 @@ One concern a production studio may have is regarding the security of test audie
  
 ** Iteration 1
 *** Introduction
-    Our plan for this iteration was changed throughout the developement, project. Initially we had 2 iterations and considered adding more use-cases that manages movies and samples within the system. However once we finished our work breakdown and started to sort out our tasks, we figured out it will be a risk considering all the tasks we have and we might not be able to complete our goals within timespan. So iteration 1 was expanded to cover most of this semester and we focused on two use-cases from the user-perspective. From the system perspective, we started working on the two main analysis subsystems once our on use-case two commenced.
+    Like we mentioned before this iteration implements only two use-cases, but it does not mean the amount of tasks we have is smaller than iteration 2, which we have planned that involves more use-cases. Our plan for this iteration was changed throughout the developement, project. Initially we had 2 iterations and considered adding more use-cases that manages movies and samples within the system. However once we finished our work breakdown and started to sort out our tasks, we figured out it will be a risk considering all the tasks we have and we might not be able to complete our goals within timespan. 
+
+So iteration 1 was expanded to cover most of this semester and we focused on two use-cases from the user-perspective. From the system perspective, we started working on the two main analysis subsystems once our on use-case two commenced.
 
 
 *** Purpose
-The purpose of this iteration is mainly to make sure our application can record a video and extract the primary data, required for machine learning from the video. This means the two analysis subsystems must be designed tested, and they should be integrated into the system.
+    The purpose of this iteration is mainly to make sure our application can record a video and extract the primary data, required for machine learning from the video. This means the two analysis subsystems must be designed tested, and they should be integrated into the system.
 
     By the end of this iteration the system should be able to do the following:
  1. *Capture Video*: The admin should be able to record video by using the command line interface and graphical user interface, to create a video file.
@@ -872,14 +870,49 @@ The software engineering aspects and machine learning parts of the code must be 
 In this iteration we do not evaluate the speed and accuracy performance of the entire pipeline, from the beginning, something we intend to do in all the future iterations.
 
 
-*** Analysis and Design Artefacts
-*** Implementation and Testing
+*** COMMENT Analysis and Design Artefacts
+**** Pipeline diagrams
 
-**** Unit Testing
+#+BEGIN_SRC dot :file img/pipeline.png
+digraph g{
+ rankdir=LR;
+ node[shape="rectangle"]
+ img[label="Video" shape="parallelogram"]
+ analyse_cli[label="Analysis\nModule"]
+ util[label="Util\nModule"]
+ fer[label="FER"]
+ begr[label="BEGR"]
+ img -> analyse_cli
+ analyse_cli -> begr
+ analyse_cli -> fer
+ fer -> util
+ begr -> util
+ util -> out
+ out[label="Time-series" shape="parallelogram"]
+}
+#+END_SRC
 
-**** Automated Unit Testing
+#+RESULTS:
+[[file:img/pipeline.png]]
 
-**** Focused Model Testing (Accuracy)
+#+ATTR_LATEX: :width 490px
+#+CAPTION: Analyse pipeline Overview
+#+NAME: fig:pipeline
+#+RESULTS: 
+
+
+Even though it is possible to run /FER/ and /BEGR/ simultaneous and in parallel by design, during the implementation phase we realised our development systems are not capable of  running the subsystems in parallel without running out of memory.
+
+
+**** Class Diagrams
+
+** Iteration I: Implementation and Testing
+   
+*** Unit Testing
+     
+*** Automated Unit Testing
+
+*** FER Model Testing (Accuracy)
 
 *** Iteration Review and Evaluation
 

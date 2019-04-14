@@ -1,13 +1,13 @@
 ** TODO IMPORTANT
-*** Faith
- - [ ] Download dataset for testing
+*** [16%] Faith
+ - [X] Download dataset for testing
  - [ ] Monthly Progress reports
  - [ ] Minutes of meetings
  - [ ] Supervisor Meeting Reports
  - [ ] Screenshot cli usecase 1
  - [ ] Screenshot cli usecase 2
 
-*** Ibrahim
+*** [0%] Ibrahim
  - [ ] Screenshot gui usecase 1
  - [ ] Screenshot gui usecase 2
  - [ ] Write accuracy testing 
@@ -16,3 +16,6 @@
  - [ ] Rewrite chapter 1
  - [ ] Rewrite chapter 2
  - [ ] Write Chapter 5
+ - [ ] Pipeline diagram
+ - [ ] Class Diagram
+ - [ ] Append gantt chart
