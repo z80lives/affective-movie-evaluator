@@ -4,7 +4,8 @@ import os
 from src.youtube import YouTubeModule
 from src.playback import RecordSystem, VLCPlayer
 from src.openpose import PoseSystem
-from src.utils import SampleLoader
+from src.utils import SampleLoader, SampleController, MovieController
+from src.cli.display import table_print
 
 @click.group()
 @click.version_option(version='1.0.0')
@@ -17,6 +18,47 @@ def askRequiredField(required_fields, args):
             args[required_fields[k]] = click.prompt("Please enter "+k, type=str)
 
     return args
+
+@greet.command()
+@click.argument('object')
+def list(**args):
+    msys = MovieController()
+    
+    if  args["object"] == "samples":
+        print("Listing dataset")        
+        sys = SampleController()
+        msys.read_files()
+        sys.read_dirs()
+        md = sys.data
+        _movie_data = msys.indexed_data
+
+        lst  =sys.list_all()
+        
+        data = []        
+        for k in lst:
+            row = md[k]
+            
+            mid = row["movie_id"]
+            name = row["subject_name"]
+            
+            m = _movie_data[mid].copy()
+
+            m["subject_name"] = name
+            m["key"] = k
+            m["youtube"] = None
+            row = m            
+            data.append(row)
+
+        table_print(data)
+        
+    elif args["object"] == "movies":
+        print("Listing movies")    
+        movie_list = msys.listMovies()
+        table_print(movie_list)
+        
+    #sys = SampleController()
+    #print(sys.list_all())
+
 
 @greet.command()
 @click.argument('video_file')
@@ -68,11 +110,60 @@ def download_youtube(**kwargs):
 
 @greet.command()
 @click.argument("filename")
+@click.option('--person', default="", help="Viewer name.")
+@click.option('--display', '-d', is_flag=True, help="Display camera video.")
 def start_recording(**kwargs):
     sys = RecordSystem()
+    msys = MovieController()
+    msys.read_files()
     print("Starting video capture")
-    sys.start_recording(kwargs["filename"])
+    
+    mdata = msys.getMovieByFile(kwargs["filename"])
 
+    required_fields = {
+        "Movie Name": "name",
+        "Movie Year": "year",
+        "Person Name": "person"        
+    }
+    other_fields = {
+        "Tags": "tags",
+        "Genre": "genre"
+    }
+    
+    kwargs = {**mdata, **kwargs}
+    kwargs = askRequiredField(required_fields, kwargs)
+    args = kwargs
+    all_fields = {**required_fields, **other_fields}
+
+    person = args["person"]
+    #data = {}
+    #for k in all_fields:
+    #    click.echo(k +": " + args[all_fields[k]])
+    #    data[k] = args[all_fields[k]]
+
+    file_name = msys.get_dir() + msys.getMovieObjById(mdata['id']).filename
+    data = {"movie_id": "%s"%(mdata["id"]),"subject_name": person}
+    
+    #print("Filename", file_name)
+    print(data)
+    print("Playing")
+    player = VLCPlayer(file_name)
+    #player.play_movie()
+    
+    print("Recording")
+    sys = RecordSystem()
+    filename = sys.createSampleDir()
+    
+    sys.saveMetaData(filename, data)
+    sys.start_recording("test", player, False, filename)
+
+    #sys.start_recording(kwargs["filename"])
+
+
+@greet.command()
+@click.argument("filename")
+def playback(**args):
+    player = VLCPlayer("data/"+args["filename"]+"/test.avi")                    
 
 @greet.command()
 @click.argument("filename")
@@ -156,8 +247,7 @@ def webcam(**args):
         )
         wc.test_run()
         
-        
-    
+            
 
 #@click.command()
 def greeter(**kwargs):

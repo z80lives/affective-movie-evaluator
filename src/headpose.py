@@ -2,7 +2,10 @@ import cv2
 import numpy as np
 import dlib
 from imutils import face_utils
+
+
 from src.analysis_module import PoseAnalyser
+    
 
 ## Template borrowed from Openface project (for author credits view README.md)
 ### https://github.com/cmusatyalab/openface/blob/master/openface/align_dlib.py

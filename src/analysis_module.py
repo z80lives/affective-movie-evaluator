@@ -7,7 +7,8 @@ class PoseAnalyser:
     def viewKeypointsOnSample(self, sample_dir, sample_type="mixed", drawKeypoints=None, options={}):
         if drawKeypoints is None:
             print("Please provide a draw key_point method")
-            return 
+            return
+        
         video_file = sample_dir+"test.avi"
         keypoint_file  = sample_dir+sample_type+"_points.npy"
         keypoints = np.load(keypoint_file)

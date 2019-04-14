@@ -98,7 +98,7 @@ class PoseSystem:
 
 
             progress = c
-            print("Progress = %d/%d, time=%.2f avg=%.2f, remaining=%s \r" % (progress, length, last_inference_time, average_inference, str(timedelta(seconds=remaining_time))), end="")
+            #print("Progress = %d/%d, time=%.2f avg=%.2f, remaining=%s \r" % (progress, length, last_inference_time, average_inference, str(timedelta(seconds=remaining_time))), end="")
 
             start_time = time.time()
             output = self.infer(raw_img)
