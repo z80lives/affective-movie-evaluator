@@ -9,6 +9,8 @@ FER/haarcascade_files/*.xml
 FER/models/*.hdf5
 FER/models/*.dat
 
+data/
+
 # C extensions
 *.so
 
