@@ -1,4 +1,4 @@
-% Created 2019-04-15 Mon 13:56
+% Created 2019-04-16 Tue 01:36
 % Intended LaTeX compiler: pdflatex
 \documentclass[12pt,a4paper,man]{report}
 \usepackage[utf8]{inputenc}
@@ -103,7 +103,14 @@ Date: 12-04-2019
 
 \renewcommand{\abstractname}{Acknowledgement}
 \begin{abstract}
-	Aknowledgements here.
+	Aknowledgements
+	This project will not be possible without the help of a number of people. We would like to express our deepest gratitude to HELP's University Department of Information and Communication Technology for their support and provision to make this project a success and to our family for their unconditional love and support to make sure our education is successful.
+
+Our gratitude goes to the following individuals who have been with us through this journey:
+Ms. Shu Mn for teaching and guiding us through the entire process of this project
+Mr. Abdul Quayoon for being patient with us as our supervisor, and for providing insight and expertise that has greatly helped us in implementing our project
+
+And we also thank our Colleagues who have been of help to us in the best way that they can.
 \end{abstract}
 
 
@@ -133,9 +140,9 @@ Date: 12-04-2019
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 
 \part{Proposal}
-\label{sec:org9eb8adb}
+\label{sec:org2a33e90}
 \chapter{Introduction}
-\label{sec:orgf78f396}
+\label{sec:org20f60a9}
 
 Movie production studios use test screening in order to determine whether their movies will succeed. Recently, internet movie distributors such as Netflix and Amazon have started taking more control of the production of their content, it is more beneficial for studios to re-edit their movie once they can predict that the product is going to fail. While there are automated sentiment analysis tools used to measure how well the audience reacts to test screening, most of the feedback is still taken from questionnaires and the audiences subjective evaluation.
 
@@ -146,7 +153,7 @@ The aim of this project is to develop a system that can evaluate how good a movi
 A system like this can aid us develop further, a more general system that can evaluate how good a certain product or presentation is by analysing the audience reaction limited by a certain context. In our case the product is a movie, and how the audience reacts may depend on what genre of movie they are watching, or what kind of experience they were expecting beforehand. It is likely that our system may not work well without knowing these information. Systems like these are also related to computer vision with Emotion AI technologies, such as face based lie detectors, which uses the same techniques to work.
 
 \chapter{Background}
-\label{sec:org48494f5}
+\label{sec:org0faedb2}
 For a long time movie industry have used statistical modeling and machine learning to predict, the success of movies based on high level data. While there have been several works in early to mid 2000’s, which takes in multimedia information to form a representation for the user’s emotions \cite{Shiliang_Zhang_2008,wu2008interactive}, the earliest work we could find that specifically focus on movie scenes was by Soleyman et. al.
 
 Quite recently, there have been interest in using deep learning techniques to analyse audiences facial data such as \cite{saha2018unsupervised}, to predict whether an audience enjoyed the movie, most notably research work that has been funded by The Walt Disney Company \cite{Deng_2017}. The purpose of their research is to use facial emotion recognition techniques, to analyse the emotion of the audience in order to improve the movies.
@@ -161,7 +168,7 @@ The problem we are trying to solve is that film studios screens movies to test a
 Affective Analysis is already used by marketing giants such as Coca-Cola to predict the effectiveness of their advertisement on target test audiences. Affective movie analysis could prove to be valuable to streaming services that distributes their own content and have more control over the productions such as NetFlix.
 
 \chapter{Issues}
-\label{sec:org27f035e}
+\label{sec:org644a7be}
 Our system is not real-time but still requires heavy computing power in order to run. This means the admin will often have to run multiple processes for analysis and come back later for the result. Our system does not support multiple processes yet, while it is possible for our system to run a process on a remote server or a cloud computer service via ssh and http, the admin still have to wait for the analysis to be completed. 
 
 In order to minimize the scale of the problem, the first few iterations of the problem deals with only a single audience member. The largest audience we will be designing our system will be for a group of two to four person, under controlled lighting environment. Unless we have access to infrared cameras and better computing facilites, we will not be able to overcome these limitations. 
@@ -173,7 +180,7 @@ One of the weakness we have is in the accuracy of the face detection algorithm. 
 Right now our system uses an externel media player known as VLC media player, to play the movie while being recorded in use case 1. The system admin is usually required to install the software manually. However on Windows based systems, it is sometimes not possible to find the 
 
 \chapter{Benefits and Constraints}
-\label{sec:orgb855ad8}
+\label{sec:orgc1e6e43}
 For our current iteration the system can analyse only one audience member. The reason for this limitation is that we initially wanted to start the project with a smaller scope and also to reduce the amount of tasks we might have for the first iteration. Even in our future iterations, we will not be analysing and audience consisting of more than a handful of person, unless we get better camera equipments.
 
 Another issue faced by us is that facial emotion recogntion is not working that well, for now. In order to improve the accuracy of the \gls{FER} model we plan to write separate test cases.
@@ -182,7 +189,7 @@ Since our system takes a long time to analyse, we had to modify our "Analyse Vid
 
 
 \chapter{Project Aims and Objectives}
-\label{sec:org922e328}
+\label{sec:orgfdf8ebd}
 The aim of our project is to develop a system that can evaluate how good a movie is, by analysing both face and body postures of the audience. In order for this to work we provide the system a video file consisting of audience reactions, and the system will tell us how good a movie is within a rating metrics, we will define later. It is important for us to state, that we are not proposing a real-time system here; the system accepts a recording of the raw data - which is currently defined as video file, and can be any other form of measurement - as the primary input.
 \begin{itemize}
 \item system like this is very useful for movie studios, which often relies on test audience in order to predict whether their movies are going to be successful and a system like this can aid in measuring the audience reaction more accurately.
@@ -206,7 +213,7 @@ Define the metrics by which the system is going to give the score before we crea
 \end{itemize}
 
 \chapter{Project Scope}
-\label{sec:org2caf9ae}
+\label{sec:org968864c}
 \begin{itemize}
 \item For developement purpose, we will be dealing with short movies mostly.
 \item We will be recording atleast 12 subjects, watching multiple movies.
@@ -218,15 +225,15 @@ A large portion of the project is in Software 2.0, therefore we do realize we ha
 
 
 \chapter{Software and Hardware Requirements}
-\label{sec:org5c0642a}
+\label{sec:org63e999d}
 
 \section{Funding Sources}
-\label{sec:orgfdc1ea0}
+\label{sec:org796a412}
 As mentioned before we do not have any corporate and industry backing, therefore we are expecting HELP School of ICT to provide any possible funding we may require, if requested. Since the University already have most of the assets we require for our FYP1, we will require permission from the IT department to use the facilities, for our project.
 As for FYP2, the tools and resources we require for data collection and obtaining ground truth can only be determined after we complete the first part of our project.
 
 \section{Minimum hardware requirements}
-\label{sec:org7d5b19b}
+\label{sec:org127f046}
 Although, our system can run with a laptop with a webcam we designed the system with the following requirements in mind.
 
 \begin{table}[htbp]
@@ -247,7 +254,7 @@ No & Item & Usage & Qty\\
 \end{table}
 
 \section{Recommended hardware requirements}
-\label{sec:org9dbc68f}
+\label{sec:org3c8f515}
 
 \begin{table}[htbp]
 \caption{\label{table:mxreq}
@@ -268,13 +275,19 @@ No & Item & Usage & Qty\\
 \end{tabular}
 \end{table}
 
-\chapter{Developement Methodology}
-\label{sec:orgd913fe2}
+\chapter{Development Methodology}
+\label{sec:org8c9e121}
 To give you the context of the reasoning behind our decision, we would like to discuss a brief overview of commonly used development methodologies first. The most commonly followed methodologies for data-science projects are either SEMMA or CRISP-DR methodologies. SEMMA is a methodology developed by SAS institute, while CRISPR-DR method was originally developed in a joint effort by five companies, and further improved by data mining industry, most notably by IBM. 
 
 The main difference between both methodologies are that CRISPR-DR considers business understanding of the process and also considers model deployment and the results. SEMMA is mainly used for data mining projects, which does not consider business aspect. The methodology we chose for our project is SEMMA methodology.
 
 The reason we chose SEMMA is that, we wanted to keep option generalise our problem scope later, for example we wanted to apply what the system does in other scenarios than movies. Also, business project timelines and research project timelines are usually incompatible, and this is a fact we need to consider while planning early on, since machine learning projects falls under the latter. So not considering the business aspects of the project, will be an advantage for us given the time we  have. 
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=6in]{./ext_img/SEMMA.JPG}
+\caption{SEMMA (2018, Data Mining for Business Intelligence Series)}
+\end{figure}
 
 SEMMA methodology consists of 5 phases (Sample, Explore, Modify, Model and Assess). SEMMA methodology gives us freedom to reiterate from any step, as we require. It does not have a definitive cycle for iteration, which makes it a more simple and less rigid framework to follow, compared to CRISP-DR (Palacios, 2017). 
 Sample:  First step of of SEMMA involves collecting all data samples.
@@ -297,27 +310,39 @@ As our primary version control system we will be using gitlab as our github repo
 As for the specific techniques we will use throughout the development, our idea is to analyse existing literatures, and compare notes and follow general data mining/modeling techniques with fewer brainstorm sessions. In order to obtain the ground truth while collecting the data, our current idea is to use questionnaires after recording a subject’s reaction. Alternatively, it’s possible for us to measure blood pressure or any other means of observation if possible, and we will consider that for our FYP2.
 
 \part{Project Management Plan}
-\label{sec:org1588cbd}
+\label{sec:org9f5bd3a}
 \chapter{Introduction}
-\label{sec:orgd1a6e44}
+\label{sec:org6f96d03}
 The aim of our project is to develop a system that can evaluate how good a movie is, by analysing both face and body postures of the audience. In order for this to work we provide the system a video file consisting of audience reactions, and the system will tell us how good a movie is within a rating metrics, we will define later. It is important for us to state, that we are not proposing a real-time system here; the system accepts a recording of the raw data - which is currently defined as video file, and can be any other form of measurement - as the primary input. A system like this is very useful for movie studios, which often relies on test audience in order to predict whether their movies are going to be successful and a system like this can aid in measuring the audience reaction more accurately. 
 
-\section{OBJECTIVES OF THE PROJECT}
-\label{sec:org49fc823}
-The objectives we have set for our project are the following:
-Define the metrics by which the system is going to give the score before we create the evaluation model. (e.g: value between 0.0-1.0 or a discrete grading system, like A+, A, B) 
- Research the requirements of the dataset, and methodologies before week 3.
-Find or create the required test datasets for in order to complete objective 6.
-Dataset for the emotion recognition subsystem
-Dataset for body pose subsystem.
-Dataset for the whole system: Video recordings of audiences reacting to movies. 
-Determine accuracy of the overall project by comparing its output to existing scoring systems. 
-To prove that we are using state of the art technologies in our system; produce:
-Accuracy report for Emotion recognition 
-Accuracy report Body pose/action estimation
+\section{Object of the Project}
+\label{sec:orgfe9afc7}
+\subsection{To create metrics by which the system gives score.}
+\label{sec:org33a0bd3}
+In order to accomplish our goal our system needs a valid output format. The output format maybe a discrete list of values, for example the letters A to C or a continous number. The purpose of this metrics is to indicate the overall sentiment of the movie for a single audience. 
 
-\section{OUTPUTS EXPECTED FROM THE PROJECT}
-\label{sec:orgb64c798}
+\subsection{To research on the requirements of the dataset and methodologies before March.}
+\label{sec:org86b4077}
+We decided to add research on dataset and methodologies as an objective since, we cannot start developement of the system without it.
+
+\subsection{To Create and Collect Datasets for testing and developement}
+\label{sec:orgdb7b198}
+The following datasets will be collected for testing and developement of our system. The exact criteria and the requirements for the dataset will be decided after analysis in the work item.
+\begin{enumerate}
+\item Facial Dataset with labelled Emotion
+\item Pose Dataset with body pose labelled
+\item Video Recordings of audience reacting to Movie
+\end{enumerate}
+
+\subsection{2.4 To determine accuracy of the project by comparing its output to existing scoring systems.}
+\label{sec:orgbfaa023}
+This is essential because we need the means to determine how well our system is performing. The system cannot be considered complete without that.
+\subsection{2.5 To produce accuracy reports for the analysis subsystems}
+\label{sec:org9a6fb91}
+Analysis report for subsystems are used to tune the system and lets us know which part of the application needs improvement. 
+
+\section{Output expected from the project}
+\label{sec:orgc09c50e}
 
 The project will be divided into two phases; initially, we will be working on two seperate system that capture the emotion and pose respectively, into meaningful data and then streamline our work into a single codebase. The second phase of our project will be working together to create the movie evaluation model, which takes in the processed data from our previous system and gives us a prediction of how well the audience liked that movie. 
 
@@ -351,19 +376,26 @@ The deliverables consists of:
 
 
 \chapter{Work Breakdown Structure}
-\label{sec:org7164519}
+\label{sec:org4d26fee}
 During our analysis phase we broke down the project into largest completable tasks for each phase. In-order to identify the completable tasks, we thought of the project in terms of user-story/use-case perspective and also by identifying the independent components of the system, from our analysis. We thought of the first input data that will pass through the pipeline, and how it will be processed along to get the results we wanted. For example, if our initial data is video files captured by a camera device, the system must have to at somepoint interact with a camera object, therefore it is very likely during our design phase that we may need to create a camera object for a module.
 
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{img/wbs1.png}
-\caption{Task in terms of complexity}
+\caption{\label{fig:affheir}
+Task in terms of complexity}
 \end{figure}
 
-\begin{center}
+
+
+The figure \ref{fig:affheir} shows an approximate overview of the entires system. The picture is not intended to give you an idea of how those subsystems will interact. It is there to show you what components we will be creating and working on in terms of the workbreakdown structure. In contrast, figure \ref{fig:affheir2} shows the actual work breakdown structure we planned for the only iteration in FYP 1.
+
+\begin{figure}[htbp]
+\centering
 \includegraphics[width=.9\linewidth]{img/wbs2.png}
-\end{center}
+\caption{Work Breakdown Chart}
+\end{figure}
 
 
 \begin{table}[htbp]
@@ -378,7 +410,7 @@ Work breakdown tasks}
  & 2. Expanded Use-case & 12/03/19 & 16/03/19 & S\\
  & 3. Wireframe & 12/03/19 & 16/03/19 & S\\
 \hline
- & 1. Setup github &  &  & S\\
+2 & 1. Setup github &  &  & S\\
  & environment &  &  & \\
  & 2. Install OpenCV &  &  & S\\
  & 3. Capture Video &  &  & L\\
@@ -386,10 +418,10 @@ Work breakdown tasks}
  & 4. CLI to Capture &  &  & M\\
  & Video &  &  & \\
 \hline
- & 1. AUT Capture &  &  & M\\
+3 & 1. AUT Capture &  &  & M\\
  & 2. AUT CLI &  &  & S\\
 \hline
- & 1. Script to collect &  &  & M\\
+4 & 1. Script to collect &  &  & M\\
  & training dataset &  &  & \\
  & 2. Collect dataset 1 &  &  & L\\
  & 3. Script to load &  &  & M\\
@@ -400,13 +432,8 @@ Work breakdown tasks}
 
 
 
-
-Every task on the list have a deliverable.
-
-
-
 \chapter{Risk Management Plan}
-\label{sec:orga4a60a0}
+\label{sec:orgb6be8a8}
 
 
 \begin{table}[htbp]
@@ -437,7 +464,7 @@ Risk Management Plan}
 \end{table}
 
 \chapter{Project timeline}
-\label{sec:org5ea7ade}
+\label{sec:orgb4da818}
 You can find our baseline gantt chart for estimated project plan in Appendix A. We created the work breakdown structure during our project plan, and we grouped each task under a phase in our methodology. Then we estimated time for each task and prioritsed them, finally creating a project timeline in a gantt chart format. 
 
 \begin{figure}[htbp]
@@ -447,10 +474,11 @@ You can find our baseline gantt chart for estimated project plan in Appendix A. 
 Overview of baseline gantt chart}
 \end{figure}
 
+
 \part{Requirement Analysis}
-\label{sec:orgb90c608}
+\label{sec:org690c65e}
 \chapter{Introduction}
-\label{sec:org087ee79}
+\label{sec:org1615c23}
 Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
 
 Like any other software developement project, our approach was to first of all analyse the system and identify. Practically, most of the requirement analysis was done while we were creating the project plan, while we did not thoroughly document it in the proposal itself. This part of the document was later updated to reflect the change in number of use-cases in our iteration 1, after we realised that we are not able to fit the three initial use-cases we planned into the first iteration.
@@ -463,15 +491,15 @@ Initially, we like we planned we worked on the facial analysis, and posture anal
 
 
 \chapter{Requirement Summary}
-\label{sec:orgbcf6d61}
+\label{sec:org40a7ec3}
 The first thing we did during our first meeting was infact to identify all the stakeholders and actors who interacted with the system. While we discussed the naming conventions of the actors involved during the later meetings, it was early on established that only one user directly interacts with the system and can be considered to be the primary user.
 
 Our systems consists of mainly this one user controlling the application directly. Ideally this user is a system operator, hired by the production company with a knowledgeable background in IT and system administration. Throughout this document we refer to this user, simply as \emph{Admin}. We should note that the user \emph{Admin} is not really a recognized object within the system and thus does not have a login function. \emph{Admin} refers to whoever is operating the system.
 
 \section{Actors and Stakeholders}
-\label{sec:org4428d88}
+\label{sec:orgb405533}
 \subsection{Admin}
-\label{sec:orgc68b94a}
+\label{sec:orgfa89a7f}
 
 An \emph{Admin} can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
 
@@ -484,14 +512,14 @@ An \emph{Admin} can use the system to record audiences watching a movie. Right n
 \end{itemize}
 
 \subsection{Subject}
-\label{sec:org92e12ed}
+\label{sec:orgb52c3a5}
 Subject is not considered a primary actor in the system. The only interaction between the subject and the system occurs when the admin records the subject watching a movie in the first use-case. The admin initiates the use-case and subject passively sits infronts of the camera, until the movie is completed, whole while the admin actually have the control of the system such that they can terminate the recording process or wait until the movie is finished.
 
 While the UML for iteration 1 might not directly hint that our system considers \emph{Subject} as a seperate entity for design purpose, it is going to be added as an Object in our future iteration. We did not include the \emph{Subject} as an object that is in the system, yet. 
 
 
 \section{Object represented in the system}
-\label{sec:org1874f50}
+\label{sec:org65d8299}
 For this iteration, all use-cases are going to be involved with only two object. Object Sample represents a sample recording of an audience video, while the object movie represents a Movie that an audience is watching. It is important that these two logical objects are well defined within the system, as we might later need to categorize and display the statistics for future use cases.
 \begin{figure}[htbp]
 \centering
@@ -502,9 +530,9 @@ Objects in the system}
 
 
 \chapter{Functional Requirements}
-\label{sec:orgf5acfc9}
+\label{sec:orga43a564}
 \section{Use-Case Diagrams}
-\label{sec:orgb2ca846}
+\label{sec:org3b071be}
 While designing of the use-cases we only thought from a logical/business perspective and not included the "technical" usecases, as our methodology and approach does not heavily rely on UML. 
 
 
@@ -532,7 +560,7 @@ Analyse uscase with subsystems}
 It would have been ideal for the sake of this documentation for Analyse use case to include two "technical" use-cases, "Analyse FER" and "Analyse BEGR", so that it is easier to credit the two team members, but it would not have been accurate. Ideally a use case should show an added value to a system, and seperating them does not really contribute the value to from either logical or design perspective. 
 
 \section{High-Level Use Cases}
-\label{sec:orgb7c82cc}
+\label{sec:org6baa349}
 
 \begin{table}[htbp]
 \caption{\label{table:auc1}
@@ -563,15 +591,15 @@ Description & Use camera to record and store video session of an audience\\
  & watching a movie screening.\\
 \hline
 \end{tabular}
-\end{table}\footnotetext[1]{\label{org5d13a9b}Use case was designed by faith and implemented by Ibrahim.}\footnotetext[2]{\label{org04aec1c}FER portion of use-case was created by Faith and BEGR was created by Ibrahim.}
+\end{table}\footnotetext[1]{\label{org91ec06e}Use case was designed by faith and implemented by Ibrahim.}\footnotetext[2]{\label{org5bbf16e}FER portion of use-case was created by Faith and BEGR was created by Ibrahim.}
 
 
 \chapter{Non-Functional Requirements}
-\label{sec:org89c3b43}
+\label{sec:orgef4d3ff}
 \section{Technical Requirements}
-\label{sec:org0f2edf9}
+\label{sec:org7b2a670}
 \subsection{Prototype 1 - BIT304}
-\label{sec:orgfc0a7d5}
+\label{sec:org8bcf336}
 We recommend to use a moderately powerful desktop computer to run the application. For video capture, it currently uses a webcam, though the application is currently compatible with any other type of live video capture stream. Ideally, a dual monitor system must be used one facing the audience and one facing the \emph{Admin}, who will be interacting with the control panel. The system was actually tested on a laptop computer and we assume that it is also possible to setup and run this application on most standard laptops without any issue. 
 
 Almost all of our application is written using Python 3. We used the Anaconda distribution of python and it's environment and package management system because it reduced the compatibility issues associated with installing packages such as tensorflow across different systems. 
@@ -590,7 +618,7 @@ Windows 7/8\\
 
 \begin{enumerate}
 \item Recommended Setup
-\label{sec:orgc6f0a39}
+\label{sec:org70e406c}
 \begin{itemize}
 \item Linux based system, preferrably Debian variant
 \item System Utilites
@@ -604,20 +632,20 @@ Windows 7/8\\
 \end{enumerate}
 
 \section{Usability Requirements}
-\label{sec:org604c4e2}
+\label{sec:org62001a2}
 
 Our standard user documentation is written as a README file in markdown format. Since the project is currently available in GitHub, the documentation is the first thing the user can see of our project. The purpose of the user documentation is to describe the whole project briefly, and guide the user to install and setup the application.
 
 The user is able to interact with the application through commandline and GUI.
 
 \section{Reliability Requirements}
-\label{sec:orgf91a6fa}
+\label{sec:org45cac0d}
 In our current iteration, all the files are stored in the filesystem within the project file. Our version control system (git) does not track the data files and models, since they are considered large and we do not think it will be effective to use VCS to track data files. Therefore, datasets and results must be shared and versioned manually, we will have to back it up separately and share it on internet with email and file sharing services.
 
 One of the scripts we wrote that will run when a new user is going to setup the system, will actually download the pre-trained models used by subsystems from the internet. This seems to be a standard practice as even larger projects such as OpenPose often does not store their models in the github repository. 
 
 \section{Security Requirements}
-\label{sec:org1d5e1d7}
+\label{sec:org4b8abc5}
 By design, our system does not have an authentication system nor it is considered required. We consider that if deployed, most production studios have their own security systems to control access.
 
 The only time the application uses network currently is to access the internet and download the required models and software.
@@ -626,20 +654,20 @@ One concern a production studio may have is regarding the security of test audie
 
 
 \subsection{FYP2}
-\label{sec:org661174e}
+\label{sec:org0cf48eb}
 We plan to implement the cloud analysis use-case for iteration 3.
 
 \part{Iterations}
-\label{sec:org73cf7a3}
+\label{sec:org767cdf5}
 \chapter{Iteration Plans}
-\label{sec:org283800b}
+\label{sec:org01c1e19}
 Early on we planned two iteration for FYP 1, but as mentioned in the requirement analysis we had to change that because of time constraint and risks of not completing the objectives of our FYP 1. 
 
 As shown in our project timeline, we combined SEMMA phases with SDLC phases in our project timeline. The SEMMA phase are not analogous to an SDLC phase, and we've learned that there may exist no standard for such analogy. For example most software engineers and feature engineers tend to write code during the Sample phase while ML engineers may work on something else. For later iterations, we are going to follow the SEMMA phases more rigidly as we will be working more on the machine learning aspects of the project.
 
 
 \section{Current Iteration}
-\label{sec:org71f5a46}
+\label{sec:org6f34034}
 We only have one Iteration for this part of our final year project. Initially the work was divided between the two part. Use case one was primarily developed by Ibrahim and designed by Faith. Use-case two's main two sub-components were developed and tested independently and later on we re-integrated our work into a single codebase.
 
 \begin{table}[htbp]
@@ -660,7 +688,7 @@ Iteration Plan}
 
 
 \section{Future Iterations}
-\label{sec:orgceb23e5}
+\label{sec:orge5291ad}
 
 \begin{table}[htbp]
 \caption{\label{table:fuiterplan}
@@ -674,19 +702,19 @@ Future Iterations}
 3 & 4, 5\\
 \hline
 \end{tabular}
-\end{table}\footnotetext[3]{\label{org9d2cb0e}Future use cases are described under the conclusion chapter.}
+\end{table}\footnotetext[3]{\label{orgdf3401f}Future use cases are described under the conclusion chapter.}
 
 
 \chapter{Iteration 1}
-\label{sec:orgc5805fa}
+\label{sec:org3ffd719}
 \section{Introduction}
-\label{sec:orgabf6ecb}
+\label{sec:org52fa4a6}
 Like we mentioned before this iteration implements only two use-cases, but it does not mean the amount of tasks we have is smaller than iteration 2, which we have planned that involves more use-cases. Our plan for this iteration was changed throughout the developement, project. Initially we had 2 iterations and considered adding more use-cases that manages movies and samples within the system. However once we finished our work breakdown and started to sort out our tasks, we figured out it will be a risk considering all the tasks we have and we might not be able to complete our goals within timespan. 
 
 So iteration 1 was expanded to cover most of this semester and we focused on two use-cases from the user-perspective. From the system perspective, we started working on the two main analysis subsystems once our on use-case two commenced. 
 
 \section{Purpose}
-\label{sec:org2fdb583}
+\label{sec:orgd5af0dc}
 The purpose of this iteration is mainly to make sure our application can record a video and extract the primary data, required for machine learning from the video. This means the two analysis subsystems must be designed tested, and they should be integrated into the system.
 
 By the end of this iteration the system should be able to do the following:
@@ -697,11 +725,11 @@ By the end of this iteration the system should be able to do the following:
 
 
 \section{Context}
-\label{sec:orgbb26969}
+\label{sec:org94873be}
 On a grand scale, by the end of this iteration we will have a codebase and an fixed project structure. It should be easier to navigate and design for our future iterations, since we will be more familiar with how we are going to work and what exactly needs to be documented. Most importantly, the review of the first iteration is actually going to help us estimate and prioritize the tasks for future iterations because it is going to show how much we overestimate or under-estimate the size of a task.
 
 \section{Schedule of Iteration Workflow}
-\label{sec:org122b446}
+\label{sec:org57ad5c1}
 \begin{longtable}{|l|l|l|l|l|l|l|lp{3cm}|}
 \caption{\label{table:iterwork}
 Schedule of Iterations Workflow}
@@ -738,7 +766,7 @@ Test & 08/04/19 & 09/04/19 & \\
 
 
 \section{Iteration Schedule Breakdown}
-\label{sec:org5692a5f}
+\label{sec:orgc186954}
 
 \begin{longtable}{|l|l|l|l|l|l|l|lp{3cm}|}
 \caption{\label{table:itersched}
@@ -814,7 +842,7 @@ Schedule of Tasks}
 
 
 \section{Resource Summary}
-\label{sec:org9b56b5c}
+\label{sec:org13dc96e}
 Resources used for this project
 \begin{longtable}{|l|l|l|l|l|l|l|lp{3cm}|}
 \caption{\label{table: hard_ressumm}
@@ -903,7 +931,7 @@ Software Resources used for iteration}
 \end{longtable}
 
 \section{Evaluation Criterea}
-\label{sec:org2b560ca}
+\label{sec:org80a140f}
 
 The criteria for evaluation of the whole system is divided into three parts. We intend to test the software 
 \begin{enumerate}
@@ -918,9 +946,9 @@ In this iteration we do not evaluate the speed and accuracy performance of the e
 
 
 \section{Analysis and Design Artefacts}
-\label{sec:org155495b}
+\label{sec:org2b14a4a}
 \subsection{Pipeline diagrams}
-\label{sec:org0e0c7dd}
+\label{sec:org70f2891}
 
 \begin{center}
 \includegraphics[width=.9\linewidth]{img/pipeline.png}
@@ -943,7 +971,7 @@ The valence arousal encoder is currently not built, instead we use a hard coded 
 
 
 \subsection{Class Diagrams}
-\label{sec:org9fb84cb}
+\label{sec:org52e8db1}
 
 \begin{center}
 \includegraphics[width=.9\linewidth]{img/class1.png}
@@ -965,12 +993,12 @@ Note since the current BEGR subsystem's full body pose recognizer is too slow, w
 Also, the fact that BEGR code is not in a seperate package and FER code is in a separate package, is because of a miscommunication and oversight between the two programmers who worked on this during the developement and we decided not to refactor the mistake until, next iteration due to lack of time. BEGR should be refactored into it's own package by in the future.
 
 \chapter{Iteration I: Implementation and Testing}
-\label{sec:org940ab6a}
+\label{sec:org5a514dc}
 
 Our manual tests corresponds to the use-cases, for demonstration purpose we isolate the components associated with the use-case. We do this manual process only for the sake of documentation, while most other smaller systems are tested with the help of automated pythons automated unit testing framework.
 
 \section{Implementation}
-\label{sec:orgab81e06}
+\label{sec:orgc1ee8ea}
 Our application is mostly written in python with the exception of few OS specific shell scripts used to setup and configure. For developement we used conda distribution of python, along with its package and environment manager. The main reason we chose conda was it's ease of use, when installing certain packages such as tensorflow for various platforms compared to pythons default package manager.
 
 \begin{minted}[]{shell}
@@ -1024,7 +1052,7 @@ Analyse Screen}
 \end{figure}
 
 \section{Testing}
-\label{sec:orgdd0284c}
+\label{sec:org9bb589f}
 
 
 \begin{table}[htbp]
@@ -1100,7 +1128,7 @@ Automated Unit Testing & White & 1. Record Video & \\
 All automated unit tests are prefixed with the letter A to distinguish it from manual tests, which are prefixed with the letter M. Manual unit testing requires user to run and observe the results for each test case, and tests may require user input unlike automated unit tests.
 
 \section{Unit Testing}
-\label{sec:org76d5dcb}
+\label{sec:org2c6beea}
 Our goal of unit testing is to test the smallest possible software components within the system seperately and manually without where it is possible. For more internal components that mainly interacts with other components, we do no rigidly test all possible fail cases as some fail cases may be triggered by a programming mistakes. 
 
 Unit testing was implemented under the task, "Test CLI". 
@@ -1134,7 +1162,7 @@ M2 & VLCPlayer & src.utils & 1\\
 \end{table}
 
 \subsection{UnitTest: A1}
-\label{sec:org742caf5}
+\label{sec:org9b92077}
 
 \begin{longtable}{|p{7in}|}
 \caption{\label{table:utest_a1}
@@ -1219,7 +1247,7 @@ OK
 \end{verbatim}
 
 \subsection{UnitTest A2}
-\label{sec:orgb4cbdab}
+\label{sec:org5b6a8a5}
 
 \begin{longtable}{|p{7in}|}
 \caption{\label{table:utest_a2}
@@ -1304,7 +1332,7 @@ OK
 \end{verbatim}
 
 \subsection{ManualTest M1}
-\label{sec:orgc547e9e}
+\label{sec:org2417709}
 \begin{longtable}{|p{7in}|}
 \caption{\label{table:utest_m1}
 Unit Test M1}
@@ -1377,21 +1405,38 @@ Part of the test suite. Please run ./run\_test.sh on a Linux system to run all t
 \end{longtable}
 
 
-\part{Appendix}
-\label{sec:org1c3e97f}
-\chapter{Appendix A}
-\label{sec:orge3988cf}
+\part{Conclusion}
+\label{sec:org8cd391b}
+\chapter{Current Status}
+\label{sec:org942ab5c}
+   So far we have been able to complete the most vital objectives. One of the failure of our FYP is that we prioritzed system development work items such as GUI developement over 
+data collection and machine learning tasks. This is because we wanted to demonstrate the application as soon as possible.  
+  Throughout the developement we were able to resolve most of the issues we faced with compromises which affects changes in the project. For example we prioritised speed, by often choosing less accurate model over models that can run in considerable time. This means often the models extract less features than we originally intended, and so far we cannot estimate how much of a difference that would make on our entire overall system.
+
+So far, there are no clear results about how successful the project is going to be in terms of accuracy. Faith is planning to focus on improving the FER subsystem, and we might be able to detect and improve problems with the machine learning models in the pipeline once we the system is able to run the accuracy tests. Ibrahim will focus on building the BEGR and representation model, while both team members will contribute in other system developement work items.
+
+We also plan to possibly experiment integrating our own deep learning model into the pipeline, possibly to build representation for the time-series. Currently, our strategy for representation algorithm is to visualize and cluster the time series representation using a unsupervised ML algorithm before we sent for regression/classification.
+
+\part{Appendix A}
+\label{sec:org7f6ae53}
+
+
 \includepdf[pages=-,pagecommand={},width=\textwidth]{gantt.pdf}
-\chapter{Appendix B}
-\label{sec:org9d4d1d5}
 
-\begin{itemize}
-\item[{$\square$}] Baseline Gantt Chart
-\item[{$\square$}] Tracking GanttChart
-\end{itemize}
+\part{Appendix B}
+\label{sec:org6acfc2e}
+
+\part{Appendix C}
+\label{sec:org98d9bd2}
+
+\part{Appendic D}
+\label{sec:orge950b15}
+
+\part{Appendix E}
+\label{sec:org9374b2c}
+
 \part{Bibliography}
-\label{sec:orgb35a08d}
-
+\label{sec:org2dcbd1c}
 \printglossaries
 
 \bibliographystyle{apacite}

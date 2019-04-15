@@ -5,7 +5,7 @@
  - [ ] Minutes of meetings
  - [X] Supervisor Meeting Reports
 
-*** [26%] Ibrahim
+*** [33%] Ibrahim
  - [X] Screenshot gui usecase 1
  - [X] Screenshot gui usecase 2
  - [ ] Write the unit testing
@@ -15,7 +15,7 @@
  - [ ] Update all timeline if accuracy testing done
  - [ ] Rewrite chapter 1
  - [ ] Rewrite chapter 2
- - [ ] Write Chapter 5 - Conclusion
+ - [X] Write Chapter 5 - Conclusion
  - [X] Pipeline diagram
  - [X] Class Diagram
  - [ ] Append gantt chart

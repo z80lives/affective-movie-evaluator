@@ -135,7 +135,7 @@ And we also thank our Colleagues who have been of help to us in the best way tha
 \cfoot{\thepage}
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 #+END_EXPORT
- 
+
 * Proposal
 ** Introduction
 
@@ -247,12 +247,16 @@ Although, our system can run with a laptop with a webcam we designed the system 
 |    | gtx 1080 ti               |                             |     |
 |----+---------------------------+-----------------------------+-----|
 
-** Developement Methodology
+** Development Methodology
  To give you the context of the reasoning behind our decision, we would like to discuss a brief overview of commonly used development methodologies first. The most commonly followed methodologies for data-science projects are either SEMMA or CRISP-DR methodologies. SEMMA is a methodology developed by SAS institute, while CRISPR-DR method was originally developed in a joint effort by five companies, and further improved by data mining industry, most notably by IBM. 
 
 The main difference between both methodologies are that CRISPR-DR considers business understanding of the process and also considers model deployment and the results. SEMMA is mainly used for data mining projects, which does not consider business aspect. The methodology we chose for our project is SEMMA methodology.
 
 The reason we chose SEMMA is that, we wanted to keep option generalise our problem scope later, for example we wanted to apply what the system does in other scenarios than movies. Also, business project timelines and research project timelines are usually incompatible, and this is a fact we need to consider while planning early on, since machine learning projects falls under the latter. So not considering the business aspects of the project, will be an advantage for us given the time we  have. 
+
+#+CAPTION: SEMMA (2018, Data Mining for Business Intelligence Series)
+#+ATTR_LATEX: :width 6in
+[[./ext_img/SEMMA.JPG]]
 
 SEMMA methodology consists of 5 phases (Sample, Explore, Modify, Model and Assess). SEMMA methodology gives us freedom to reiterate from any step, as we require. It does not have a definitive cycle for iteration, which makes it a more simple and less rigid framework to follow, compared to CRISP-DR (Palacios, 2017). 
 Sample:  First step of of SEMMA involves collecting all data samples.
@@ -279,21 +283,24 @@ As for the specific techniques we will use throughout the development, our idea 
    The aim of our project is to develop a system that can evaluate how good a movie is, by analysing both face and body postures of the audience. In order for this to work we provide the system a video file consisting of audience reactions, and the system will tell us how good a movie is within a rating metrics, we will define later. It is important for us to state, that we are not proposing a real-time system here; the system accepts a recording of the raw data - which is currently defined as video file, and can be any other form of measurement - as the primary input. A system like this is very useful for movie studios, which often relies on test audience in order to predict whether their movies are going to be successful and a system like this can aid in measuring the audience reaction more accurately. 
 
 *** Object of the Project
+**** To create metrics by which the system gives score. 
+  In order to accomplish our goal our system needs a valid output format. The output format maybe a discrete list of values, for example the letters A to C or a continous number. The purpose of this metrics is to indicate the overall sentiment of the movie for a single audience. 
 
-The objectives we have set for our project are the following:
-Define the metrics by which the system is going to give the score before we create the evaluation model. (e.g: value between 0.0-1.0 or a discrete grading system, like A+, A, B) 
- Research the requirements of the dataset, and methodologies before week 3.
-Find or create the required test datasets for in order to complete objective 6.
-Dataset for the emotion recognition subsystem
-Dataset for body pose subsystem.
-Dataset for the whole system: Video recordings of audiences reacting to movies. 
-Determine accuracy of the overall project by comparing its output to existing scoring systems. 
-To prove that we are using state of the art technologies in our system; produce:
-Accuracy report for Emotion recognition 
-Accuracy report Body pose/action estimation
+**** To research on the requirements of the dataset and methodologies before March.
+     We decided to add research on dataset and methodologies as an objective since, we cannot start developement of the system without it.
+
+**** To Create and Collect Datasets for testing and developement
+The following datasets will be collected for testing and developement of our system. The exact criteria and the requirements for the dataset will be decided after analysis in the work item.
+  1. Facial Dataset with labelled Emotion
+  2. Pose Dataset with body pose labelled
+  3. Video Recordings of audience reacting to Movie
+
+**** 2.4 To determine accuracy of the project by comparing its output to existing scoring systems.
+     This is essential because we need the means to determine how well our system is performing. The system cannot be considered complete without that.
+**** 2.5 To produce accuracy reports for the analysis subsystems
+     Analysis report for subsystems are used to tune the system and lets us know which part of the application needs improvement. 
 
 *** Output expected from the project
-
 
 The project will be divided into two phases; initially, we will be working on two seperate system that capture the emotion and pose respectively, into meaningful data and then streamline our work into a single codebase. The second phase of our project will be working together to create the movie evaluation model, which takes in the processed data from our previous system and gives us a prediction of how well the audience liked that movie. 
 
@@ -335,10 +342,16 @@ graph g{
   utils -- playback
 }
 #+END_SRC
+#+NAME: fig:affheir
 #+CAPTION: Task in terms of complexity
 #+RESULTS:
 [[file:img/wbs1.png]]
 
+
+
+The figure ref:fig:affheir shows an approximate overview of the entires system. The picture is not intended to give you an idea of how those subsystems will interact. It is there to show you what components we will be creating and working on in terms of the workbreakdown structure. In contrast, figure ref:fig:affheir2 shows the actual work breakdown structure we planned for the only iteration in FYP 1.
+
+#+NAME: fig:affheir2
 #+BEGIN_SRC dot :file img/wbs2.png
 digraph g {
     newrank=true;
@@ -417,8 +430,8 @@ digraph g {
      
 }
 #+END_SRC
-
-#+RESULTS:
+#+CAPTION: Work Breakdown Chart
+#+RESULTS: fig:affheir2
 [[file:img/wbs2.png]]
 
 
@@ -432,7 +445,7 @@ digraph g {
 |         | 2. Expanded Use-case | 12/03/19 | 16/03/19 | S      |
 |         | 3. Wireframe         | 12/03/19 | 16/03/19 | S      |
 |---------+----------------------+----------+----------+--------|
-|         | 1. Setup github      |          |          | S      |
+|       2 | 1. Setup github      |          |          | S      |
 |         | environment          |          |          |        |
 |         | 2. Install OpenCV    |          |          | S      |
 |         | 3. Capture Video     |          |          | L      |
@@ -440,20 +453,15 @@ digraph g {
 |         | 4. CLI to Capture    |          |          | M      |
 |         | Video                |          |          |        |
 |---------+----------------------+----------+----------+--------|
-|         | 1. AUT Capture       |          |          | M      |
+|       3 | 1. AUT Capture       |          |          | M      |
 |         | 2. AUT CLI           |          |          | S      |
 |---------+----------------------+----------+----------+--------|
-|         | 1. Script to collect |          |          | M      |
+|       4 | 1. Script to collect |          |          | M      |
 |         | training dataset     |          |          |        |
 |         | 2. Collect dataset 1 |          |          | L      |
 |         | 3. Script to load    |          |          | M      |
 |         | dataset1             |          |          |        |
 |---------+----------------------+----------+----------+--------|
-
-
-
-
-Every task on the list have a deliverable.
 
 
 
@@ -491,6 +499,7 @@ You can find our baseline gantt chart for estimated project plan in Appendix A. 
 #+ATTR_LATEX: :width 7in
 #+RESULTS:
 [[./ext_img/gant1.png]]
+
 
 * Requirement Analysis
 ** Introduction
@@ -1531,23 +1540,32 @@ OK
 
 *** COMMENT Iteration Review and Evaluation
 
-* COMMENT Conclusion
+* Conclusion
 ** Current Status
-Current developement of the system also prioritised speed, by often choosing less accurate model over models that can run in considerable time.
-** Results
-** What we learned
-** Future plans
-* Appendix 
-** Appendix A
+   So far we have been able to complete the most vital objectives. One of the failure of our FYP is that we prioritzed system development work items such as GUI developement over 
+data collection and machine learning tasks. This is because we wanted to demonstrate the application as soon as possible.  
+  Throughout the developement we were able to resolve most of the issues we faced with compromises which affects changes in the project. For example we prioritised speed, by often choosing less accurate model over models that can run in considerable time. This means often the models extract less features than we originally intended, and so far we cannot estimate how much of a difference that would make on our entire overall system.
+
+  So far, there are no clear results about how successful the project is going to be in terms of accuracy. Faith is planning to focus on improving the FER subsystem, and we might be able to detect and improve problems with the machine learning models in the pipeline once we the system is able to run the accuracy tests. Ibrahim will focus on building the BEGR and representation model, while both team members will contribute in other system developement work items.
+
+   We also plan to possibly experiment integrating our own deep learning model into the pipeline, possibly to build representation for the time-series. Currently, our strategy for representation algorithm is to visualize and cluster the time series representation using a unsupervised ML algorithm before we sent for regression/classification.
+
+* Appendix A
+
+
 #+BEGIN_EXPORT latex
 \includepdf[pages=-,pagecommand={},width=\textwidth]{gantt.pdf}
 #+END_EXPORT
-** Appendix B
 
- - [ ] Baseline Gantt Chart
- - [ ] Tracking GanttChart
+* Appendix B
+
+* Appendix C
+
+* Appendic D 
+
+* Appendix E 
+
 * Bibliography
-
 #+BEGIN_EXPORT latex
 \printglossaries
 #+END_EXPORT

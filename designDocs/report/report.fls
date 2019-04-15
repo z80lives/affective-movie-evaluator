@@ -353,6 +353,8 @@ INPUT /usr/share/texmf/tex/latex/lm/ts1lmr.fd
 INPUT /usr/share/texmf/tex/latex/lm/ts1lmr.fd
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ts1-lmr12.tfm
 INPUT /usr/share/texmf/fonts/tfm/public/lm/ec-lmri12.tfm
+INPUT ./ext_img/SEMMA.JPG
+INPUT ./ext_img/SEMMA.JPG
 INPUT ./img/wbs1.png
 INPUT img/wbs1.png
 INPUT ./img/wbs2.png
@@ -457,4 +459,3 @@ INPUT /usr/share/texmf/fonts/type1/public/lm/lmr8.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmri12.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb
 INPUT /usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb
