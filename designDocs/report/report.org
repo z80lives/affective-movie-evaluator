@@ -271,7 +271,8 @@ As for the specific techniques we will use throughout the development, our idea 
 ** Introduction
    The aim of our project is to develop a system that can evaluate how good a movie is, by analysing both face and body postures of the audience. In order for this to work we provide the system a video file consisting of audience reactions, and the system will tell us how good a movie is within a rating metrics, we will define later. It is important for us to state, that we are not proposing a real-time system here; the system accepts a recording of the raw data - which is currently defined as video file, and can be any other form of measurement - as the primary input. A system like this is very useful for movie studios, which often relies on test audience in order to predict whether their movies are going to be successful and a system like this can aid in measuring the audience reaction more accurately. 
 
-*** OBJECTIVES OF THE PROJECT
+*** Object of the Project
+
 The objectives we have set for our project are the following:
 Define the metrics by which the system is going to give the score before we create the evaluation model. (e.g: value between 0.0-1.0 or a discrete grading system, like A+, A, B) 
  Research the requirements of the dataset, and methodologies before week 3.
@@ -284,7 +285,8 @@ To prove that we are using state of the art technologies in our system; produce:
 Accuracy report for Emotion recognition 
 Accuracy report Body pose/action estimation
 
-*** OUTPUTS EXPECTED FROM THE PROJECT
+*** Output expected from the project
+
 
 The project will be divided into two phases; initially, we will be working on two seperate system that capture the emotion and pose respectively, into meaningful data and then streamline our work into a single codebase. The second phase of our project will be working together to create the movie evaluation model, which takes in the processed data from our previous system and gives us a prediction of how well the audience liked that movie. 
 
