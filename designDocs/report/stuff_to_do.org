@@ -1,21 +1,25 @@
 ** TODO IMPORTANT
-*** [33%] Faith
+*** [75%] Faith
  - [X] Download dataset for testing
  - [X] Monthly Progress reports
  - [ ] Minutes of meetings
- - [ ] Supervisor Meeting Reports
+ - [X] Supervisor Meeting Reports
+
+*** [26%] Ibrahim
+ - [X] Screenshot gui usecase 1
+ - [X] Screenshot gui usecase 2
+ - [ ] Write the unit testing
+ - [ ] Write Implementation
+ - [ ] Iteration Review
+ - [ ] Write accuracy testing 
+ - [ ] Update all timeline if accuracy testing done
+ - [ ] Rewrite chapter 1
+ - [ ] Rewrite chapter 2
+ - [ ] Write Chapter 5 - Conclusion
+ - [X] Pipeline diagram
+ - [X] Class Diagram
+ - [ ] Append gantt chart
  - [ ] Screenshot cli usecase 1
  - [ ] Screenshot cli usecase 2
 
-*** [9%] Ibrahim
- - [ ] Screenshot gui usecase 1
- - [ ] Screenshot gui usecase 2
- - [ ] Write accuracy testing 
- - [ ] Update all timeline if accuracy testing done
- - [ ] Write the unit testing
- - [ ] Rewrite chapter 1
- - [ ] Rewrite chapter 2
- - [ ] Write Chapter 5
- - [X] Pipeline diagram
- - [ ] Class Diagram
- - [ ] Append gantt chart
+(setq org-latex-listings 'minted)

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+sysadmin@localhost:\PYGZti{}/affective\PYGZus{}movie\PYGZus{}evaluator/\PYGZdl{} conda create \PYGZhy{}\PYGZhy{}name affmem\PYGZus{}env pip tensorflow \PYG{n+nv}{python}\PYG{o}{=}\PYG{l+m}{3}.5
+sysadmin@localhost:\PYGZti{}/affective\PYGZus{}movie\PYGZus{}evaluator/\PYGZdl{} conda activate affmem\PYGZus{}env
+\PYG{o}{(}affmem\PYGZus{}env\PYG{o}{)} sysadmin@localhost:\PYGZti{}/affective\PYGZus{}movie\PYGZus{}evaluator/\PYGZdl{} conda activate
+\end{Verbatim}
