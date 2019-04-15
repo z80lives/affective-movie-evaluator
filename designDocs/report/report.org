@@ -98,7 +98,14 @@ Date: 12-04-2019
 
 \renewcommand{\abstractname}{Acknowledgement}
 \begin{abstract}
-	Aknowledgements here.
+	Aknowledgements
+	This project will not be possible without the help of a number of people. We would like to express our deepest gratitude to HELP's University Department of Information and Communication Technology for their support and provision to make this project a success and to our family for their unconditional love and support to make sure our education is successful.
+
+Our gratitude goes to the following individuals who have been with us through this journey:
+Ms. Shu Mn for teaching and guiding us through the entire process of this project
+Mr. Abdul Quayoon for being patient with us as our supervisor, and for providing insight and expertise that has greatly helped us in implementing our project
+
+And we also thank our Colleagues who have been of help to us in the best way that they can.
 \end{abstract}
 
 

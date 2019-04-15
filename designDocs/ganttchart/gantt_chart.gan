@@ -56,7 +56,7 @@
                 <task id="85" name="Script to load dataset" color="#8cb6ce" meeting="false" start="2019-03-28" duration="1" complete="100" thirdDate="2019-03-21" thirdDate-constraint="0" expand="true"/>
             </task>
         </task>
-        <task id="91" name="Analyse Video" color="#000000" meeting="false" project="true" start="2019-03-18" duration="23" complete="100" thirdDate="2019-03-26" thirdDate-constraint="0" expand="true">
+        <task id="91" name="Analyse Video" color="#000000" meeting="false" project="true" start="2019-03-18" duration="23" complete="100" thirdDate="2019-03-26" thirdDate-constraint="0" expand="false">
             <task id="113" name="Sample" color="#000000" meeting="false" start="2019-03-28" duration="5" complete="100" thirdDate="2019-03-28" thirdDate-constraint="0" expand="true">
                 <task id="114" name="Collect dataset 2" color="#8cb6ce" meeting="false" start="2019-03-29" duration="4" complete="100" thirdDate="2019-03-26" thirdDate-constraint="0" expand="true"/>
                 <task id="115" name="Script to load FER dataset" color="#8cb6ce" meeting="false" start="2019-03-28" duration="2" complete="100" thirdDate="2019-03-26" thirdDate-constraint="0" expand="true"/>

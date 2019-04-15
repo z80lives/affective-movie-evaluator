@@ -4,6 +4,7 @@
 #+TITLE: Final Report I: Affective Movie Evaluator
 #+AUTHOR: Ibrahim M. Shaatha, Faith Alfred
 #+LATEX_HEADER: \usepackage{apacite} \usepackage{algorithm} \usepackage{listings} \usepackage[noend]{algpseudocode}  \usepackage{indentfirst}  \usepackage{fancyhdr} \usepackage{stringstrings} 
+#+LATEX_HEADER: \usepackage[table]{xcolor}
 #+LATEX_HEADER: \usepackage{longtable}
 #+LATEX_HEADER: \usepackage{geometry} \geometry{ a4paper,  total={170mm,257mm}, left=20mm, top=1in, foot=0.3in}
 #+LATEX_HEADER:\usepackage[final]{pdfpages}
@@ -12,8 +13,22 @@
 #+LATEX_HEADER: \usepackage[raggedright]{titlesec}
 #+latex_header: \usepackage[toc,section=section]{glossaries}
 #+latex_header: \makeglossaries
+#+LATEX_HEADER: \usepackage{minted} %minted requires -shell-escape flag. Remove it if necessary
+#+header: :eval "no"
+#+OPTIONS: ^:nil
+
+#+OPTIONS: H:4
 
 #+OPTIONS: toc:nil title:nil
+
+#+BEGIN_EXPORT latex
+%enable heading 4
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+#+END_EXPORT
 
 #+BEGIN_EXPORT latex
 \newglossaryentry{FER}{
@@ -60,10 +75,10 @@
   {} 
 #+END_EXPORT
 
+
 \newpage
 \begin{abstract}
-	Write Abstract here.  
-
+	For a project to be successfully implemented, it requires meet-ups with stakeholders, team members and any external member that will contribute positively to the success of the project. For our project we didn’t have a need to meet with external stakeholders, but it was necessary for us to meet with each other (project team member), and our supervisor. These meetings have enabled us to manage our project well, share ideas and limit our work to a specific audience. It has also helped us to eliminate some work that we think is necessary but later realised it would have just been a waste of time and resources.
 \end{abstract}
 
 #+BEGIN_EXPORT latex
@@ -468,7 +483,6 @@ You can find our baseline gantt chart for estimated project plan in Appendix A. 
 #+RESULTS:
 [[./ext_img/gant1.png]]
 
-
 * Requirement Analysis
 ** Introduction
    Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
@@ -482,7 +496,6 @@ Along with the project's functional requirements and non-functional requirements
 Initially, we like we planned we worked on the facial analysis, and posture analysis portion of the code seperately. Later on we refactored and integrated the code as seperate modules into a single codebase with the help of object-oriented programming.
 
 
-
 ** Requirement Summary
 The first thing we did during our first meeting was infact to identify all the stakeholders and actors who interacted with the system. While we discussed the naming conventions of the actors involved during the later meetings, it was early on established that only one user directly interacts with the system and can be considered to be the primary user.
 
@@ -491,15 +504,16 @@ Our systems consists of mainly this one user controlling the application directl
 *** Actors and Stakeholders
 ****  Admin
 
-An /Admin/ can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
+     An /Admin/ can use the system to record audiences watching a movie. Right now, in order to do that, the movie must exist within the computer system first. Admin is supposed to launch our application, and provide the details of the audience member and the movie, because the system does not yet store the metadata of the movies yet. The movie object is not considered as an object of the system in this iteration.
 
  - Admin is able to Record a video of a /Subject/ watching a movie.
- - Admin is able to Analyse a video of a subject
+ - Admin is able to Analyse a video of a /subject/
   - Produce time-series.
 
 ****  Subject
+Subject is not considered a primary actor in the system. The only interaction between the subject and the system occurs when the admin records the subject watching a movie in the first use-case. The admin initiates the use-case and subject passively sits infronts of the camera, until the movie is completed, whole while the admin actually have the control of the system such that they can terminate the recording process or wait until the movie is finished.
 
-While the UML for iteration 1 might not directly hint that subject is indeed a part of the system, it is going to be added as an Object in our future iteration. We did not include the /Subject/ as an object that is in the system, yet. 
+While the UML for iteration 1 might not directly hint that our system considers /Subject/ as a seperate entity for design purpose, it is going to be added as an Object in our future iteration. We did not include the /Subject/ as an object that is in the system, yet. 
 
 
 *** Object represented in the system
@@ -522,7 +536,6 @@ class Sample{
 #+RESULTS:
 [[file:./img/obj1.png]]
 
-TODO: This is supposed to be an object diagram not class diagram.
 
 *** COMMENT Hardware Architecture / Layout
 
@@ -616,8 +629,6 @@ It would have been ideal for the sake of this documentation for Analyse use case
 
 Almost all of our application is written using Python 3. We used the Anaconda distribution of python and it's environment and package management system because it reduced the compatibility issues associated with installing packages such as tensorflow across different systems. 
 
-Minimum Requirements
-
 #+NAME: table:minreq1
 #+ATTR_LATEX: :align |l|l|lp{3cm}|
 #+CAPTION: Minimum Software Requirements
@@ -664,11 +675,7 @@ One concern a production studio may have is regarding the security of test audie
 
 
 *** Current Iteration
-  We only have one Iteration for this part of our final year project.
-  Initially the work was divided between the two part.
-  Use case one was primarily developed by Ibrahim and designed by Faith.
-
-  Use-case two's main two sub-components were developed and tested independently and later on we re-integrated our work into a single codebase.
+  We only have one Iteration for this part of our final year project. Initially the work was divided between the two part. Use case one was primarily developed by Ibrahim and designed by Faith. Use-case two's main two sub-components were developed and tested independently and later on we re-integrated our work into a single codebase.
 
  #+NAME: table:iterplan
  #+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
@@ -676,10 +683,11 @@ One concern a production studio may have is regarding the security of test audie
  |-------+-------------+-------------+-----------------------+---------------------|
  | *FYP* | *Iteration* | *Use Cases* | *Proposed Start Date* | *Proposed End Date* |
  |-------+-------------+-------------+-----------------------+---------------------|
- |     1 |           1 | 1,2         | 11/03/19              | 09/04/19            |
+ |     1 | 1           | 1,2         | 11/03/19              | 09/04/19            |
  |       |             |             |                       |                     |
  |-------+-------------+-------------+-----------------------+---------------------|
- 
+ |     2 | 2,3         | 2,3,4       |                       |                     |
+ |-------+-------------+-------------+-----------------------+---------------------|
 
 
 *** Future Iterations
@@ -699,11 +707,12 @@ One concern a production studio may have is regarding the security of test audie
  
 ** Iteration 1
 *** Introduction
-    Our plan for this iteration was changed throughout the developement, project. Initially we had 2 iterations and considered adding more use-cases that manages movies and samples within the system. However once we finished our work breakdown and started to sort out our tasks, we figured out it will be a risk considering all the tasks we have and we might not be able to complete our goals within timespan. So iteration 1 was expanded to cover most of this semester and we focused on two use-cases from the user-perspective. From the system perspective, we started working on the two main analysis subsystems once our on use-case two commenced.
+    Like we mentioned before this iteration implements only two use-cases, but it does not mean the amount of tasks we have is smaller than iteration 2, which we have planned that involves more use-cases. Our plan for this iteration was changed throughout the developement, project. Initially we had 2 iterations and considered adding more use-cases that manages movies and samples within the system. However once we finished our work breakdown and started to sort out our tasks, we figured out it will be a risk considering all the tasks we have and we might not be able to complete our goals within timespan. 
 
+So iteration 1 was expanded to cover most of this semester and we focused on two use-cases from the user-perspective. From the system perspective, we started working on the two main analysis subsystems once our on use-case two commenced. 
 
 *** Purpose
-The purpose of this iteration is mainly to make sure our application can record a video and extract the primary data, required for machine learning from the video. This means the two analysis subsystems must be designed tested, and they should be integrated into the system.
+    The purpose of this iteration is mainly to make sure our application can record a video and extract the primary data, required for machine learning from the video. This means the two analysis subsystems must be designed tested, and they should be integrated into the system.
 
     By the end of this iteration the system should be able to do the following:
  1. *Capture Video*: The admin should be able to record video by using the command line interface and graphical user interface, to create a video file.
@@ -745,39 +754,39 @@ On a grand scale, by the end of this iteration we will have a codebase and an fi
 |------------+-----------------------------------------------+------------+------------+------------|
 | *Use case* | *Task Name*                                   | *Start*    | *Finish*   | *Est Time* |
 |------------+-----------------------------------------------+------------+------------+------------|
-|            | *1.1 Design (Explore)*                        | 11/03/2019 | 16/03/2019 |         18 |
+|            | *1.1 Design (Explore)*                        | 11/03/2019 | 16/03/2019 |          5 |
 |          1 | 1.1.1 Class Diagram                           |            |            |            |
 |            | 1.1.2 Expanded Use-Case                       |            |            |            |
 |            | 1.1.3 Wireframes                              |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          1 | *1.2 Implement*                               | 16/03/19   | 24/03/19   |         18 |
+|          1 | *1.2 Implement*                               | 16/03/19   | 24/03/19   |          8 |
 |            | 1.2.1 Setup github environment                |            |            |            |
 |            | 1.2.2 Install OpenCV                          |            |            |            |
 |            | 1.2.3 Capture video in a folder               |            |            |            |
 |            | 1.2.4 CLI to capture video                    |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          1 | *1.3 Evaluate*                                | 22/03/19   | 28/03/19   |            |
+|          1 | *1.3 Evaluate*                                | 22/03/19   | 28/03/19   |          6 |
 |            | 1.3.1 AUT capture                             |            |            |            |
 |            | 1.3.2 AUT CLI                                 |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          1 | *1.4 Sample*                                  | 26/03/19   | 30/03/19   |            |
+|          1 | *1.4 Sample*                                  | 26/03/19   | 30/03/19   |          4 |
 |            | 1.4.1 Script to collect training dataset      |            |            |            |
 |            | 1.4.2 Collect Test Dataset 1                  |            |            |            |
 |            | 1.4.3 Write script to load test dataset       |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.1 Sample*                                  | 29/03/19   | 02/04/19   |            |
+|          2 | *2.1 Sample*                                  | 29/03/19   | 02/04/19   |          4 |
 |            | 2.1.1 Collect Test Dataset 2                  |            |            |            |
 |            | 2.1.1 Download FER dataset                    |            |            |            |
 |            | 2.1.2 Script to load FER dataset              |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.2 Explore/Design*                          | 01/04/19   | 06/04/19   |            |
+|          2 | *2.2 Explore/Design*                          | 01/04/19   | 06/04/19   |          5 |
 |            | 2.2.1 Split and label Test Dataset 2          |            |            |            |
 |            | 2.2.2 Pipeline Diagram                        |            |            |            |
 |            | 2.2.3 Interaction Diagram (SSD)               |            |            |            |
 |            | 2.2.4 Design Class Diagram                    |            |            |            |
 |            | 2.2.5 Wireframe                               |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *Implement*                                   | 18/03/19   | 09/04/19   |            |
+|          2 | *Implement*                                   | 18/03/19   | 09/04/19   |         22 |
 |            | 2.3.1 Setup FER library                       |            |            |            |
 |            | 2.3.2 Setup OpenPose Library                  |            |            |            |
 |            | 2.3.3 Generate FER time series                |            |            |            |
@@ -786,12 +795,12 @@ On a grand scale, by the end of this iteration we will have a codebase and an fi
 |            | 2.3.6 Integrate BEGR analysis to UI           |            |            |            |
 |            | 2.3.7 Analyse Video CLI                       |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.4 Modify*                                  | 07/04/19   | 09/04/19   |            |
+|          2 | *2.4 Modify*                                  | 07/04/19   | 09/04/19   |          2 |
 |            | 2.4.1 Define combined time-series file format |            |            |            |
 |            | 2.4.2 Code to Visualise Time Series           |            |            |            |
 |            | 2.4.3 Refactor code                           |            |            |            |
 |------------+-----------------------------------------------+------------+------------+------------|
-|          2 | *2.5 Evaluate*                                | 07/04/19   | 07/04/19   |            |
+|          2 | *2.5 Evaluate*                                | 07/04/19   | 09/04/19   |          2 |
 |            | 2.5.1 Write automated unit test               |            |            |            |
 |            | 2.5.2 FER Accuracy test                       |            |            |            |
 |            | 2.5.3 Pose accuracy test                      |            |            |            |
@@ -872,16 +881,646 @@ The software engineering aspects and machine learning parts of the code must be 
 In this iteration we do not evaluate the speed and accuracy performance of the entire pipeline, from the beginning, something we intend to do in all the future iterations.
 
 
-*** Analysis and Design Artefacts
-*** Implementation and Testing
+***  Analysis and Design Artefacts
+**** Pipeline diagrams
 
-**** Unit Testing
+#+ATTR_LATEX: :width 490px
+#+CAPTION: Analyse pipeline Overview
+#+NAME: fig:pipeline
+#+BEGIN_SRC dot :file img/pipeline.png
+digraph g{
+ rankdir=LR;
+ node[shape="rectangle"]
+ img[label="Video" shape="parallelogram"]
+ analyse_cli[label="Analysis\nModule"]
+ util[label="Util\nModule"]
+ fer[label="FER"]
+ begr[label="BEGR"]
+ img -> analyse_cli
+ analyse_cli -> begr
+ analyse_cli -> fer
+ fer -> util
+ begr -> util
+ util -> out
+ out[label="Time-series" shape="parallelogram"]
+}
+#+END_SRC
 
-**** Automated Unit Testing
+#+RESULTS: fig:pipeline
+[[file:img/pipeline.png]]
 
-**** Focused Model Testing (Accuracy)
 
-*** Iteration Review and Evaluation
+Even though it is possible to run /FER/ and /BEGR/ simultaneous and in parallel by design, during the implementation phase we realised our development systems are not capable of  running the subsystems in parallel without running out of memory. Therefore, we decided that the video will pass through the analysis pipeline twice to exctract the time-series data.
+
+
+#+ATTR_LATEX: :width 490px
+#+CAPTION: FER pipeline Overview
+#+NAME: fig:ferpipeline
+#+BEGIN_SRC dot :file img/ferpipeline.png
+digraph g{
+ rankdir=LR;
+ node[shape="rectangle"]
+ img[label="Image" shape="parallelogram"]
+ detect[label="Detection\n Model"]
+ emotion[label="Recognition\n Model"]
+ out[label="Time-series" shape="parallelogram"]
+ img->detect->emotion->out
+}
+#+END_SRC
+
+#+RESULTS: fig:ferpipeline
+[[file:img/ferpipeline.png]]
+
+
+#+ATTR_LATEX: :width 490px
+#+CAPTION: BEGR pipeline Overview
+#+NAME: fig:begrpipeline
+#+BEGIN_SRC dot :file img/begrpipeline.png
+digraph g{
+ rankdir=LR;
+ node[shape="rectangle"]
+ img[label="Image" shape="parallelogram"]
+ detect[label="Head Pose\n Detection Model"]
+ detect2[label="Face keypoint\n Detector"]
+ emotion[label="V/A Encoder"]
+ out[label="Time-series" shape="parallelogram"]
+ img -> detect2 -> emotion
+ img->detect->emotion->out
+}
+#+END_SRC
+
+#+RESULTS: fig:begrpipeline
+[[file:img/begrpipeline.png]]
+
+The valence arousal encoder is currently not built, instead we use a hard coded module as a replacement. Currently all the V/A encoder returns is a 1 dimensional value that we call 'interest'. If the subject is facing the camera the algorithm returns a higher value, otherwise we return a lower value.
+
+
+**** Class Diagrams
+
+#+CAPTION: Class diagram: usecase 1
+#+BEGIN_SRC plantuml :file img/class1.png
+
+package src.system_objects{
+class Movie{
+ - averageRating : float
+ - currentRating : float
+ - genre : str
+ - name : str
+ - tags : str
+ + createMovie(name, genre, tags)
+}
+
+Sample *- Movie
+class Sample{
+ - filename: str
+ - length : float
+ - movie : str
+ - size : float
+ - subject : str
+}
+
+}
+
+
+package src.utils{
+
+RecordSystem -- VLCPlayer
+RecordSystem -- Webcam
+class RecordSystem{
+  - set_metadata()
+  - start_recording()
+  + createSampleDir()
+  + generateFileName()
+  + loadMetaData()
+  + play_video()
+  + saveMetaData()
+  + select_file()
+}
+
+class SampleLoader{
+ + getDir()
+ + getVideoFile()
+}
+
+SampleController --o Sample
+SampleController -- SampleLoader
+class SampleController{
+ - dirs
+ - sample_dir : str
+ + list_all()
+ + read_dirs()
+ + read_metadata()
+}
+
+Movie *- MovieController
+class MovieController{
+  + read_files()
+  + getMovieByFileName(filename)
+  + getMovieObjectById(movie_id)
+  + get_dir()
+}
+
+class VLCPlayer{
+ - done : bool
+ - thread : Thread
+ + isAlive()
+ + play_movie()
+}
+
+class Webcam{
+ + startCamera() : cv2.Camera
+}
+
+}
+
+#+END_SRC
+
+#+RESULTS:
+[[file:img/class1.png]]
+
+The classes RecordSystem, SampleController and MovieController are respectively used by the User interface code for the use case. We do not have a presentation layer abstraction between the actual user interface code and the /Controller/ classes.
+
+One design principle we tried to follow loosely is the Single-Responsible principle, as you can see from the diagram. A class should have one responsibility, but we did not adher strictly to it.
+
+Webcam module helps setting up the camera.
+
+
+#+CAPTION: Class diagram: usecase 2
+#+BEGIN_SRC plantuml :file img/class2.png
+package FER{
+  class FaceSystem extends PoseAnalyser{
+    - infer(img : cv2.Image)
+    + analyse(video_file)
+  }
+}
+
+
+package src.system_objects{
+
+
+class HeadPoseEstimator extends PoseAnalyser{
+ - infer(img:cv2.Image)
+ + analyse(video_file : str)
+}
+
+
+class Movie{
+ - averageRating : float
+ - currentRating : float
+ - genre : str
+ - name : str
+ - tags : str
+ + createMovie(name, genre, tags)
+}
+
+Sample *- Movie
+class Sample{
+ - filename: str
+ - length : float
+ - movie : str
+ - size : float
+ - subject : str
+}
+
+}
+
+
+package src.utils{
+
+class SampleLoader{
+ + getDir()
+ + getVideoFile()
+}
+
+SampleController --o Sample
+SampleController -- SampleLoader
+class SampleController{
+ - dirs
+ - sample_dir : str
+ + list_all()
+ + read_dirs()
+ + read_metadata()
+}
+
+
+}
+
+#+END_SRC
+
+#+RESULTS:
+[[file:img/class2.png]]
+
+Note since the current BEGR subsystem's full body pose recognizer is too slow, we replaced it with another model only measuring head pose and renamed the package /begr/ as /head_pose/. Package /head_pose/ is just a placeholder for /begr/ until we find a better replacement. 
+
+Also, the fact that BEGR code is not in a seperate package and FER code is in a separate package, is because of a miscommunication and oversight between the two programmers who worked on this during the developement and we decided not to refactor the mistake until, next iteration due to lack of time. BEGR should be refactored into it's own package by in the future.
+
+** Iteration I: Implementation and Testing
+
+Our manual tests corresponds to the use-cases, for demonstration purpose we isolate the components associated with the use-case. We do this manual process only for the sake of documentation, while most other smaller systems are tested with the help of automated pythons automated unit testing framework.
+
+*** Implementation
+Our application is mostly written in python with the exception of few OS specific shell scripts used to setup and configure. For developement we used conda distribution of python, along with its package and environment manager. The main reason we chose conda was it's ease of use, when installing certain packages such as tensorflow for various platforms compared to pythons default package manager.
+
+#+BEGIN_SRC shell :exports code
+~/affective_movie_evaluator/$ conda create --name affmem_env \
+                                                  pip tensorflow python=3.5
+~/affective_movie_evaluator/$ conda activate affmem_env
+~/affective_movie_evaluator/$ conda activate 
+(affmem_env) ~/affective_movie_evaluator/$ 
+#+END_SRC
+
+The shell command snippet above shows an example scenario of creating a conda environment and activating the environment for the project. Right now we recommend all /Admins/ to work using conda environment to avoid common multiple dependency version issues users face when they use the global python environment.
+
+
+All of the data was stored directly on disk drive, and the system identifies the objects with the help of metadata written in JSON format. Since we are not expecting search functions, that will traverse through the disk drive and most machine learning algorithms either loads datasets in batches or in entirety we do not think a database is necessary. A search with the current system will perform linearly $O(n)$ and an insertion will cost constant time.
+
+#+CAPTION: The GUI Application
+#+NAME: fig:sc1
+#+ATTR_LATEX: :width 5in
+#+RESULT:
+[[file:./ext_img/sc1.png]]
+
+Figure ref:fig:sc1 shows the initial screen the admin will see once they start the application. The empty text area shown in the screenshot is going to display error error messages for the admin, and was also used as the console log by us while were developing the application.
+
+#+CAPTION: Record Sample: 1. Select the movie file
+#+NAME: fig:sc12
+#+ATTR_LATEX: :width 5in
+#+RESULT:
+[[file:./ext_img/sc1.1.png]]
+
+If the /Admin/ wants to record a new sample, they will have to select a movie stored from the disk drives. The movie files are stored in a the 'movies' directory as shown in Figure ref:fig:sc12, along with the metadata file which describes each movie.
+
+Our overall strategy for implementation can be describe as a test driven bottom up approach. For modules that uses machine learning we have a different approach, instead of writing tests for accuracy or simple integration we write a procedural test file, then convert into Object Oriented code which is compatible with our Analyse interface.
+
+
+#+CAPTION: Record Sample: 2. Fill in the blanks
+#+NAME: fig:sc2
+#+ATTR_LATEX: :width 5in
+#+RESULT:
+[[file:./ext_img/sc2.png]]
+
+
+
+#+CAPTION: Analyse Screen
+#+NAME: fig:sc3
+#+ATTR_LATEX: :width 5in
+#+RESULT:
+[[file:./ext_img/sc3.png]]
+
+*** COMMENT User Manual
+*** Testing    
+
+
+#+NAME: table:strattable
+#+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
+#+CAPTION: Table of Strategy
+|-------+---------------------------------------------------------------------|
+| *No.* | *Strategy*                                                          |
+|-------+---------------------------------------------------------------------|
+|     1 | Create the smallest possible class                                  |
+|-------+---------------------------------------------------------------------|
+|     2 | Write the unit test for the class    and improve the class until it |
+|       | passes all the basic test conditions                                |
+|-------+---------------------------------------------------------------------|
+|     3 | Write the user interface code                                       |
+|-------+---------------------------------------------------------------------|
+
+
+#+NAME: table:mstrattable
+#+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
+#+CAPTION: Table of Strategy for Models
+|-------+------------------------------------------------|
+| *No.* | *Strategy*                                     |
+|-------+------------------------------------------------|
+|     1 | Write driver code for used for testing purpose |
+|-------+------------------------------------------------|
+|     2 | Write the class which can import the model and |
+|       | perform predictions                            |
+|-------+------------------------------------------------|
+|     3 | Keep on improving the class until the          |
+|       | realtime tests pass                            |
+|-------+------------------------------------------------|
+
+    We did not use the main dataset and movie diretory for testing purpose, but instead created mock data for that purpose. For example, in order to test the SampleLoader which loads the Sample for other module given the parameter, we actually created a test directory without actual samples but metadata files. 
+
+#+NAME: table:testtable
+#+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
+#+CAPTION: Test Plan
+|------------------------+------------+----------------------|
+| *Type of testing*      | *Approach* | *Subject*            |
+|------------------------+------------+----------------------|
+|                        |            |                      |
+| Automated Unit Testing | White      | Unit: RecordSystem   |
+| Integration Testing    | Black Box  | Usecase 1, Usecase 2 |
+|------------------------+------------+----------------------|
+
+
+#+NAME: table:testt
+#+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
+#+CAPTION: Test Plan
+|------------------------+------------+-----------------+--------|
+| *Type of testing*      | *Approach* | *Use Case*      | *Task* |
+|------------------------+------------+-----------------+--------|
+| Automated Unit Testing | White      | 1. Record Video |        |
+|                        |            |                 |        |
+
+
+All automated unit tests are prefixed with the letter A to distinguish it from manual tests, which are prefixed with the letter M. Manual unit testing requires user to run and observe the results for each test case, and tests may require user input unlike automated unit tests.
+
+*** Unit Testing
+    Our goal of unit testing is to test the smallest possible software components within the system seperately and manually without where it is possible. For more internal components that mainly interacts with other components, we do no rigidly test all possible fail cases as some fail cases may be triggered by a programming mistakes. 
+
+Unit testing was implemented under the task, "Test CLI". 
+
+#+NAME: table:autests
+#+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
+#+CAPTION: Automated Unit Tests
+|-----+------------------+-----------+-----------|
+| *#* | *Module*         | *Package* | *Usecase* |
+|-----+------------------+-----------+-----------|
+| A1  | SampleLoader     | src.util  | 1,2       |
+| A2  | SampleController | src.util  | 1,2       |
+|-----+------------------+-----------+-----------|
+
+#+NAME: table:mutests
+#+ATTR_LATEX: :align |l|l|lp{3cm}|
+#+CAPTION: Manual Unit Tests
+|-----+-----------+-----------+-----------|
+| *#* | *Module*  | *Package* | *Usecase* |
+|-----+-----------+-----------+-----------|
+| M1  | Webcam    | src.utils |         1 |
+| M2  | VLCPlayer | src.utils |         1 |
+|-----+-----------+-----------+-----------|
+
+**** COMMENT Test Template
+
+| A3  | MovieController  | src.util            | 1         |
+| A4  | FaceSystem       | FER.ferAnalysis     | 2         |
+| A5  | HeadPoseSystem   | src.head_pose       | 2         |
+|-----+------------------+---------------------+-----------|
+
+#+NAME: table:utest_a1
+#+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
+#+ATTR_LATEX: :environment longtable
+#+CAPTION: Unit Test A1
+|-----------------------------------------------------------------------------|
+| *Unit Test Plan*                                                            |
+|-----------------------------------------------------------------------------|
+|-----------------------------------------------------------------------------|
+| Module Name/ID: $\rule{5cm}{0.15mm}$   ProgramName/ID: $\rule{5cm}{0.15mm}$ |
+|-----------------------------------------------------------------------------|
+| *1. Module Overview*                                                        |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *1.1 Input to Module*                                                       |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *1.2 Outputs from Module*                                                   |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *1.3 LogicFlow*                                                             |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *2. Test Data*                                                              |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *2.1 Positive Test Cases*                                                   |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *2.2 Negative Test Cases*                                                   |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *3. Interface Modules*                                                      |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|                                                                             |
+|-----------------------------------------------------------------------------|
+| *4. Test Tools*                                                             |
+|-----------------------------------------------------------------------------|
+|                                                                             |
+|                                                                             |
+|-----------------------------------------------------------------------------|
+
+
+**** UnitTest: A1
+
+#+NAME: table:utest_a1
+#+ATTR_LATEX: :environment longtable :align |p{7in}|
+#+CAPTION: Unit Test A1
+|---------------------------------------------------------------------------------------|
+| <85>                                                                                  |
+| *Unit Test Plan* \cellcolor{blue!25}                                                  |
+|---------------------------------------------------------------------------------------|
+|---------------------------------------------------------------------------------------|
+| Module Name:\underline{SampleLoader} \hspace{2in}  file:  "./test/path_test.py"       |
+|---------------------------------------------------------------------------------------|
+| *1. Module Overview*                                                                  |
+|---------------------------------------------------------------------------------------|
+| The purpose of the SampleLoader is to aid the SampleController load the Sample        |
+| files from the directory. Inspite of it's name the actual responsibility  of          |
+| the class is to resolve the directory path of of a sample folder and nothing else.    |
+|---------------------------------------------------------------------------------------|
+| *1.1 Input to Module*                                                                 |
+|---------------------------------------------------------------------------------------|
+| Input 'param1' will passed as argument 1 of the constructor.                          |
+| sys = SampleLoader(param1)                                                            |
+|---------------------------------------------------------------------------------------|
+| *1.2 Outputs from Module*                                                             |
+|---------------------------------------------------------------------------------------|
+| For every input.                                                                      |
+| - CASE 1:  -- assert self._sdir == "./data/test/"                                     |
+| - CASE 2: testGetVideoFile: assert self.getVideoFile() == "./data/test/test.avi"      |
+| - CASE 3: testDirSlash:                                                               |
+|---------------------------------------------------------------------------------------|
+| *1.3 LogicFlow / Source*                                                              |
+|---------------------------------------------------------------------------------------|
+| ./src/utils.py : SampleLoader                                                         |
+|---------------------------------------------------------------------------------------|
+| *2. Test Data*                                                                        |
+|---------------------------------------------------------------------------------------|
+| - "./data/test/"                                                                      |
+| - "./data/test"                                                                       |
+|---------------------------------------------------------------------------------------|
+| *2.1 Positive Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - CASE 1: testGetDir()                                                                |
+| - CASE 2: testGetVideoFile()                                                          |
+| - CASE 3: testDirSlash()                                                              |
+|---------------------------------------------------------------------------------------|
+| *2.2 Negative Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - None                                                                                |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *3. Interface Modules*                                                                |
+|---------------------------------------------------------------------------------------|
+| requires: none                                                                        |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *4. Test Tools*                                                                       |
+|---------------------------------------------------------------------------------------|
+| - unittest                                                                            |
+| - Run unit only: "python3 -m unittest tests.path_test.TestSampleLoader"               |
+| Part of the test suite. Please run ./run_test.sh on a Linux system to run all tests.  |
+|---------------------------------------------------------------------------------------|
+
+#+BEGIN_EXAMPLE 
+(fyp) ➜  affective-movie-evaluator git:(master) ✗ python3 -m unittest tests.path_test.TestSampleLoader
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+#+END_EXAMPLE
+
+**** UnitTest A2
+
+#+NAME: table:utest_a2
+#+ATTR_LATEX: :environment longtable :align |p{7in}|
+#+CAPTION: Unit Test A2
+|---------------------------------------------------------------------------------------|
+| <85>                                                                                  |
+| *Unit Test Plan* \cellcolor{blue!25}                                                  |
+|---------------------------------------------------------------------------------------|
+|---------------------------------------------------------------------------------------|
+| Module Name:\underline{SampleController} \hspace{2in}  file:  "./test/path_test.py"   |
+|---------------------------------------------------------------------------------------|
+| *1. Module Overview*                                                                  |
+|---------------------------------------------------------------------------------------|
+| The purpose of the SampleController is to  handle Create, Retrieve, Update and        |
+| Delete operations of the Sample Objects within the system.                            |
+|---------------------------------------------------------------------------------------|
+| *1.1 Input to Module*                                                                 |
+|---------------------------------------------------------------------------------------|
+| Input 'param1' will passed as argument 1 of the constructor.                          |
+| sys = SampleLoader(param1)                                                            |
+|---------------------------------------------------------------------------------------|
+| *1.2 Outputs from Module*                                                             |
+|---------------------------------------------------------------------------------------|
+| expected_data =  ['661737f0-3bf4-41ac-9c5e-a9f2147086d6', '1d989665-80ae-4bff-bf59-b5f7691fb3b9'] |
+| For every input.                                                                      |
+| - CASE 1:  -- assert sys.list_all() == expected_data                                  |
+| Expected data corresponds to valid sample folders manually created with valid,        |
+| metadata.                                                                             |
+|---------------------------------------------------------------------------------------|
+| *1.3 LogicFlow / Source*                                                              |
+|---------------------------------------------------------------------------------------|
+| ./src/utils.py : SampleLoader                                                         |
+|---------------------------------------------------------------------------------------|
+| *2. Test Data*                                                                        |
+|---------------------------------------------------------------------------------------|
+| - "./data/test/"                                                                      |
+|---------------------------------------------------------------------------------------|
+| *2.1 Positive Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - CASE 1: test1()                                                                     |
+| Purpose of test1 is to make sure that the list_all() method retrieves only valid      |
+| Sample folders.                                                                       |
+|---------------------------------------------------------------------------------------|
+| *2.2 Negative Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - None                                                                                |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *3. Interface Modules*                                                                |
+|---------------------------------------------------------------------------------------|
+| requires: none                                                                        |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *4. Test Tools*                                                                       |
+|---------------------------------------------------------------------------------------|
+| - unittest                                                                            |
+| - Run unit only: "python3 -m unittest tests.path_test.TestSampleController"           |
+| Part of the test suite. Please run ./run_test.sh on a Linux system to run all tests.  |
+|---------------------------------------------------------------------------------------|
+
+
+#+BEGIN_EXAMPLE 
+(fyp) ➜  affective-movie-evaluator git:(master) ✗ python3 -m unittest tests.path_test.TestSampleController
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+#+END_EXAMPLE
+
+**** ManualTest M1
+#+NAME: table:utest_m1
+#+ATTR_LATEX: :environment longtable :align |p{7in}|
+#+CAPTION: Unit Test M1
+|---------------------------------------------------------------------------------------|
+| <85>                                                                                  |
+| *Unit Test Plan* \cellcolor{blue!25}                                                  |
+|---------------------------------------------------------------------------------------|
+|---------------------------------------------------------------------------------------|
+| Module Name:\underline{Webcam} \hspace{2in}  file:  "./test/path_test.py"             |
+|---------------------------------------------------------------------------------------|
+| *1. Module Overview*                                                                  |
+|---------------------------------------------------------------------------------------|
+| Purpose of the webcam module is to provide a standard camera interface through        |
+| webcam for other modules.                                                             |
+|---------------------------------------------------------------------------------------|
+| *1.1 Input to Module*                                                                 |
+|---------------------------------------------------------------------------------------|
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *1.2 Outputs from Module*                                                             |
+|---------------------------------------------------------------------------------------|
+| For every input.                                                                      |
+| - CASE 1:  -- assert self._sdir == "./data/test/"                                     |
+| - CASE 2: testGetVideoFile: assert self.getVideoFile() == "./data/test/test.avi"      |
+| - CASE 3: testDirSlash:                                                               |
+|---------------------------------------------------------------------------------------|
+| *1.3 LogicFlow / Source*                                                              |
+|---------------------------------------------------------------------------------------|
+| ./src/utils.py : SampleLoader                                                         |
+|---------------------------------------------------------------------------------------|
+| *2. Test Data*                                                                        |
+|---------------------------------------------------------------------------------------|
+| - "./data/test/"                                                                      |
+| - "./data/test"                                                                       |
+|---------------------------------------------------------------------------------------|
+| *2.1 Positive Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - CASE 1: testGetDir()                                                                |
+| - CASE 2: testGetVideoFile()                                                          |
+| - CASE 3: testDirSlash()                                                              |
+|---------------------------------------------------------------------------------------|
+| *2.2 Negative Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - None                                                                                |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *3. Interface Modules*                                                                |
+|---------------------------------------------------------------------------------------|
+| requires: none                                                                        |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *4. Test Tools*                                                                       |
+|---------------------------------------------------------------------------------------|
+| - unittest                                                                            |
+| - Run unit only: "python3 -m unittest tests.path_test.TestSampleLoader"               |
+| Part of the test suite. Please run ./run_test.sh on a Linux system to run all tests.  |
+|---------------------------------------------------------------------------------------|
+
+
+**** COMMENT ManualTest M2
+
+
+*** COMMENT FER Model Testing (Accuracy)
+
+*** COMMENT Iteration Review and Evaluation
 
 * COMMENT Conclusion
 ** Current Status
@@ -890,6 +1529,12 @@ Current developement of the system also prioritised speed, by often choosing les
 ** What we learned
 ** Future plans
 * Appendix 
+** Appendix A
+#+BEGIN_EXPORT latex
+\includepdf[pages=-,pagecommand={},width=\textwidth]{gantt.pdf}
+#+END_EXPORT
+** Appendix B
+
  - [ ] Baseline Gantt Chart
  - [ ] Tracking GanttChart
 * Bibliography
