@@ -492,7 +492,8 @@ digraph g {
 |---+-----------------------------+-------------+--------+-------------------------------|
 
 ** Project timeline
-You can find our baseline gantt chart for estimated project plan in Appendix A. We created the work breakdown structure during our project plan, and we grouped each task under a phase in our methodology. Then we estimated time for each task and prioritsed them, finally creating a project timeline in a gantt chart format. 
+We were assigned our supervisor near the by of January, and we spent the first two months mostly on research, analysis and planning our approach.  Our official timeline for the project started on March 11, though we were did analysis work few weeks prior. Since our earlier analysis work was presented on the interim project plan we submitted and the requirements were changed slightly after considering the advice we had on our own literature review and estimation of computer processing related resources we will need.
+
 
 #+NAME: fig:gantt1
 #+CAPTION: Overview of baseline gantt chart
@@ -500,7 +501,9 @@ You can find our baseline gantt chart for estimated project plan in Appendix A. 
 #+RESULTS:
 [[./ext_img/gant1.png]]
 
+We have mentioned a few times throughout this documentation how the project timeline was created from the WBS. After the time and priority was set what we are supposed to do  was to pick the tasks for every week by ourselves, and assign daily hours allocated to spend for the task . After the first week we found out that we are able to finish the tasks really fast, and we were free without a task assigned to ourselves. Eventually we decided to assign the tasks evenly for the entire iteration, this was easy to achieve because early in part of the iteration we were both working on our own subsystem, which can be run independently. Later on more tasks were dependent on each other, especially the design and testing tasks. 
 
+You can find our baseline gantt chart for estimated project plan in Appendix A. We created the work breakdown structure during our project plan, and we grouped each task under a phase in our methodology. Then we estimated time for each task and prioritsed them, finally creating a project timeline in a gantt chart format. 
 * Requirement Analysis
 ** Introduction
    Since the conception of the project plan, our initial goal for the first iteration was to create a system that is going to analyse the facial emotion and body posture emotion independently and construct a data representation such as a time-series from the analysis. We delegated the primary goal of our project, which is to use that data to train and create a model that can score movies for later iterations intentionally, so it will give us time to reconsider our methods and also create dataset in between the downtime.
@@ -511,7 +514,7 @@ Along with the project's functional requirements and non-functional requirements
 
    We also wanted to complete all the software design and engineering intensive tasks as early as possible so we can focus on the machine learning aspects of our project. Thus, a large portion of this iteration is writing the code for user interaction, and designing processes within the system that can perform independent of the type of user interface.
 
-Initially, we like we planned we worked on the facial analysis, and posture analysis portion of the code seperately. Later on we refactored and integrated the code as seperate modules into a single codebase with the help of object-oriented programming.
+Initially, we like we planned we worked on the facial analysis, and posture analysis portion of the code seperately. Later on we refactored and integrated the code as seperate modules into a single codebase with the help of object-oriented programming. Refactoring and Integration was done together on site with each others help.
 
 
 ** Requirement Summary
@@ -682,19 +685,16 @@ The only time the application uses network currently is to access the internet a
 One concern a production studio may have is regarding the security of test audience data that is stored. Depending on the contract they have with their own test audience, the test audience may be concerned with their privacy if the data is leaked or shared without their permission for other projects.
 
 
-**** FYP2
- We plan to implement the cloud analysis use-case for iteration 3.
-
 
 * Iterations
 ** Iteration Plans
-   Early on we planned two iteration for FYP 1, but as mentioned in the requirement analysis we had to change that because of time constraint and risks of not completing the objectives of our FYP 1. 
+   Early on we planned two iteration for FYP 1, but as mentioned in the requirement analysis we had to change that because of time constraint and risks of not completing the objectives of our FYP 1. We set out two meetings for iteration plans, which includes analyisis, work break down structure and task assignment. Most of the work was already done during our analyisis for the project plan, what we had to do was arrange our timeline so that we complete atleast two of the project objectives. Prior to analysis we already identified what is going to be two major subsystems in our system. Based on our research on multimodal emotion analysis, we decided to mention the two mode of emotion in our project goals. So it was a necessary to approach these subsystems seperately while we planned the iteration.
 
   As shown in our project timeline, we combined SEMMA phases with SDLC phases in our project timeline. The SEMMA phase are not analogous to an SDLC phase, and we've learned that there may exist no standard for such analogy. For example most software engineers and feature engineers tend to write code during the Sample phase while ML engineers may work on something else. For later iterations, we are going to follow the SEMMA phases more rigidly as we will be working more on the machine learning aspects of the project.
 
 
 *** Current Iteration
-  We only have one Iteration for this part of our final year project. Initially the work was divided between the two part. Use case one was primarily developed by Ibrahim and designed by Faith. Use-case two's main two sub-components were developed and tested independently and later on we re-integrated our work into a single codebase.
+  We only have one Iteration for this part of our final year project. Initially the work was divided between the two part. Use case one was primarily developed by Ibrahim and designed by Faith. Use-case two's main two sub-components were developed and tested independently and later on we re-integrated our work into a single codebase. 
 
  #+NAME: table:iterplan
  #+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
@@ -705,11 +705,22 @@ One concern a production studio may have is regarding the security of test audie
  |     1 | 1           | 1,2         | 11/03/19              | 09/04/19            |
  |       |             |             |                       |                     |
  |-------+-------------+-------------+-----------------------+---------------------|
- |     2 | 2,3         | 2,3,4       |                       |                     |
+ |     2 | 2,3         | 2,3,4       | 22/08/19              | 18/11/19            |
  |-------+-------------+-------------+-----------------------+---------------------|
-
+ 
 
 *** Future Iterations
+
+Iteration two consists of the following use cases. We have written them in the /user story/ form 
+instead of traditional UML use-case diagram, for better clarity.
+ 1) Admin can manage the Sample, in order to detect and reduce the possible mistakes they make while data collection.
+ 2) Admin can manage the Movies, so that the studio will be able evaluate their movie. From a developer's perspective, a wider library of movies can be used to create more datasets and that means a larger dataset can be used to develop and evaluate the system.
+ 3) Admin can analyse the movie, so that they can get a score. This is use case 2 in our current iteration. We will be working on this use-case on every iteration.
+
+Some of the use-cases we mentioned is currently possible without using our software. For example, /Admin/ can manage the Samples 
+or Movies directly by using the filesystem and editing metadata files, as we did for the first iteration. Iteration 3 will also continue use case two "Admin analyse sample", but we are going to really expand our our work on the machine learning algorithms. All tests for this iteration should be a global accuracy and performance tests, that we can use to evaluate the entire system.
+
+
 
 #+NAME: table:fuiterplan
 #+ATTR_LATEX: :align |l|l|l|l|lp{3cm}|
@@ -721,9 +732,9 @@ One concern a production studio may have is regarding the security of test audie
 |           3 | 4, 5               |
 |-------------+--------------------|
 
-[fn:3] Future use cases are described under the conclusion chapter.
+[fn:3] Future plans are also described further under the conclusion chapter. 
 
- 
+
 ** Iteration 1
 *** Introduction
     Like we mentioned before this iteration implements only two use-cases, but it does not mean the amount of tasks we have is smaller than iteration 2, which we have planned that involves more use-cases. Our plan for this iteration was changed throughout the developement, project. Initially we had 2 iterations and considered adding more use-cases that manages movies and samples within the system. However once we finished our work breakdown and started to sort out our tasks, we figured out it will be a risk considering all the tasks we have and we might not be able to complete our goals within timespan. 
@@ -1233,7 +1244,6 @@ In order to use the system the user must, setup python and installed required li
 |------------------------+------------+----------------------|
 | *Type of testing*      | *Approach* | *Subject*            |
 |------------------------+------------+----------------------|
-|                        |            |                      |
 | Automated Unit Testing | White      | Unit: RecordSystem   |
 | Integration Testing    | Black Box  | Usecase 1, Usecase 2 |
 |------------------------+------------+----------------------|
@@ -1242,16 +1252,17 @@ In order to use the system the user must, setup python and installed required li
 #+NAME: table:testt
 #+ATTR_LATEX: :align |l|l|l|l|l|lp{3cm}|
 #+CAPTION: Test Plan
-|------------------------+------------+-----------------+--------|
-| *Type of testing*      | *Approach* | *Use Case*      | *Task* |
-|------------------------+------------+-----------------+--------|
-| Automated Unit Testing | White      | 1. Record Video |        |
-|                        |            |                 |        |
+|---------------------+------------+-----------------+-------------|
+| *Type of testing*   | *Approach* | *Use Case*      | *Task*      |
+|---------------------+------------+-----------------+-------------|
+| Manual Unit Testing | White      | 1. Record Video | Webcam Test |
+|---------------------+------------+-----------------+-------------|
+
 
 
 All automated unit tests are prefixed with the letter A to distinguish it from manual tests, which are prefixed with the letter M. Manual unit testing requires user to run and observe the results for each test case, and tests may require user input unlike automated unit tests.
 
-*** COMMENT Unit Testing
+*** Unit Testing
     Our goal of unit testing is to test the smallest possible software components within the system seperately and manually without where it is possible. For more internal components that mainly interacts with other components, we do no rigidly test all possible fail cases as some fail cases may be triggered by a programming mistakes. 
 
 Unit testing was implemented under the task, "Test CLI". 
@@ -1277,7 +1288,7 @@ Unit testing was implemented under the task, "Test CLI".
 |-----+-----------+-----------+-----------|
 
 **** COMMENT Test Template
-
+     
 | A3  | MovieController  | src.util            | 1         |
 | A4  | FaceSystem       | FER.ferAnalysis     | 2         |
 | A5  | HeadPoseSystem   | src.head_pose       | 2         |
@@ -1524,7 +1535,7 @@ OK
 | *Unit Test Plan* \cellcolor{blue!25}                                                  |
 |---------------------------------------------------------------------------------------|
 |---------------------------------------------------------------------------------------|
-| Module Name:\underline{Webcam} \hspace{2in}  file:  "./test/path_test.py"             |
+| Module Name:\underline{Webcam} \hspace{2in}  file:  "./src/device.py"                 |
 |---------------------------------------------------------------------------------------|
 | *1. Module Overview*                                                                  |
 |---------------------------------------------------------------------------------------|
@@ -1537,7 +1548,7 @@ OK
 |---------------------------------------------------------------------------------------|
 | *1.2 Outputs from Module*                                                             |
 |---------------------------------------------------------------------------------------|
-| [[file:./ext_img/ex.png]]                                                                 |
+| [[file:./ext_img/ex1.png]]                                                                |
 |---------------------------------------------------------------------------------------|
 | *1.3 LogicFlow / Source*                                                              |
 |---------------------------------------------------------------------------------------|
@@ -1569,13 +1580,95 @@ OK
 |---------------------------------------------------------------------------------------|
 
 
-**** COMMENT ManualTest M2
+**** ManualTest M2
+#+NAME: table:utest_m2
+#+ATTR_LATEX: :environment longtable :align |p{7in}|
+#+CAPTION: Unit Test M2
+|---------------------------------------------------------------------------------------|
+| <85>                                                                                  |
+| *Unit Test Plan* \cellcolor{blue!25}                                                  |
+|---------------------------------------------------------------------------------------|
+|---------------------------------------------------------------------------------------|
+| Module Name:\underline{BEGR} \hspace{2in}  file:  "./src/head_pose.py"                |
+|---------------------------------------------------------------------------------------|
+| *1. Module Overview*                                                                  |
+|---------------------------------------------------------------------------------------|
+| Purpose of the BEGR subsystem is to estimate the upper body pose and measure the      |
+| 3d keypoints of the face, which are used for emotion analysis.                        |
+|---------------------------------------------------------------------------------------|
+| *1.1 Input to Module*                                                                 |
+|---------------------------------------------------------------------------------------|
+| - Camera feedback                                                                     |
+|---------------------------------------------------------------------------------------|
+| *1.2 Outputs from Module*                                                             |
+|---------------------------------------------------------------------------------------|
+| [[file:./ext_img/ext_2.png]]                                                              |
+|---------------------------------------------------------------------------------------|
+| *1.3 LogicFlow / Source*                                                              |
+|---------------------------------------------------------------------------------------|
+| - Create a new BEGR object                                                            |
+| - Create new Webcam Object                                                            |
+| - Open Webcam interface                                                               |
+| - For each frame that pass through the camera, call BEGR.infer(), then BEGR.draw()    |
+| the infered data to visualise                                                         |
+|---------------------------------------------------------------------------------------|
+| *2. Test Data*                                                                        |
+|---------------------------------------------------------------------------------------|
+| - Live camera Feedback containing a face                                              |
+|---------------------------------------------------------------------------------------|
+| *2.1 Positive Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - Keypoints detected for clear face                                                   |
+| - 3-D Pose co-rdinate calculated                                                      |
+| - Interest value must approximate 1 when the point their head towards camera.         |
+|---------------------------------------------------------------------------------------|
+| *2.2 Negative Test Cases*                                                             |
+|---------------------------------------------------------------------------------------|
+| - No keypoints detected for a clear face                                              |
+| - No pose detected for a clear face                                                   |
+|---------------------------------------------------------------------------------------|
+| *3. Interface Modules*                                                                |
+|---------------------------------------------------------------------------------------|
+| - Webcam                                                                              |
+|                                                                                       |
+|---------------------------------------------------------------------------------------|
+| *4. Test Tools*                                                                       |
+|---------------------------------------------------------------------------------------|
+| Python                                                                                |
+|---------------------------------------------------------------------------------------|
+
 
 
 *** COMMENT FER Model Testing (Accuracy)
 
-*** COMMENT Iteration Review and Evaluation
-    
+*** Iteration Review and Evaluation
+    The completion of this iteration makes us closer to our primary goal. While some objectives related to accuracy testing and data collection were not complete because of the way we organized the project we successfully completed all the work items prioritised by us for this iteration. We had two meetings as documented in the meetings reports, that were directly concerned with planning the iteration. Prioritising of the tasks and judging the duration for work time was at first very difficult to estimate. Because of that, we managed to over-estimate the duration for most of the items and were not able to properly manage what to do with the slack time.
+
+    In terms of usability we have implemented two modes of UI, for the /Admin/ to use in order to interact with our system. While UX design was not part of our primary goals, because we expect the /Admin/ user to have enough system administration skills to install and setup Unix like software. We instead focus on making sure our command line user interface is similar to existing tools available, so that the user can easily adapt into our system through familiarity. The GUI interface is in contrast designed for basic functionality, and mostly intended to demonstrate the project for stakeholders. The graphical interface is also less optimized compared to the CLI, for example the preview mode of the analyse use-case may look slower on GUI if the progress bar is enabled, because the wx-widget library function are required to run on the main thread and some of the OpenCV's own functionalities require to be run on the main application thread. In contrast, the CLI can support multithreading without any issues and run OpenCV's gui functionalities on the main thread if the user enables live preview function.
+
+#+ATTR_LATEX: :width 4in
+#+CAPTION: Burn down chart
+#+NAME: fig:bd_chart
+[[file:./ext_img/burndown.png]]
+
+    On Overall, we do consider the acheivement of the whole iteration as a success, but the planning and execution needs to be in future iterations. Looking at the individual work items and tasks, tasks related to designing and documentation was actually with more time than the programming tasks. If you look at the burdown chart (Figure  and our evaluation) and the statistics shown, below it shows that we less time on testing and implementation per day than the other tasks.
+
+#+NAME: table:bdstat_table
+#+ATTR_LATEX: :align |l|l|
+#+CAPTION: Statistics
+|--------------------------+------|
+| Total Per Day            |  177 |
+| Faith                    |   93 |
+| Ibrahim                  |   70 |
+| Actual Time Spent        |  163 |
+| Estimated time Remaining | 2530 |
+| Actual Time Remaining    | 2526 |
+|--------------------------+------|
+
+
+
+
+
 * Conclusion
 ** Current Status
    So far we have been able to complete the most vital objectives. One of the failure of our FYP is that we prioritzed system development work items such as GUI developement over 
@@ -1584,7 +1677,17 @@ data collection and machine learning tasks. This is because we wanted to demonst
 
   So far, there are no clear results about how successful the project is going to be in terms of accuracy. Faith is planning to focus on improving the FER subsystem, and we might be able to detect and improve problems with the machine learning models in the pipeline once we the system is able to run the accuracy tests. Ibrahim will focus on building the BEGR and representation model, while both team members will contribute in other system developement work items.
 
-   We also plan to possibly experiment integrating our own deep learning model into the pipeline, possibly to build representation for the time-series. Currently, our strategy for representation algorithm is to visualize and cluster the time series representation using a unsupervised ML algorithm before we sent for regression/classification.
+#+NAME: fig:exprnet
+#+CAPTION: Expression Net 
+#+ATTR_LATEX: :width 7in
+#+RESULTS:
+[[./ext_img/expr_net.png]]
+
+One of the deep learning model we used for was Expression Net cite:chang17expnet, but we chose to use a faster and smaller pose estimation model for this iteration. If possible, what we plan to do is use similar techniques as used in a work we studied cite:saha2018unsupervised. Instead of analysing per frame we can analyse per key frame, try to detect changes in video on a static background using computer vision techniques, which are faster and apply the technique to detect changes in keyframes. Doing this might actually let us use Expression Net shown in Figure  ref:fig:exprnet because it will now only have to infer only a few frames from the whole video. Expression net, which produces a very accurate 3d vertices of the face which can be used as a keypoint more effectively than our current approach.
+
+    We also plan to possibly experiment integrating our own deep learning model into the pipeline, possibly to build representation for the time-series. Currently, our strategy for representation algorithm is to visualize and cluster the time series representation using a unsupervised ML algorithm before we sent for regression/classification.
+
+
 
 * Appendix A - Gantt Charts
 

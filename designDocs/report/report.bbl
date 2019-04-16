@@ -1,6 +1,36 @@
 \begin{thebibliography}{}
 
 \bibitem [\protect \citeauthoryear {%
+Chang%
+\ \protect \BOthers {.}}{%
+Chang%
+\ \protect \BOthers {.}}{%
+{\protect \APACyear {2018}}%
+}]{%
+chang17expnet}
+\APACinsertmetastar {%
+chang17expnet}%
+\begin{APACrefauthors}%
+Chang, F\BHBI J.%
+, Tran, A.%
+, Hassner, T.%
+, Masi, I.%
+, Nevatia, R.%
+\BCBL {}\ \BBA {} Medioni, G.%
+\end{APACrefauthors}%
+\unskip\
+\newblock
+\APACrefYearMonthDay{2018}{}{}.
+\newblock
+{\BBOQ}\APACrefatitle {ExpNet: Landmark-Free, Deep, 3D Facial Expressions}
+  {Expnet: Landmark-free, deep, 3d facial expressions}.{\BBCQ}
+\newblock
+\BIn{} \APACrefbtitle {13th IEEE Conference on Automatic Face and Gesture
+  Recognition.} {13th ieee conference on automatic face and gesture
+  recognition.}
+\PrintBackRefs{\CurrentBib}
+
+\bibitem [\protect \citeauthoryear {%
 Deng%
 \ \protect \BOthers {.}}{%
 Deng%
