@@ -78,7 +78,7 @@
 
 \newpage
 \begin{abstract}
-	For a project to be successfully implemented, it requires meet-ups with stakeholders, team members and any external member that will contribute positively to the success of the project. For our project we didn’t have a need to meet with external stakeholders, but it was necessary for us to meet with each other (project team member), and our supervisor. These meetings have enabled us to manage our project well, share ideas and limit our work to a specific audience. It has also helped us to eliminate some work that we think is necessary but later realised it would have just been a waste of time and resources.
+  For our final year project we are building an application that analyses videos of audience watching movie and gives the video a score called  the Affective Movie Evaluator. We established the goals and objectives and we were able to achieve roughly half of our objectives. This report is a summary of the conception, developement and of the project. We also discuss the current progress of the project and future plans briefly. 
 \end{abstract}
 
 #+BEGIN_EXPORT latex
@@ -685,6 +685,7 @@ One concern a production studio may have is regarding the security of test audie
 **** FYP2
  We plan to implement the cloud analysis use-case for iteration 3.
 
+
 * Iterations
 ** Iteration Plans
    Early on we planned two iteration for FYP 1, but as mentioned in the requirement analysis we had to change that because of time constraint and risks of not completing the objectives of our FYP 1. 
@@ -974,6 +975,7 @@ The valence arousal encoder is currently not built, instead we use a hard coded 
 
 
 **** Class Diagrams
+     The design class diagram shown here has been updated to represent the actual implementation faithfully. The actual deliverables we made before the change can be found in the design doc folder of along with the source code. By glancing at the class diagram we can say that the structure is not consistent,  since we followed the agile principle of "document what you need", the requirements were kept brief before we implemented each work item.
 
 #+CAPTION: Class diagram: usecase 1
 #+BEGIN_SRC plantuml :file img/class1.png
@@ -1185,7 +1187,11 @@ Our overall strategy for implementation can be describe as a test driven bottom 
 #+RESULT:
 [[file:./ext_img/sc3.png]]
 
-*** COMMENT User Manual
+*** User Manual
+The user manual is supposed to be at the project directory folder, in markdown format. We do intent to write a more detailed user documentation on the final iteration, on how to operate and trouble shoot. The user documentation right now consists of how to setup and install, then the only two use cases. The system does have extra features that need to be documented so that the user can effectively operate the system.
+
+In order to use the system the user must, setup python and installed required libraries listed in requirements.txt then run the scripts to download and install the models. Once the models are installed, the user can run the "./gui.py" to open the user interface. A brief overview of how it is used is described in the implementation section.
+
 *** Testing    
 
 
@@ -1245,7 +1251,7 @@ Our overall strategy for implementation can be describe as a test driven bottom 
 
 All automated unit tests are prefixed with the letter A to distinguish it from manual tests, which are prefixed with the letter M. Manual unit testing requires user to run and observe the results for each test case, and tests may require user input unlike automated unit tests.
 
-*** Unit Testing
+*** COMMENT Unit Testing
     Our goal of unit testing is to test the smallest possible software components within the system seperately and manually without where it is possible. For more internal components that mainly interacts with other components, we do no rigidly test all possible fail cases as some fail cases may be triggered by a programming mistakes. 
 
 Unit testing was implemented under the task, "Test CLI". 
@@ -1331,67 +1337,98 @@ Unit testing was implemented under the task, "Test CLI".
 |-----------------------------------------------------------------------------|
 
 
-**** UnitTest: A1
+**** UnitTest A1
+
+#+BEGIN_SRC python :results output latex  :exports results
+from utest_creator import UnitTestPlan
+from plans import plan1
+ut = UnitTestPlan(width="7in")
+ut.createPlan(plan1())
+table = ut.makeLatex()
+print(table)
+#+END_SRC
 
 #+NAME: table:utest_a1
 #+ATTR_LATEX: :environment longtable :align |p{7in}|
 #+CAPTION: Unit Test A1
-|---------------------------------------------------------------------------------------|
-| <85>                                                                                  |
-| *Unit Test Plan* \cellcolor{blue!25}                                                  |
-|---------------------------------------------------------------------------------------|
-|---------------------------------------------------------------------------------------|
-| Module Name:\underline{SampleLoader} \hspace{2in}  file:  "./test/path_test.py"       |
-|---------------------------------------------------------------------------------------|
-| *1. Module Overview*                                                                  |
-|---------------------------------------------------------------------------------------|
-| The purpose of the SampleLoader is to aid the SampleController load the Sample        |
-| files from the directory. Inspite of it's name the actual responsibility  of          |
-| the class is to resolve the directory path of of a sample folder and nothing else.    |
-|---------------------------------------------------------------------------------------|
-| *1.1 Input to Module*                                                                 |
-|---------------------------------------------------------------------------------------|
-| Input 'param1' will passed as argument 1 of the constructor.                          |
-| sys = SampleLoader(param1)                                                            |
-|---------------------------------------------------------------------------------------|
-| *1.2 Outputs from Module*                                                             |
-|---------------------------------------------------------------------------------------|
-| For every input.                                                                      |
-| - CASE 1:  -- assert self._sdir == "./data/test/"                                     |
-| - CASE 2: testGetVideoFile: assert self.getVideoFile() == "./data/test/test.avi"      |
-| - CASE 3: testDirSlash:                                                               |
-|---------------------------------------------------------------------------------------|
-| *1.3 LogicFlow / Source*                                                              |
-|---------------------------------------------------------------------------------------|
-| ./src/utils.py : SampleLoader                                                         |
-|---------------------------------------------------------------------------------------|
-| *2. Test Data*                                                                        |
-|---------------------------------------------------------------------------------------|
-| - "./data/test/"                                                                      |
-| - "./data/test"                                                                       |
-|---------------------------------------------------------------------------------------|
-| *2.1 Positive Test Cases*                                                             |
-|---------------------------------------------------------------------------------------|
-| - CASE 1: testGetDir()                                                                |
-| - CASE 2: testGetVideoFile()                                                          |
-| - CASE 3: testDirSlash()                                                              |
-|---------------------------------------------------------------------------------------|
-| *2.2 Negative Test Cases*                                                             |
-|---------------------------------------------------------------------------------------|
-| - None                                                                                |
-|                                                                                       |
-|---------------------------------------------------------------------------------------|
-| *3. Interface Modules*                                                                |
-|---------------------------------------------------------------------------------------|
-| requires: none                                                                        |
-|                                                                                       |
-|---------------------------------------------------------------------------------------|
-| *4. Test Tools*                                                                       |
-|---------------------------------------------------------------------------------------|
-| - unittest                                                                            |
-| - Run unit only: "python3 -m unittest tests.path_test.TestSampleLoader"               |
-| Part of the test suite. Please run ./run_test.sh on a Linux system to run all tests.  |
-|---------------------------------------------------------------------------------------|
+#+RESULTS:
+#+BEGIN_EXPORT latex
+\begin{longtable}{|p{6in}|}
+\hline 
+\textbf{Unit Test Plan} \cellcolor{blue!25} \\  
+\hline 
+\endfirsthead 
+\multicolumn{1}{l}{Continued from previous page} \\ 
+\hline 
+
+\textbf{Unit Test Plan} \cellcolor{blue!25} \\  \\ 
+\hline 
+\endhead 
+\hline\multicolumn{1}{r}{Continued on next page} \ 
+\endfoot 
+\endlastfoot 
+\hline 
+
+ \hline
+\textbf{Module Name: } SampleLoader \hspace{1in} \textbf{File:}\path{./test/path_test.py} \\ \hline
+\textbf{1. Module Overview}\\\hline
+The purpose of the SampleLoader is to aid the SampleController load the Sample
+files from the directory. Inspite of it's name the actual responsibility  of
+the class is to resolve the directory path of of a sample folder and nothing else.\\\hline
+\textbf{1.1 Inpself to Module}\\\hline
+Input 'param1' will passed as argument 1 of the constructor. 
+ sys = SampleLoader(param1) \\\hline
+\textbf{1.2 Output from Module}\\\hline
+\\\hline
+\textbf{1.3 Logic Flow}\\\hline
+ 
+\begin{minted}{python}
+  class SampleLoader(object):
+    """ SampleLoader is responsible for aiding the load process of individual
+    sample data from our directory.
+    """
+
+    def __init__(self, filename):
+        #self._dir = "./data/"+filename+"/"
+        f = filename
+        if f[-1] != '/':
+            f = f + "/"
+        self._dir = f
+
+    def getVideoFile(self):
+        return self._dir+"test.avi"
+
+    def getDir(self):
+        return self._dir
+\end{minted}
+\\\hline
+\textbf{2. Test Data}\\\hline
+
+\begin{itemize}
+  \item \path{./data/test/}
+  \item \path{./data/test/}
+\end{itemize}
+\\\hline
+\textbf{2.1 Positive Test Cases}\\\hline
+
+\begin{itemize}
+ \item CASE 1: testGetDir()           
+ \item CASE 2: testGetVideoFile() 
+ \item CASE 3: testDirSlash()     
+\end{itemize}l
+\\\hline
+\textbf{2.2 Negative Test Cases}\\\hline
+None\\\hline
+\textbf{2.2 Interface Modules}\\\hline
+Python unittest\\\hline
+\textbf{2.3 Test Tools}\\\hline
+Test Tools\\ 
+\hline
+\end{longtable}
+#+END_EXPORT
+
+
+#+CAPTION: Results
 
 #+BEGIN_EXAMPLE 
 (fyp) ➜  affective-movie-evaluator git:(master) ✗ python3 -m unittest tests.path_test.TestSampleLoader
@@ -1401,6 +1438,8 @@ Ran 3 tests in 0.000s
 
 OK
 #+END_EXAMPLE
+
+
 
 **** UnitTest A2
 
@@ -1434,7 +1473,10 @@ OK
 |---------------------------------------------------------------------------------------|
 | *1.3 LogicFlow / Source*                                                              |
 |---------------------------------------------------------------------------------------|
-| ./src/utils.py : SampleLoader                                                         |
+| class SampleLoader:                                                                   |
+| + read_dir() # scans the directories and creates dictionary for search                |
+| + list_all() # lists the sample_ids read by the last scan                             |
+| + read_metadata(id) #  retrieves sample metadata given and id                         |
 |---------------------------------------------------------------------------------------|
 | *2. Test Data*                                                                        |
 |---------------------------------------------------------------------------------------|
@@ -1458,9 +1500,9 @@ OK
 |---------------------------------------------------------------------------------------|
 | *4. Test Tools*                                                                       |
 |---------------------------------------------------------------------------------------|
-| - unittest                                                                            |
-| - Run unit only: "python3 -m unittest tests.path_test.TestSampleController"           |
-| Part of the test suite. Please run ./run_test.sh on a Linux system to run all tests.  |
+| Python                                                                                |
+|                                                                                       |
+|                                                                                       |
 |---------------------------------------------------------------------------------------|
 
 
@@ -1491,29 +1533,25 @@ OK
 |---------------------------------------------------------------------------------------|
 | *1.1 Input to Module*                                                                 |
 |---------------------------------------------------------------------------------------|
-|                                                                                       |
+| - None                                                                                |
 |---------------------------------------------------------------------------------------|
 | *1.2 Outputs from Module*                                                             |
 |---------------------------------------------------------------------------------------|
-| For every input.                                                                      |
-| - CASE 1:  -- assert self._sdir == "./data/test/"                                     |
-| - CASE 2: testGetVideoFile: assert self.getVideoFile() == "./data/test/test.avi"      |
-| - CASE 3: testDirSlash:                                                               |
+| [[file:./ext_img/ex.png]]                                                                 |
 |---------------------------------------------------------------------------------------|
 | *1.3 LogicFlow / Source*                                                              |
 |---------------------------------------------------------------------------------------|
-| ./src/utils.py : SampleLoader                                                         |
+| - Create a new Webcam Object                                                          |
+| - call runTest() method                                                               |
+| - view the output                                                                     |
 |---------------------------------------------------------------------------------------|
 | *2. Test Data*                                                                        |
 |---------------------------------------------------------------------------------------|
-| - "./data/test/"                                                                      |
-| - "./data/test"                                                                       |
+| Camera input                                                                          |
 |---------------------------------------------------------------------------------------|
 | *2.1 Positive Test Cases*                                                             |
 |---------------------------------------------------------------------------------------|
-| - CASE 1: testGetDir()                                                                |
-| - CASE 2: testGetVideoFile()                                                          |
-| - CASE 3: testDirSlash()                                                              |
+| - Clear visual image displayed                                                        |
 |---------------------------------------------------------------------------------------|
 | *2.2 Negative Test Cases*                                                             |
 |---------------------------------------------------------------------------------------|
@@ -1527,9 +1565,7 @@ OK
 |---------------------------------------------------------------------------------------|
 | *4. Test Tools*                                                                       |
 |---------------------------------------------------------------------------------------|
-| - unittest                                                                            |
-| - Run unit only: "python3 -m unittest tests.path_test.TestSampleLoader"               |
-| Part of the test suite. Please run ./run_test.sh on a Linux system to run all tests.  |
+| Python                                                                                |
 |---------------------------------------------------------------------------------------|
 
 
@@ -1539,7 +1575,7 @@ OK
 *** COMMENT FER Model Testing (Accuracy)
 
 *** COMMENT Iteration Review and Evaluation
-
+    
 * Conclusion
 ** Current Status
    So far we have been able to complete the most vital objectives. One of the failure of our FYP is that we prioritzed system development work items such as GUI developement over 
@@ -1550,20 +1586,30 @@ data collection and machine learning tasks. This is because we wanted to demonst
 
    We also plan to possibly experiment integrating our own deep learning model into the pipeline, possibly to build representation for the time-series. Currently, our strategy for representation algorithm is to visualize and cluster the time series representation using a unsupervised ML algorithm before we sent for regression/classification.
 
-* Appendix A
-
+* Appendix A - Gantt Charts
 
 #+BEGIN_EXPORT latex
 \includepdf[pages=-,pagecommand={},width=\textwidth]{gantt.pdf}
 #+END_EXPORT
 
-* Appendix B
+* Appendix B - Monthly Progress Reports
 
-* Appendix C
 
-* Appendic D 
+* Appendix C - Meeting Reports
 
-* Appendix E 
+
+* Appendix D - Minutes
+
+
+* Appendix E - Evaluation Report
+
+#+BEGIN_EXPORT latex
+\includepdf[pages=-]{ibrahim.pdf}
+#+END_EXPORT
+
+#+BEGIN_EXPORT latex
+\includepdf[pages=-]{faith.pdf}
+#+END_EXPORT
 
 * Bibliography
 #+BEGIN_EXPORT latex

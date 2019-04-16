@@ -1,0 +1,6 @@
+#+BEGIN_EXPORT latex
+\newglossaryentry{FER}{
+         name={FER},
+         description={Facial Expression Recognition.}
+}
+#+END_EXPORT

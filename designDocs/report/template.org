@@ -1,0 +1,54 @@
+#+LaTeX_CLASS: report
+#+latex_class_options: [12pt,a4paper]
+#+LATEX_HEADER: \renewcommand{\baselinestretch}{1.5} 
+#+LATEX_HEADER: \usepackage{apacite} \usepackage{algorithm} \usepackage{listings} \usepackage[noend]{algpseudocode}  \usepackage{indentfirst}  \usepackage{fancyhdr} \usepackage{stringstrings} 
+#+LATEX_HEADER: \usepackage[table]{xcolor}
+#+LATEX_HEADER: \usepackage{longtable}
+#+LATEX_HEADER: \usepackage{geometry} \geometry{ a4paper,  total={170mm,257mm}, left=20mm, top=1in, foot=0.3in}
+#+LATEX_HEADER:\usepackage[final]{pdfpages}
+#+LATEX_HEADER: \usepackage{placeins}
+#+LATEX_HEADER: \usepackage{cmap} \usepackage[T1]{fontenc} 
+#+LATEX_HEADER: \usepackage[raggedright]{titlesec}
+#+latex_header: \usepackage[toc,section=section]{glossaries}
+#+latex_header: \makeglossaries
+#+LATEX_HEADER: \usepackage{minted} %minted requires -shell-escape flag. Remove it if necessary
+#+header: :eval "no"
+#+OPTIONS: ^:nil
+#+OPTIONS: H:4
+#+OPTIONS: toc:nil title:nil
+
+#+BEGIN_EXPORT latex
+%FIX ISSUE WITH CHAPTER TITLE MARGIN
+\makeatletter
+\@addtoreset{chapter}{part}
+\def\ttl@mkchap@i#1#2#3#4#5#6#7{%
+  \ttl@assign\@tempskipa#3\relax\beforetitleunit
+  %\vspace*{\@tempskipa}% NEW
+  \global\@afterindenttrue
+  \ifcase#5 \global\@afterindentfalse\fi
+  \ttl@assign\@tempskipb#4\relax\aftertitleunit
+  \ttl@topmode{\@tempskipb}{%
+    \ttl@select{#6}{#1}{#2}{#7}}%
+  \ttl@finmarks  % Outside the box!
+  \@ifundefined{ttlp@#6}{}{\ttlp@write{#6}}}
+\makeatother 
+#+END_EXPORT
+
+
+
+#+BEGIN_EXPORT latex
+%enable heading 4
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+#+END_EXPORT
+
+
+#+BEGIN_EXPORT latex
+\newglossaryentry{FER}{
+         name={FER},
+         description={Facial Expression Recognition.}
+}
+#+END_EXPORT
