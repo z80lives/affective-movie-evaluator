@@ -7,7 +7,6 @@ from src.wx.event_handlers import CPanelEventHandlers
 #define
 
 
-
 frame = None
 
 
@@ -47,7 +46,7 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
     
     def __init__(self, title):
         #I'm avoiding wx.RESIZE_BORDER because I use i3wm stack window manager for my own system.
-        custom_style=wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX |wx.FRAME_FLOAT_ON_PARENT| wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
+        custom_style= wx.MINIMIZE_BOX | wx.MAXIMIZE_BOX |wx.FRAME_FLOAT_ON_PARENT| wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
         
         wx.Frame.__init__(self, None, title=title,
                           size=(1024,720),

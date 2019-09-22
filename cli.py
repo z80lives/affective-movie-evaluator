@@ -222,6 +222,7 @@ def analyse_fer(**arg):
     system = FaceSystem()
     system.analyse(video_file_name)
     ## run analysis
+    print("Done")
 
 @greet.command()
 @click.argument('command', default="")
