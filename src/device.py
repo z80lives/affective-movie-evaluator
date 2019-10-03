@@ -8,6 +8,13 @@ class Webcam:
         self.cap.set(3 , w)
         self.cap.set(4 , h )
 
+    def checkDevice(self, source):
+        cap = cv2.VideoCapture(source) 
+        if cap is None or not cap.isOpened():
+            print('Warning: unable to open video source: ', source)
+            return False
+        return True
+
     def setLight(self, brightness=127, contrast=127,
                  saturation=127, hue=127, gain=50, exposure=-3, white_balance=5000):
         cap = self.cap

@@ -1,7 +1,12 @@
 #!/usr/bin/env python
 import click
+
 import os
-from src.youtube import YouTubeModule
+try:
+    from src.youtube import YouTubeModule
+except:
+    print("Cannot load pytube")
+
 from src.playback import RecordSystem, VLCPlayer
 from src.openpose import PoseSystem
 from src.utils import SampleLoader, SampleController, MovieController
@@ -236,16 +241,17 @@ def analyse_fer(**arg):
 def webcam(**args):
     from src.device import Webcam
     click.echo("Webcam module")
+    click.echo("Available commands: test")
     command = args["command"]
     if  command == "test":
         wc = Webcam()
-        wc.setResolution(args["width"], args["height"])
-        wc.setLight(args["brightness"],
-                    args["contrast"],
-                    args["saturation"],
-                    args["hue"],
-                    args["gain"]
-        )
+        #wc.setResolution(args["width"], args["height"])
+        #wc.setLight(args["brightness"],
+        #            args["contrast"],
+        #            args["saturation"],
+        #            args["hue"],
+        #            args["gain"]
+        #)
         wc.test_run()
         
             

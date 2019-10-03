@@ -2,7 +2,8 @@
 import os
 import json
 import os.path
-from src.system_objects import Movie, Sample
+from src.system_objects import Movie, Sample, Person
+from tinydb import TinyDB, Query
 
 class SampleLoader(object):
     """ SampleLoader is responsible for aiding the load process of individual
@@ -58,7 +59,38 @@ class SampleController(object):
 
     def get_metadata(self, _id):
         return self.data[_id]
+
+class PersonController(object):
+    """
+    Responsible for providing data access methods
+    related to people in the system.
+    """
+    def __init__(self, data_dir="./data/"):
+        self.db = TinyDB(data_dir+"db.json")
+        self.table = self.db.table("person")
+
+    def createPerson(self, *args):
+        return Person(*args)
+
+    def getPerson(self, id):
+        Person = Query()
+        return self.table.get(Person.id == id) 
+
+    def savePerson(self, person):
+        if person.id is None:            
+            id = self.table.insert(person.__dict__)            
+            self.table.update({"id": id}, doc_ids=[id])
+        else:            
+            self.table.update(person.__dict__, doc_ids=[person.id])   
+
+    def removePerson(self, person_id):
+        self.table.remove(doc_ids=[person_id])
+
+    def getAll(self):
+        return self.table.all()
     
+
+
 class MovieController(object):
     def __init__(self, movie_dir="./movies/"):
         self.movie_dir = movie_dir
@@ -76,7 +108,7 @@ class MovieController(object):
     def read_files(self):
         """  Fetch all the directories in data folder and store it in class variables.    
         """
-        valid_filetypes = [".mp4", ".avi"]
+        valid_filetypes = [".mp4", ".avi", "webm"]
         self.files = [f for f in os.listdir(self.movie_dir) if f[-4:] in valid_filetypes ]
         self.readMetadata()
         

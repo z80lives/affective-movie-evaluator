@@ -1,9 +1,12 @@
 import wx
 
 from src.playback import RecordSystem, VLCPlayer
-from src.utils import SampleLoader, SampleController, MovieController
-from src.wx.record import RecordTabPanel
+from src.utils import SampleLoader, SampleController, MovieController, PersonController
+from src.wx.record import RecordTabPanel, CameraCaptureFrame
+from src.wx.samples import SampleTabPanel, SampleTabFrame
 from src.wx.analyse import AnalyseTabPanel
+from src.wx.movies import MoviesPanel
+from src.wx.person import PersonPanel
         
 def analyse_func(video_dir, video_file_name, fer,head,body,preview,_print):
     if fer:            
@@ -35,9 +38,12 @@ def analyse_func(video_dir, video_file_name, fer,head,body,preview,_print):
 
 class CPanelEventHandlers:
     recordTab = None
+    moviesTab = None
+    personTab = None
     analyse_process=None
     def onQuit(self, event):
         self.Close(True)
+
 
     def onAbout(self, event):
         msg = "Created by Ibrahim & Faith for FYP\n\t HELP School of ICT \n\t  2019"
@@ -94,12 +100,28 @@ class CPanelEventHandlers:
         #self.do_layout()
         self.Layout()
 
+    def onMoviesTab(self, event):
+        if self.moviesTab is None:
+            tab_title = "Movies Panel"
+            moviesTab = MoviesPanel(self.panel_notebook, self, tab_title)
+            idx = self.panel_notebook.AddPage(moviesTab, tab_title)
+            self.moviesTab = moviesTab
+        else:
+            self.moviesTab.onCloseTab(event)
+
+    def onPersonTab(self, event):
+        if self.personTab is None:
+            tab_title = "Person Panel"
+            person_controller = PersonController()
+            personTab = PersonPanel(self.panel_notebook, self, tab_title, person_controller)
+            idx = self.panel_notebook.AddPage(personTab, tab_title)
+            self.personTab = personTab
+        else:
+            self.personTab.onCloseTab(event)
+
     def onCloseTab(self, event):
         self.delPage("Record Screening")
         self.Layout()
-        #self.print("Closing tab..")
-        #self.print(event)
-        #self.recordTab.GetParent().Destroy()
 
     def onCloseAnalyserTab(self, event):
         self.onStopProcess(event)
@@ -133,9 +155,19 @@ class CPanelEventHandlers:
     def onSampleMenu(self, event):
         if self.recordTab is not None:
             self.recordTab.Close()
-        #recordTab = RecordTabPanel(self.panel_notebook, self)
-        #self.panel_notebook.AddPage(recordTab, "Record Screening")
-        #self.Layout()
+        #print("Sample Menu")
+        #sampleTab = SampleTabPanel(self.panel_notebook, self)
+        #self.panel_notebook.AddPage(sampleTab, "Sample Records")
+        sampleFrame = SampleTabFrame()
+        sampleFrame.Show()
+        self.Layout()
+
+    def onCaptureTestButton(self, event):
+        self.print("Camera Capture event started.")
+        captureFrame = CameraCaptureFrame()
+        captureFrame.Show()
+        self.Layout()
+        
 
     def onAnalyseMenu(self, event):
         with wx.FileDialog(self, "Open a sample file", wildcard="avi files (*.avi)|*.avi",

@@ -42,3 +42,17 @@ class Sample:
         self.movie = Movie(movie_file)
         self.size = size
         self.length = length
+
+class Person:
+    def __init__(self, id, name, gender, age="adult", occupation="Student"):
+        self.id = id
+        self.name = name
+        self.age = age
+        self.gender = gender
+        self.occupation = occupation
+
+    def __str__(self):
+        return "(%s, %s, %s, %s, %s)" % (self.id,
+                                 self.name, self.gender, self.age, self.occupation)
+    def __repr__(self):
+        return self.__str__()

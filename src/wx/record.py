@@ -4,6 +4,44 @@ import wx
 class FormObj:
     pass
 
+import cv2
+    
+class CameraCaptureFrame(wx.Frame):
+    def __init__(self):
+        wx.Frame.__init__(self, wx.GetApp().TopWindow, title="Capture Test Window")
+        fps = 15
+        #wx.Panel.__init__(self, parent)
+        self.capture = cv2.VideoCapture(0)
+        ret, frame = self.capture.read()
+
+        height, width = frame.shape[:2]
+        self.SetSize((width, height))
+
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        
+        self.bmp = wx.BitmapFromBuffer(width, height, frame)
+
+        self.timer = wx.Timer(self)
+        self.timer.Start(1000./fps)
+
+        self.Bind(wx.EVT_PAINT, self.OnPaint)
+        self.Bind(wx.EVT_TIMER, self.NextFrame)
+
+        self.Layout()
+        
+    def OnPaint(self, evt):
+        dc = wx.BufferedPaintDC(self)
+        dc.DrawBitmap(self.bmp, 0, 0)
+
+    def NextFrame(self, event):
+        ret, frame = self.capture.read()
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            self.bmp.CopyFromBuffer(frame)
+            self.Refresh()
+
+
+
 class RecordTabPanel(wx.Panel):    
     def __init__(self, parent, event_handler):
         super().__init__(parent, wx.ID_ANY)
