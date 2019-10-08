@@ -39,12 +39,14 @@ class RecordSystem:
 
     def start_recording(self, filename, movie_player=None, showVideo=False, sampleFile=None):
         vidcam = cv2.VideoCapture(0)
-        fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        #fourcc = cv2.VideoWriter_fourcc(*'XVID')
+        fourcc = cv2.VideoWriter_fourcc(*'MP4V')
         print("Recording sample: %s", sampleFile)
         if sampleFile:
             outsrc = cv2.VideoWriter("./data/"+sampleFile+"/"+filename+".avi", fourcc, 20.0, (640, 480))
         else:
-            outsrc = cv2.VideoWriter("./data/"+filename+".avi", fourcc, 20.0, (640, 480))
+            #outsrc = cv2.VideoWriter("./data/"+filename+".avi", fourcc, 20.0, (640, 480))
+            outsrc = cv2.VideoWriter("./data/"+filename+".mp4", fourcc, 20.0, (640, 480))
     
         
         while True:

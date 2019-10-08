@@ -7,7 +7,7 @@ class Webcam:
     smallRGB=None
     def __init__(self):
         self.open()
-        self.fps = 15
+        self.fps = 60
 
     def open(self):
         self.cap = cv2.VideoCapture(0)

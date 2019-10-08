@@ -5,6 +5,7 @@ class FormObj:
     pass
 
 import cv2
+import datetime
     
 class CameraCaptureFrame(wx.Frame):
     def __init__(self):
@@ -120,6 +121,7 @@ class RecordTabPanel(wx.Panel):
     last_sample_id=None
     #timer = None
     vidWriter=None
+    vidGSRWriter=None
     def __init__(self, parent, event_handler, controllers):
         super().__init__(parent, wx.ID_ANY)
         self.top_parent = wx.GetApp().TopWindow
@@ -154,7 +156,7 @@ class RecordTabPanel(wx.Panel):
         form.txtMovieID = wx.TextCtrl(self, wx.ID_ANY, "Not Selected", style=wx.TE_READONLY) 
         form.btnFindMovie = wx.Button(self, wx.ID_ANY, "Find Movie")
         form.lblGSR = wx.StaticText(self, wx.ID_ANY, "GSR/EDA Sensor")
-        form.cbGSR = wx.CheckBox(self, wx.ID_ANY, "")
+        form.cbGSR = wx.CheckBox(self, wx.ID_ANY, "")        
         form.btnRecord = wx.Button(self, wx.ID_ANY, "Record")
         form.btnTest = wx.Button(self, wx.ID_ANY, "Test")
 
@@ -231,6 +233,7 @@ class RecordTabPanel(wx.Panel):
         #self.Bind(wx.EVT_TIMER, self.onUpdate)
 
     def startRecord(self, evt):
+        gsrEnabled = self.form.cbGSR.GetValue()
         if self.selectedPerson is None:
             self.top_parent.print("Please select a person")
             return 
@@ -251,18 +254,29 @@ class RecordTabPanel(wx.Panel):
             self.top_parent.print("file_name %s"% file_name)
             player = mplayer(file_name)
             filename = sys.createSampleDir()
-            samplemeta = {"movie_id": "%s"%(metadata["id"]),"subject_name": self.selectedPerson["id"]}
+            samplemeta = { "movie_id": "%s"%(metadata["id"]),
+                           "subject_name": self.selectedPerson["id"],
+                           "datetime": datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                         }
 
             #self.timer = wx.Timer(self)
             #self.timer.Start(1000./15)
             #self.controllers.gsr.openPort()
-            #self.Bind(wx.EVT_TIMER, self.readGSR)
-            self.top_parent.start_gsr() 
+            #self.Bind(wx.EVT_TIMER, self.readGSR)            
+            if gsrEnabled:
+                self.top_parent.start_gsr() 
+
             self.top_parent.start_camera()
 
             sys.saveMetaData(filename, samplemeta)
+
+            if gsrEnabled:
+                self.vidGSRWriter = sys.getWriter(filename+"/gsrsample")
+            self.form.cbGSR.Disable()
+
             self.vidWriter = sys.getWriter(filename+"/sample")
-            
+            self.top_parent.callbacks["onGSR"] = self.onGSRUpdate
+
             #sys.start_recording("sample", player, False, filename)
             #sys.onStopRecording()
             #self.top_parent.setRecordStartEvent(self.onRecordStart)
@@ -279,13 +293,22 @@ class RecordTabPanel(wx.Panel):
     def onRecordFrame(self, frame):
         #print("Recording frame")
         self.vidWriter.write(self.top_parent.camera.imgBuffer)
+    
+    def onGSRUpdate(self, gsrval):
+        self.vidGSRWriter.write(self.top_parent.camera.imgBuffer)
 
     def onRecordEnd(self, filename):
-        self.top_parent.stop_gsr()
+        gsrEnabled = self.form.cbGSR.GetValue()
+        self.form.cbGSR.Enable()
+        if gsrEnabled:
+            self.top_parent.stop_gsr()
         self.top_parent.stop_camera()
         edaFrames = self.top_parent.edaFrames
 
-        self.controllers.recordSystem.saveWriter(self.vidWriter)
+        if gsrEnabled:
+            self.top_parent.callbacks["onGSR"] = None
+            self.controllers.recordSystem.saveWriter(self.vidGSRWriter)
+        self.controllers.recordSystem.saveWriter(self.vidWriter)        
         self.top_parent.saveEDAFile("./data/"+self.last_sample_id+"/eda.csv")
         self.recordMode = False
         self.top_parent.print("End of record session: %s"% self.last_sample_id)
@@ -293,12 +316,15 @@ class RecordTabPanel(wx.Panel):
         
 
     def toggleTest(self,event):
+        gsrEnabled = self.form.cbGSR.GetValue()
         if not self.gsrTest:
             self.serial_plotter.clear()
-            self.top_parent.start_gsr()  
+            if gsrEnabled:
+                self.top_parent.start_gsr()  
             self.top_parent.start_camera() 
         else:
-            self.top_parent.stop_gsr()
+            if gsrEnabled:
+                self.top_parent.stop_gsr()
             self.top_parent.stop_camera()
         self.gsrTest = not self.gsrTest
 

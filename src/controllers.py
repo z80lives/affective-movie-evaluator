@@ -12,7 +12,7 @@ class MainControllerObject(object):
     miniBuffer=None
     refreshFrames={}
     isRecording=False
-    callbacks={"onFrame": None, "onEnd": None}
+    callbacks={"onFrame": None, "onEnd": None, "onGSR": None}
     edaFrames = []
     edaFrameWindow = []
     edaStartTime = None
@@ -37,7 +37,7 @@ class MainControllerObject(object):
         if self.timer is None:
             gsr_ok = self.gsr.openPort()
             if gsr_ok:          
-                self.timer = wx.Timer(self)
+                self.timer = wx.Timer(self, 1)
                 self.timer.Start(1000./60)               
                 #self.Bind(wx.EVT_TIMER, self.readGSR)
                 self.edaFrames = []
@@ -51,7 +51,7 @@ class MainControllerObject(object):
     def start_camera(self):
         if self.cameraTimer is None:
             self.camera.read()
-            self.cameraTimer = wx.Timer(self)
+            self.cameraTimer = wx.Timer(self, 0)
             self.cameraTimer.Start(1000./self.camera.fps)                    
             width, height = self.camera.getSize()
             self.cameraBuffer = wx.Bitmap.FromBuffer(width, height, self.camera.rgbFrame)
@@ -65,10 +65,10 @@ class MainControllerObject(object):
     def onTimer(self, evt):
         timerobj = evt.GetTimer()
         if timerobj == self.timer:
-            self.updateFromCamera(evt)
-        elif timerobj == self.cameraTimer:
             self.readGSR(evt)
-
+        elif timerobj == self.cameraTimer:
+            self.updateFromCamera(evt)
+        
     def OnPaint(self, evt):
         for key in self.refreshFrames:
             frame, size = self.refreshFrames[key]
@@ -133,8 +133,11 @@ class MainControllerObject(object):
             edaval = int(val)
             time_elapsed = time.time() - self.edaStartTime
             self.edaFrames.append((time_elapsed, edaval))
-            self.edaFrameWindow.append((time_elapsed, edaval))  
-            self.cutEDAWindow()          
+            if self.callbacks["onGSR"]:
+                self.callbacks["onGSR"](edaval)
+            #self.edaFrameWindow.append((time_elapsed, edaval))  
+            #self.cutEDAWindow()                  
+
             #self.print("%i"%edaval)
 
     def cutEDAWindow(self):
@@ -152,5 +155,5 @@ class MainControllerObject(object):
     def saveEDAFile(self, filename):
         csv_lines = []
         for (x, val) in self.edaFrames:
-            csv_lines.append([x, val])
+            csv_lines.append([x, int(val)])
         np.savetxt(filename, csv_lines, delimiter=",")
