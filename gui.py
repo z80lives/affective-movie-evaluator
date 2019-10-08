@@ -3,6 +3,8 @@ from __future__ import print_function
 
 import wx
 from src.wx.event_handlers import CPanelEventHandlers
+from src.controllers import MainControllerObject
+
 #import builtins as __builtin__
 #define
 #import os
@@ -21,10 +23,10 @@ def print(*args, **kwargs):
 
         
 
-class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
+class ControlPanelFrame(wx.Frame, CPanelEventHandlers, MainControllerObject):
     def createMenus(self):
         filemenu = wx.Menu()                
-        #newItem = filemenu.Append(wx.ID_NEW, "&New Record", "Create a new Recording")          
+        newItem = filemenu.Append(wx.ID_NEW, "&New Record", "Create a new Recording")          
         aboutItem = filemenu.Append(wx.ID_ABOUT, "&About", "Application Information")
         
         filemenu.AppendSeparator()
@@ -39,7 +41,7 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
         test_camera = toolmenu.Append(wx.ID_ANY, "Test &Camera", "Test the camera")
 
         #self.Bind(wx.EVT_MENU, self.onNew, newItem)
-       # self.Bind(wx.EVT_MENU, self.onRecord, newItem)
+        self.Bind(wx.EVT_MENU, self.onNewSample, newItem)
         self.Bind(wx.EVT_MENU, self.onAbout, aboutItem)
         self.Bind(wx.EVT_MENU, self.onQuit, exitItem)
 
@@ -47,12 +49,17 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
         self.Bind(wx.EVT_MENU, self.onCaptureTestButton, test_camera)
         self.Bind(wx.EVT_MENU, self.onMoviesTab, manage_movie)
         self.Bind(wx.EVT_MENU, self.onPersonTab, manage_people)
-
+        
+        self.Bind(wx.EVT_CLOSE, self.OnClose)
         return {
             "&File": filemenu,
             "&View": viewmenu,
             "&Tools": toolmenu
         }
+
+    def OnClose(self, evt):
+        self.mainControllerQuit()
+        self.Destroy()
 
     def setIcon(self):
         icon = wx.Icon()
@@ -99,6 +106,7 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
         self.print("Operating System: %s %s"% (platform.system(), platform.release()) )
         self.print("SYSTEM READY")
         #ConsoleUI = self
+        MainControllerObject.__init__(self)
         
 
     def print(self, *args, **kwargs):        
@@ -121,5 +129,3 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers):
 app = wx.App(False)
 frame = ControlPanelFrame("Affective Movie Evaluation Machine -- ControlPanel")
 app.MainLoop()
-
-

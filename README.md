@@ -14,6 +14,7 @@ audiences mood and predict which type of content they are likely to enjoy.
  - opencv=3.4.2
  - tabulate=0.8.3
  - tinydb=3.14.1
+ - python-vlc=3.0.7110 (libVLC required)
 
 ### Optional
  keras=2.2.4
@@ -21,6 +22,7 @@ audiences mood and predict which type of content they are likely to enjoy.
  scipy=1.3.1
  pandas=0.25.1
  pytube=9.5.2
+ pyserial=3.4 (for gsr sensor)
  
 
 

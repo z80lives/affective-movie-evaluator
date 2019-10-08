@@ -1,8 +1,30 @@
 import cv2
+#import wx
 
 class Webcam:
+    imgBuffer = None
+    rgbFrame = None
+    smallRGB=None
     def __init__(self):
+        self.open()
+        self.fps = 15
+
+    def open(self):
         self.cap = cv2.VideoCapture(0)
+
+    def close(self):
+        self.cap.release()
+        self.open()
+
+    def read(self):
+        ret, self.imgBuffer = self.cap.read()
+        self.rgbFrame = cv2.cvtColor(self.imgBuffer, cv2.COLOR_BGR2RGB)
+        self.smallRGB = cv2.resize(self.rgbFrame, (320,200))
+        return (ret, self.imgBuffer)
+
+    def getSize(self):
+        (h,w) = self.imgBuffer.shape[:2]
+        return (w,h)
 
     def setResolution(self, w, h):
         self.cap.set(3 , w)

@@ -7,7 +7,8 @@ from src.wx.samples import SampleTabPanel, SampleTabFrame
 from src.wx.analyse import AnalyseTabPanel
 from src.wx.movies import MoviesPanel
 from src.wx.person import PersonPanel
-        
+from src.gsr import GSRSensor
+
 def analyse_func(video_dir, video_file_name, fer,head,body,preview,_print):
     if fer:            
         _print("Analysing facial keypoints...")
@@ -54,6 +55,20 @@ class CPanelEventHandlers:
 
     def newRecord(self, event):
         self.print("Creating a new record")
+
+    def onNewSample(self, event):
+        class EmptyClass: pass
+        controllers = EmptyClass()
+        controllers.personController = PersonController()
+        controllers.movieController = MovieController()
+        controllers.sampleController = SampleController()
+        controllers.recordSystem = RecordSystem()
+        controllers.mediaplayer = VLCPlayer
+        #controllers.gsr = GSRSensor()
+        
+        recordTab = RecordTabPanel(self.panel_notebook, self, controllers)
+        idx = self.panel_notebook.AddPage(recordTab, "Record Screening")
+        self.Layout()
 
     def onNew(self, event):
         #file selector dialog
@@ -145,9 +160,8 @@ class CPanelEventHandlers:
 
         sys = RecordSystem()
         filename = sys.createSampleDir()
-    
         sys.saveMetaData(filename, data)
-        sys.start_recording("test", player, False, filename)
+        sys.start_recording("sample", player, False, filename)
         self.print("Record complete...")
         self.print("New sample created. sample_id= %s"%(filename))
         
