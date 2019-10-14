@@ -115,12 +115,13 @@ class MovieController(object):
         self.data = []
         for f in self.files:
             row = Movie(f)
+            
             try:
                 md  = self.metadata[f]
                 row = Movie(f, md['name'],
-                            md['genre'], md['year'],
-                            md["tags"]
-                )
+                            genre=md['genre'], year=md['year'],
+                            tags=md["tags"]
+                )               
                 self.indexed_data[md["id"]] = md
                 self.indexed_data2[md["id"]] = row
             except KeyError:

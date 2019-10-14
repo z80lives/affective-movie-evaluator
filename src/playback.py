@@ -7,7 +7,7 @@ import json
 class RecordSystem:    
     def __init__(self):
         self.writer = None
-        self.frame_count = 0
+        self.frame_count = 0  
 
     def getWriter(self, filename):
         fourcc = cv2.VideoWriter_fourcc(*'XVID')    

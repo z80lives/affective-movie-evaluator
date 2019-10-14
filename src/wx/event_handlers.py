@@ -118,7 +118,8 @@ class CPanelEventHandlers:
     def onMoviesTab(self, event):
         if self.moviesTab is None:
             tab_title = "Movies Panel"
-            moviesTab = MoviesPanel(self.panel_notebook, self, tab_title)
+            movieController = MovieController()
+            moviesTab = MoviesPanel(self.panel_notebook, self, tab_title, movieController)
             idx = self.panel_notebook.AddPage(moviesTab, tab_title)
             self.moviesTab = moviesTab
         else:

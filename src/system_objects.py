@@ -5,14 +5,16 @@ class Movie:
                  internetScore=None,
                  tags=""
     ):
+        self.id = None
         self.filename = filename
         self.name = name
         self.genre = genre
-        self.year=year,
+        self.year=year
         self.averageRating = ar
         self.currentRating = cr
         self.youtube = youtube
         self.internetScore = internetScore
+        self.tags=tags
 
     def getAttributes(self):
         attr = {
@@ -21,7 +23,8 @@ class Movie:
             "year": self.year,
             "averageRating": self.averageRating,
             "currentRating": self.currentRating,
-            "filename": self.filename
+            "filename": self.filename,
+            "tags": self.tags
         }
         if self.youtube is not  None:
             attr["youtube"] = self.youtube
