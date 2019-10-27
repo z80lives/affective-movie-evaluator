@@ -1,0 +1,52 @@
+{
+    "alive_in_joburg.mp4": {
+		"id": "1",
+		"name": "Alive in Jorbug",
+		"genre": "sci-fi",
+		"tags": "short",
+		"year": "2018",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": ""
+	},
+    "lights_out.mp4": {
+		"id": "2",
+		"name": "Lights Out",
+		"genre": "horror",
+		"tags": "short",
+		"year": "2018",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": ""
+    },
+    "one_small_step.mp4": {
+		"id": "3",
+		"name": "One small step",
+		"genre": "horror",
+		"tags": "short",
+		"year": "2018",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": ""
+    },
+    "watermelon.mp4": {
+		"id": "4",
+		"name": "Watermelon",
+		"genre": "horror",
+		"tags": "short",
+		"year": "2018",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": ""
+    },    
+    "spring.mp4": {
+		"id": "5",
+		"name": "Spring",
+		"genre": "horror",
+		"tags": "short",
+		"year": "2018",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": ""
+    }
+}
