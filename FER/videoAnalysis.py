@@ -4,8 +4,10 @@ import cv2
 from keras.models import load_model
 import numpy as np
 
-test_movie = "C:\\Users\\USER\\Desktop\\affective-movie-evaluator\\data\\da012c7f-f39e-4b4b-89b8-76575b7b24d9\\test.avi"
-camera = cv2.VideoCapture(0)
+#test_movie = "C:\\Users\\USER\\Desktop\\affective-movie-evaluator\\data\\da012c7f-f39e-4b4b-89b8-76575b7b24d9\\test.avi"
+test_movie = "../data/0efad150-04cd-47d5-bd2d-0594662b7064/sample.avi"
+#camera = cv2.VideoCapture(0)
+camera = cv2.VideoCapture(test_movie)
 
 detection_model_path = 'haarcascade_files/haarcascade_frontalface_default.xml'
 emotion_model_path = 'models/_mini_XCEPTION.102-0.66.hdf5'
@@ -24,7 +26,7 @@ while camera.isOpened():
     #frame2 = frame.clone()
     #frame2 = imutils.resize(frame,width=300)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_detection.detectMultiScale(gray,scaleFactor=1.05,minNeighbors=5,minSize=(30,30),maxSize=(300,300),flags=cv2.CASCADE_SCALE_IMAGE)
+    faces = face_detection.detectMultiScale(gray,scaleFactor=1.5,minNeighbors=5,minSize=(100,100),maxSize=(300,300),flags=cv2.CASCADE_SCALE_IMAGE)
     
     if len(faces) > 0:
     	face = faces[0]
@@ -46,7 +48,7 @@ while camera.isOpened():
     	emotion_probability = np.max(preds)
     	label = EMOTIONS[preds.argmax()]
 
-    	print(label, emotion_probability)
+    	print(label, emotion_probability, len(faces))
 
     	cv2.putText(
 					frame,
