@@ -10,6 +10,7 @@ FER/models/*.hdf5
 FER/models/*.dat
 
 data/
+movies/
 
 # C extensions
 *.so
