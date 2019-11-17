@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <script src="https://download.affectiva.com/js/3.2.1/affdex.js" >
+        </script>
+    </head>
+    <body>
+        <h1>Affdex JS</h1>
+        <video id="video" controls="controls">
+            <source src="./sample.mp4" />
+        </video>
+        <canvas id="canvasOut" width="640" height="480">
+
+        </canvas>
+            
+        <div id="affdex_elements">
+        
+        </div>
+        <script>
+        console.log("Wait");
+            var divRoot = document.getElementById("affdex_elements");
+            var video = document.getElementById("video");
+            var width=640;
+            var height=480;
+            var startTimestamp = (new Date()).getTime() / 1000;
+            var now = (new Date()).getTime() / 1000;
+
+            
+            var memoryCanvas = document.createElement('canvas');
+            memoryCanvas.width = 640;
+            memoryCanvas.height = 480;
+            var bufferContext = memoryCanvas.getContext('2d');
+
+            var aCanvas = document.getElementById("canvasOut");            
+            var context = aCanvas.getContext('2d');
+
+            function start(){
+                detector.detectAllExpressions();
+                detector.detectAllEmotions();
+                //detector.detectAllEmojis();
+                detector.detectAllAppearance();
+                detector.start();
+            }
+
+            video.addEventListener('play', function () {
+                var $this = this; //cache
+                startTimestamp = (new Date()).getTime() / 1000;
+                (function loop() {
+                    if (!$this.paused && !$this.ended) {
+                        bufferContext.drawImage($this, 0, 0);
+                        now = (new Date()).getTime() / 1000;
+                        var deltaTime = now - startTimestamp;
+                        var imageData = bufferContext.getImageData(0, 0, 640, 480);
+                        detector.process(imageData, deltaTime);
+                        setTimeout(loop, 1000 / 30); // drawing at 30fps
+                    }
+                })();
+            }, 0);
+            var startTimestamp = (new Date()).getTime() / 1000;
+
+            var faceMode = affdex.FaceDetectorMode.LARGE_FACES;
+            //var detector = new affdex.CameraDetector(divRoot, width, height, faceMode);
+            var detector = new affdex.FrameDetector(faceMode);
+
+            detector.addEventListener("onInitializeSuccess", function() {
+                console.log("Initialised..")
+            });
+
+        detector.addEventListener("onInitializeFailure", function() {
+            console.log("Failed to Initialise.")
+        });
+
+
+        function drawFeaturePoints(img, featurePoints) {
+
+            var hRatio = context.canvas.width / img.width;
+            var vRatio = context.canvas.height / img.height;
+            var ratio = Math.min(hRatio, vRatio);
+
+            context.strokeStyle = "#FFFFFF";
+            for (var id in featurePoints) {
+                context.beginPath();
+                context.arc(featurePoints[id].x,
+                featurePoints[id].y, 2, 0, 2 * Math.PI);
+                context.stroke();
+            }
+        }
+
+
+        /* 
+        onImageResults success is called when a frame is processed successfully and receives 3 parameters:
+        - Faces: Dictionary of faces in the frame keyed by the face id.
+                For each face id, the values of detected emotions, expressions, appearane metrics 
+                and coordinates of the feature points
+        - image: An imageData object containing the pixel values for the processed frame.
+        - timestamp: The timestamp of the captured image in seconds.
+        */
+        detector.addEventListener("onImageResultsSuccess", function (faces, image, timestamp) {
+            //context.drawImage(image.data, 0, 0);            
+            context.putImageData(image, 0, 0);
+            if(faces.length > 0){
+                drawFeaturePoints(image, faces[0].featurePoints);
+                console.log(faces[0].emotions);
+            }
+            
+            //console.log("Process done!", faces, timestamp);
+            //context.drawImage(image, 0, 0);
+        });
+
+        /* 
+        onImageResults success receives 3 parameters:
+        - image: An imageData object containing the pixel values for the processed frame.
+        - timestamp: An imageData object contain the pixel values for the processed frame.
+        - err_detail: A string contains the encountered exception.
+        */
+        detector.addEventListener("onImageResultsFailure", function (image, timestamp, err_detail) {});
+
+        detector.addEventListener("onResetSuccess", function() {});
+        detector.addEventListener("onResetFailure", function() {});
+
+        detector.addEventListener("onStopSuccess", function() {});
+        detector.addEventListener("onStopFailure", function() {});
+
+        detector.detectExpressions.smile = true;
+        //detector.start();
+        start();
+        </script>
+    </body>
+</html>
+

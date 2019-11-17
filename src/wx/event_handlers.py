@@ -173,7 +173,12 @@ class CPanelEventHandlers:
         #print("Sample Menu")
         #sampleTab = SampleTabPanel(self.panel_notebook, self)
         #self.panel_notebook.AddPage(sampleTab, "Sample Records")
-        sampleFrame = SampleTabFrame()
+        class EmptyClass: pass
+        controllers = EmptyClass()
+        controllers.personController = PersonController()
+        controllers.movieController = MovieController()
+        controllers.sampleController = SampleController()
+        sampleFrame = SampleTabFrame(controllers)
         sampleFrame.Show()
         self.Layout()
 

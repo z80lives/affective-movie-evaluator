@@ -8,5 +8,7 @@ class YouTubeModule:
     def download_video(self, movie_name, url):        
         yt = YouTube(url)
         yt.register_on_progress_callback(self.show_progress_bar)
-        
-        yt.streams.first().download("./movies/", movie_name)
+        movie_name = movie_name.split(".")        
+        if len(movie_name) > 1:
+            movie_name = movie_name[0]
+        yt.streams.filter(file_extension='mp4').first().download("./movies/", movie_name)

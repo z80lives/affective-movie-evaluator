@@ -33,21 +33,21 @@ while cap.isOpened():
         
         roi = sys.extract_roi(gray, face)
     
-        preds = sys. emotion_classifier.predict(roi)[0]
+        preds = sys.emotion_classifier.predict(roi)[0]
         emotion_probability = np.max(preds)
         label = sys.EMOTIONS[preds.argmax()]
 
         x,y,w,h = face
         cv2.rectangle(frame, (x, y), (x+w, y+h), (255, 0, 0))
         cv2.putText(
-	    frame,
-	    "%s, %.2f"%(label, emotion_probability),
-	    (x,y),
-	    cv2.FONT_HERSHEY_SIMPLEX,
-	    1,
-	    (0,0,128),
-	    2
-	)
+	        frame,
+	        "%s, %.2f"%(label, emotion_probability),
+	        (x,y),
+	        cv2.FONT_HERSHEY_SIMPLEX,
+	        1,
+	        (0,0,128),
+	        2
+	    )
 
 
     

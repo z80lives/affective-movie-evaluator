@@ -4,6 +4,8 @@ import json
 import os.path
 from src.system_objects import Movie, Sample, Person
 from tinydb import TinyDB, Query
+import pandas as pd #for returning the sample features
+import os.path #to check if file exist
 
 class SampleLoader(object):
     """ SampleLoader is responsible for aiding the load process of individual
@@ -30,6 +32,21 @@ class SampleController(object):
         self.sample_dir = sample_dir
         self._init = False
         self.data = {}
+
+    def init(self):
+        self.read_dirs()
+
+    def getSamplesByPerson(self, personId):
+        return [{"id": id, **self.data[id]} for id in self.data if self.data[id]["subject_name"] == int(personId)]
+
+    def getSamplesByMovie(self, movieId):
+        return [{"id": id, **self.data[id]} for id in self.data if self.data[id]["movie_id"] == movieId]
+
+    def getSampleIdsByMovie(self, movieId):
+        return [id for id in self.data if self.data[id]["movie_id"] == movieId]
+
+    def getSampleIdsByPerson(self, personId):
+        return [id for id in self.data if self.data[id]["subject_name"] == int(personId)]
 
 
     def read_dirs(self):
@@ -59,6 +76,23 @@ class SampleController(object):
 
     def get_metadata(self, _id):
         return self.data[_id]
+
+    def getFeatures(self, sample_id, metrics="fer"):
+        """
+        metrics: 'fer', 'eda', 'affdex.facs', 'affdex.age'
+        """
+        if metrics=="fer":
+            sample_file = self.sample_dir+sample_id+"/cat_face_emotions.csv"
+            if not os.path.exists(sample_file):
+                return None
+            return pd.read_csv(sample_file, header=0, index_col=0)
+        return 
+        
+    def hasFeatures(self, sample_id, feature_type):
+        """
+        returns whether given feature is implemented.
+        """
+        pass
 
 class PersonController(object):
     """
@@ -101,6 +135,9 @@ class MovieController(object):
         self.__init = False
         self.indexed_data = {}
         self.indexed_data2 = {}
+
+    def init(self):
+        self.read_files()
 
     def get_dir(self):
         return self.movie_dir

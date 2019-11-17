@@ -25,6 +25,9 @@ audiences mood and predict which type of content they are likely to enjoy.
  pyserial=3.4 (for gsr sensor)
  
 
+## Download movies
+Given a movie_index.json file present inside "movies" folder, run.
+python -m scripts.download_movies
 
 # Developement Guide
 ## Unit Tests

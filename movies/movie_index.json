@@ -7,7 +7,7 @@
 		"year": "2018",
 		"averageRating": 0.0,
 		"currentRating": 0.0,	
-		"youtube": ""
+		"youtube": "https://www.youtube.com/watch?v=iNReejO7Zu8"
 	},
     "lights_out.mp4": {
 		"id": "2",
@@ -17,17 +17,17 @@
 		"year": "2018",
 		"averageRating": 0.0,
 		"currentRating": 0.0,	
-		"youtube": ""
+		"youtube": "https://www.youtube.com/watch?v=FUQhNGEu2KA"
     },
     "one_small_step.mp4": {
 		"id": "3",
 		"name": "One small step",
-		"genre": "horror",
+		"genre": "animated",
 		"tags": "short",
 		"year": "2018",
 		"averageRating": 0.0,
 		"currentRating": 0.0,	
-		"youtube": ""
+		"youtube": "https://www.youtube.com/watch?v=yWd4mzGqQYo"
     },
     "watermelon.mp4": {
 		"id": "4",
@@ -37,16 +37,36 @@
 		"year": "2018",
 		"averageRating": 0.0,
 		"currentRating": 0.0,	
-		"youtube": ""
+		"youtube": "https://www.youtube.com/watch?v=lTxn2BuqyzU"
     },    
     "spring.mp4": {
 		"id": "5",
 		"name": "Spring",
-		"genre": "horror",
+		"genre": "animated",
+		"tags": "short",
+		"year": "2018",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": "https://www.youtube.com/watch?v=WhWc3b3KhnY"
+	},
+	"bao.mp4": {
+		"id": "6",
+		"name": "Bao",
+		"genre": "animated",
 		"tags": "short",
 		"year": "2018",
 		"averageRating": 0.0,
 		"currentRating": 0.0,	
 		"youtube": ""
+	},
+	"tears_of_steel.mp4": {
+		"id": "7",
+		"name": "Tears of Steel",
+		"genre": "sci-fi",
+		"tags": "short",
+		"year": "2012",
+		"averageRating": 0.0,
+		"currentRating": 0.0,	
+		"youtube": "https://www.youtube.com/watch?v=R6MlUcmOul8"
     }
 }
