@@ -1,0 +1,15 @@
+AFFECTIVA SDK itself is not included in our package because of their licensing policy. 
+https://developer.affectiva.com/affectiva-sdk-license-agreement/
+
+If you want to try with the features extracted from affectiva's model, please download the 
+the 60 day free evaluation or buy their services.
+
+In order to compile our extractor, please download the C++ version of the SDK. Our feature 
+extractor is a very simple console application that extracts the features from all the sample
+videos stored in data directory.
+
+Product Page
+https://www.affectiva.com/product/emotion-sdk/
+
+Developer Portal
+https://developer.affectiva.com/ 

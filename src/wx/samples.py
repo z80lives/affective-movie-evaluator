@@ -15,7 +15,8 @@ class SampleTabFrame(wx.Frame):
         
         self.setIcon()
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(myGrid, 1, wx.EXPAND)        
+        sizer.Add(myGrid, 1, wx.EXPAND)   
+             
         panel.SetSizerAndFit(sizer)
         #panel.SetSizer(sizer)
         panel.Layout()
