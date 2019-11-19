@@ -3,6 +3,7 @@ import wx
 from src.playback import RecordSystem, VLCPlayer
 from src.utils import SampleLoader, SampleController, MovieController, PersonController
 from src.wx.record import RecordTabPanel, CameraCaptureFrame
+from src.wx.test_screen import TestScreeningTab
 from src.wx.samples import SampleTabPanel, SampleTabFrame
 from src.wx.analyse import AnalyseTabPanel
 from src.wx.movies import MoviesPanel
@@ -68,6 +69,17 @@ class CPanelEventHandlers:
         
         recordTab = RecordTabPanel(self.panel_notebook, self, controllers)
         idx = self.panel_notebook.AddPage(recordTab, "Record Screening")
+        self.Layout()
+
+    def onNewScreening(self, event):
+        class EmptyClass: pass
+        controllers = EmptyClass()
+        controllers.movieController = MovieController()
+        controllers.sampleController = SampleController()
+        controllers.mediaplayer = VLCPlayer
+        
+        screeningTab = TestScreeningTab(self.panel_notebook, self, controllers)
+        idx = self.panel_notebook.AddPage(screeningTab, "Screening Tab")
         self.Layout()
 
     def onNew(self, event):

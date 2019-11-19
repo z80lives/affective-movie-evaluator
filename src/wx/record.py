@@ -97,7 +97,7 @@ class SearchBoxPerson(SearchBox):
 class SearchBoxMovie(SearchBox):
     movie_data =[]
     def __init__(self, parent, db_movie_list):
-        super(SearchBoxMovie, self).__init__(parent, title = "Search Person")
+        super(SearchBoxMovie, self).__init__(parent, title = "Search Movie")
         self.db_movie_list = db_movie_list
         self.populateList()
 

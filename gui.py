@@ -41,11 +41,15 @@ class ControlPanelFrame(wx.Frame, CPanelEventHandlers, MainControllerObject):
         test_camera = toolmenu.Append(wx.ID_ANY, "Test &Camera", "Test the camera")
 
         analysismenu = wx.Menu()
+        test_screen = analysismenu.Append(wx.ID_ANY, "Test &Screening", "Perform a test screening")
 
         #self.Bind(wx.EVT_MENU, self.onNew, newItem)
         self.Bind(wx.EVT_MENU, self.onNewSample, newItem)
+        
         self.Bind(wx.EVT_MENU, self.onAbout, aboutItem)
         self.Bind(wx.EVT_MENU, self.onQuit, exitItem)
+
+        self.Bind(wx.EVT_MENU, self.onNewScreening, test_screen)
 
         self.Bind(wx.EVT_MENU, self.onSampleMenu, samplesItem)
         self.Bind(wx.EVT_MENU, self.onCaptureTestButton, test_camera)
