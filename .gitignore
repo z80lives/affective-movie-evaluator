@@ -8,6 +8,7 @@ BEGR/models/dlib/*.data
 FER/haarcascade_files/*.xml
 FER/models/*.hdf5
 FER/models/*.dat
+models/*
 
 data/
 movies/
