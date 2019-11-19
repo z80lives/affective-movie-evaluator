@@ -77,16 +77,30 @@ class SampleController(object):
     def get_metadata(self, _id):
         return self.data[_id]
 
-    def getFeatures(self, sample_id, metrics="fer"):
+    def getFeatures(self, sample_id, metrics="emotions"):
         """
-        metrics: 'fer', 'eda', 'affdex.facs', 'affdex.age'
+        metrics: 'emotions', 'eda', 'affdex.facs', 'affdex.age', "affdex.va", "affdex.emotions"
         """
-        if metrics=="fer":
+        if metrics=="emotions":
             sample_file = self.sample_dir+sample_id+"/cat_face_emotions.csv"
             if not os.path.exists(sample_file):
                 return None
             return pd.read_csv(sample_file, header=0, index_col=0)
-        return 
+        if len(metrics) > len("affdex") and metrics[:6] == "affdex":
+            sample_file = self.sample_dir+sample_id+"/affdex_output/features.csv"
+            arg_split = metrics.split(".")
+            param = ""
+            df = pd.read_csv(sample_file, header=0, index_col=0)
+            if len(arg_split)==2:
+                param = arg_split[1]
+            if param == "va":
+                return df[["timestamp","valence","engagement"]]
+            elif param == "facs":
+                return df[["timestamp","facs", "attention", "eyeWiden"]]
+            elif param == "emotions":
+                return df[["timestamp","facs", "attention", "eyeWiden"]]
+            return df[["timestamp","joy","fear" "anger","contempt","disgust","sadness","surprise"]]
+        return None
         
     def hasFeatures(self, sample_id, feature_type):
         """
@@ -157,7 +171,8 @@ class MovieController(object):
                 md  = self.metadata[f]
                 row = Movie(f, md['name'],
                             genre=md['genre'], year=md['year'],
-                            tags=md["tags"]
+                            tags=md["tags"],
+                            id = md["id"]
                 )               
                 self.indexed_data[md["id"]] = md
                 self.indexed_data2[md["id"]] = row

@@ -11,7 +11,7 @@ from src.controllers import MainControllerObject
 import platform
 
 frame = None
-__MEM_VERSION__ = "0.1 alpha-92019"   #{release_number}.{iteration} release_type-{month}{year}
+__MEM_VERSION__ = "0.1 alpha-112019"   #{release_number}.{iteration} release_type-{month}{year}
 
 import builtins as __builtin__
 

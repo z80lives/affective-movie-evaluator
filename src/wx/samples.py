@@ -42,6 +42,11 @@ class SampleTabFrame(wx.Frame):
             grid.SetCellValue(row_index+1, 0, sample_id)   
             person_id = sampleController.data[sample_id]["subject_name"]   
             movie_id = sampleController.data[sample_id]["movie_id"]
+            score = None
+            try:
+                score = sampleController.data[sample_id]["score_5"]            
+            except KeyError:
+                pass
             movie = movieController.getMovieObjById(movie_id)
             person = self.controllers.personController.getPerson(person_id)
                         
@@ -49,6 +54,7 @@ class SampleTabFrame(wx.Frame):
             grid.SetCellValue(row_index+1, 2, str(person_id))
             grid.SetCellValue(row_index+1, 3, person["name"])
             grid.SetCellValue(row_index+1, 4, movie.name)
+            grid.SetCellValue(row_index+1, 5, str(score))
 
         for i in range(7):
             grid.AutoSizeColumn(i)      

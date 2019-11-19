@@ -3,9 +3,10 @@ class Movie:
                  name="", genre="", year="",
                  ar=0.0, cr=0.0, youtube=None,
                  internetScore=None,
-                 tags=""
+                 tags="",
+                 id=None
     ):
-        self.id = None
+        self.id = id
         self.filename = filename
         self.name = name
         self.genre = genre
@@ -18,6 +19,7 @@ class Movie:
 
     def getAttributes(self):
         attr = {
+            "id": self.id,
             "name": self.name,
             "genre": self.genre,
             "year": self.year,
