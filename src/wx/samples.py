@@ -25,7 +25,7 @@ class SampleTabFrame(wx.Frame):
 
     def setData(self, grid):
         #for col in )
-        titles= ["Sample ID", "Person ID", "Movie ID", "Person Name", "Movie Name", "Given Rating"]
+        titles= ["Sample ID", "Movie ID", "Person ID", "Person Name", "Movie Name", "Given Rating"]
         sampleController = self.controllers.sampleController
         #sampleController.init()
         movieController = self.controllers.movieController

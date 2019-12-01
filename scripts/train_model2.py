@@ -18,6 +18,9 @@ def feature_to_histogram(time_series, window_size=200, bins=10):
             time_end = time_range[1]
         time_slice = np.arange(time_start, time_end)
         w = time_series[time_start:time_end]
+        w = np.nan_to_num(w)
+        #print(w)
+        w[w == None] = 0
         #plt.plot(time_slice, w)
         feature_history_slices.append(w)
         histogram_slices = np.histogram(w, bins=bins)
@@ -42,9 +45,9 @@ samples = np.concatenate(sample_list)
 X = []
 y = []
 for sample in samples:
-    features = sample_controller.getFeatures(sample["id"], metrics="affdex.va")
+    features = sample_controller.getFeatures(sample["id"], metrics="motion")
     target = sample_controller.data[sample["id"]]["score_5"] 
-    eng = features["engagement"]
+    eng = features[["0"]]
     t = np.arange(len(eng))
     time_slices, histograms = feature_to_histogram(eng)
     histograms = np.concatenate(histograms)
@@ -72,13 +75,15 @@ pca = PCA(n_components=2)
 X_t = pca.fit_transform(X) 
 #plt.scatter(X_t[:,0], X_t[:,1], c=cols, cmap='viridis')
 #plt.show()
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score, mean_squared_error
 
 from sklearn import linear_model
 reg = linear_model.Ridge(alpha=.5)
 reg.fit(X, y) 
 y_hat = reg.predict(X)
 r2 = r2_score(y, y_hat) 
+mse = mean_squared_error(y, y_hat)
+print("Linear model (RIDGE) mse= ", np.round(mse,3))
 print("Linear model (RIDGE) r2= ", r2)
 #np.save("./models/ridge_model.npy", reg)
 
@@ -87,7 +92,10 @@ reg = linear_model.SGDRegressor(max_iter=1000)
 reg.fit(X, y) 
 y_hat = reg.predict(X)
 r2 = r2_score(y, y_hat) 
+mse = mean_squared_error(y, y_hat)
+print("Linear model (SGD) mse= ", np.round(mse,3))
 print("Linear model (SGD) r2= ", np.round(r2,3))
+
 
 
 from sklearn.ensemble import GradientBoostingRegressor
@@ -95,6 +103,8 @@ reg = GradientBoostingRegressor(n_estimators=100, learning_rate=0.1, max_depth=1
 reg.fit(X, y) 
 y_hat = reg.predict(X)
 r2 = r2_score(y, y_hat) 
+mse = mean_squared_error(y, y_hat)
+print("Gradient boost r2 mse= ", np.round(mse,3))
 print("Gradient boost r2= ", np.round(r2,3))
 
 from sklearn.neural_network import MLPRegressor
@@ -102,6 +112,8 @@ reg = MLPRegressor()
 reg.fit(X, y) 
 y_hat = reg.predict(X)
 r2 = r2_score(y, y_hat) 
+mse = mean_squared_error(y, y_hat)
+print("MLP mse= ", np.round(mse,3))
 print("Neural Network(MLP) Regressor r2= ", np.round(r2,3))
 
 from sklearn import svm
@@ -109,7 +121,11 @@ reg = svm.SVR(gamma="auto")
 reg.fit(X, y) 
 y_hat = reg.predict(X)
 r2 = r2_score(y, y_hat) 
+mse = mean_squared_error(y, y_hat)
+print("SVR mse= ", np.round(mse,3))
 print("Support Vector Regressor model r2= ", r2)
+
+np.save("models/model2_results.npy", (y, y_hat))
 
 #arr = np.array(demotions)
 #X = []
@@ -117,6 +133,7 @@ print("Support Vector Regressor model r2= ", r2)
 #    X.append(df.values)
 
 #X = np.array(X)
+
 #np.save("./alive_in_joburg.npy", X)
 
 #print(kmeans)

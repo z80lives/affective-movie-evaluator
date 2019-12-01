@@ -76,7 +76,8 @@ class MainControllerObject(object):
             if size is None:
                 dc.DrawBitmap(self.cameraBuffer, 0, 0)
             else:
-                dc.DrawBitmap(self.miniBuffer, 0, 0)
+                dc.DrawBitmap(self.miniBuffer, 0, 0, True)
+            evt.Skip()
 
     def addCameraFrame(self, frame, key, size=None):
         self.refreshFrames[key] = (frame, size)
@@ -100,6 +101,7 @@ class MainControllerObject(object):
             for key in self.refreshFrames:
                 self.refreshFrames[key][0].Refresh()
             #self.Refresh()
+        evt.Skip()
 
     def stop_camera(self):
         if self.cameraTimer:

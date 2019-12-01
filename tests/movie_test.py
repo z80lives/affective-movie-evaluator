@@ -9,7 +9,4 @@ class TestSampleLoader(unittest.TestCase):
         sys.readMetadata()
         movie_list = sys.listMovies()
         assert len(movie_list) == 2
-
-        
-
     

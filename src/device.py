@@ -1,5 +1,7 @@
+
 import cv2
 #import wx
+import time
 
 class Webcam:
     imgBuffer = None
@@ -7,10 +9,12 @@ class Webcam:
     smallRGB=None
     def __init__(self):
         self.open()
-        self.fps = 60
+        self.fps = 24 #60
 
     def open(self):
         self.cap = cv2.VideoCapture(0)
+        #self.cap = cv2.VideoCapture(1)
+        #self.cap = cv2.VideoCapture("/dev/video0")
 
     def close(self):
         self.cap.release()
@@ -20,6 +24,7 @@ class Webcam:
         ret, self.imgBuffer = self.cap.read()
         self.rgbFrame = cv2.cvtColor(self.imgBuffer, cv2.COLOR_BGR2RGB)
         self.smallRGB = cv2.resize(self.rgbFrame, (320,200))
+        #time.sleep(0.01)
         return (ret, self.imgBuffer)
 
     def getSize(self):
@@ -59,7 +64,6 @@ class Webcam:
                 break
             
             cv2.imshow("Webcam output", img)
-
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 

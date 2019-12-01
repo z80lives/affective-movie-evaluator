@@ -1,6 +1,7 @@
 import sys
 import glob
 import serial
+import os
 
 def serial_ports():
     """ Lists serial port names
@@ -37,7 +38,10 @@ def serial_ports():
 
 class GSRSensor(object):            
     def __init__(self):
-        self.active_port = "COM6"
+        if os.name == "posix":
+            self.active_port = "/dev/ttyUSB0"
+        else:
+            self.active_port = "COM6"
         self.gsr = None
 
     def openPort(self):
