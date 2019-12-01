@@ -7,7 +7,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
-import ext.facenet.align.detect_face as fn_detector #use facenet detector
+#import ext.facenet.align.detect_face as fn_detector #use facenet detector
 
 #test_movie = "C:\\Users\\USER\\Desktop\\affective-movie-evaluator\\data\\da012c7f-f39e-4b4b-89b8-76575b7b24d9\\test.avi"
 
@@ -67,7 +67,7 @@ def extract_features(camera, align_mode=None):
 	
 	plt.ion()
 
-	aligner = FaceAligner()
+	#aligner = FaceAligner()
 	#prvs = cv.cvtColor(frame1,cv.COLOR_BGR2GRAY)
 	
 

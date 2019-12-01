@@ -86,6 +86,12 @@ class SampleController(object):
             if not os.path.exists(sample_file):
                 return None
             return pd.read_csv(sample_file, header=0, index_col=0)
+
+        if metrics=="motion":
+            sample_file = self.sample_dir+sample_id+"/motion_history.csv"
+            if not os.path.exists(sample_file):
+                return None
+            return pd.read_csv(sample_file, header=0, index_col=0)
         if len(metrics) > len("affdex") and metrics[:6] == "affdex":
             sample_file = self.sample_dir+sample_id+"/affdex_output/features.csv"
             arg_split = metrics.split(".")

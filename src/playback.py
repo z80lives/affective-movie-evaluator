@@ -102,9 +102,9 @@ class VLCPlayer:
     def play_movie(self, file_name):
         #os.system("cvlc --play-and-exit "+file_name)
         #os.system("cvlc --fullscreen --play-and-exit "+file_name)
-        #os.system("cvlc --fullscreen --play-and-exit "+file_name)
+        os.system("cvlc --fullscreen --play-and-exit "+file_name)
         #os.system("\"C:\\Program Files (x86)\\VideoLAN\\VLC\\vlc.exe\" -I dummy --play-and-stop "+file_name)
-        os.system("\"C:\\Program Files\\VideoLAN\\VLC\\vlc.exe\" -I dummy --play-and-exit --video-on-top "+file_name)
+        #os.system("\"C:\\Program Files\\VideoLAN\\VLC\\vlc.exe\" -I dummy --play-and-exit --video-on-top "+file_name)
 
         print("Movie playback done")
         self.done = True
