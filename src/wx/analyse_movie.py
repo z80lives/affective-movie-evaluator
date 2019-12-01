@@ -18,6 +18,7 @@ class AnalyseMovieTabPanel(wx.Panel):
     recordMode=False
     last_sample_id=None
     mean_mag=[]
+    mean_aud_score = 0
     #timer = None    
     testStatus=False
     def __init__(self, parent, event_handler, controllers):
@@ -87,11 +88,6 @@ class AnalyseMovieTabPanel(wx.Panel):
         form_grid.Add((0,0), 0,0,0)
         form_grid.Add(form.btnCalculcate)
 
-        #vid = self.video_preview
-        #vid_container.Add(vid.videoFrame)
-        #vid.videoFrame.SetSize((320,200))
-        #vid_container.Add(vid.timeslider)
-        #vid = self.movie_player_ctrl
 
         ts_container.Add(self.serial_plotter)
 
