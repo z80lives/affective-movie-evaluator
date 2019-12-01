@@ -17,10 +17,10 @@ class SerialPlotter(wx.Panel):
     updateCallback=None
     xvals = None
     lastTime = 0
-    def __init__(self, parent, windowSize=10):
+    def __init__(self, parent, windowSize=10,xlim=(0,10),ylim=(360,600)):
         super().__init__(parent)
         self.figure = plt.figure(figsize=(20,20))
-        self.ax = plt.axes(xlim=(0,10), ylim=(340,600))
+        self.ax = plt.axes(xlim=xlim, ylim=ylim)
         self.plot_data, = self.ax.plot([],[])
         self.canvas = FigureCanvas(self, -1, self.figure)
         self.toolbar = NavigationToolbar(self.canvas)
