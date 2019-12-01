@@ -104,6 +104,8 @@ class AnalyseMovieTabPanel(wx.Panel):
         total_aud_score = []
         for sample in samples:
             total_aud_score.append(sample["score_5"])
+            #motion_history_df = pd.read_csv("./data/"+sample["id"]+"/motion_history.csv")
+            #print(motion_history_df.describe())
 
         #total_aud_score = np.array(total_aud_score)
         mean_aud_score = np.mean(total_aud_score)
