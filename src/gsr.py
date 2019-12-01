@@ -37,7 +37,7 @@ def serial_ports():
 
 class GSRSensor(object):            
     def __init__(self):
-        self.active_port = "COM6"
+        self.active_port = "COM7"
         self.gsr = None
 
     def openPort(self):

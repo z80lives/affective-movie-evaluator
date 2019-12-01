@@ -3,7 +3,7 @@ import wx
 class FormObj:
     pass
 
-class AnalyseTabPanel(wx.Panel):
+class AnalyseMovieTabPanel(wx.Panel):
     def __init__(self, parent, event_handler, _sid):
         super().__init__(parent, wx.ID_ANY)
         self.form = FormObj()
@@ -56,9 +56,9 @@ class AnalyseTabPanel(wx.Panel):
         
     def do_bind(self):
         self.form.btnCancel.Bind(wx.EVT_BUTTON, self.event_handler.onCloseAnalyserTab )
-        self.form.btnStart.Bind(wx.EVT_BUTTON,
-                                lambda event:
-                                self.event_handler.onAnalyse(event, self._sid, self.form)
-        )
+        #self.form.btnStart.Bind(wx.EVT_BUTTON,
+        #                        lambda event:
+        #                        self.event_handler.onAnalyse(event, self._sid, self.form)
+        #)
         
         

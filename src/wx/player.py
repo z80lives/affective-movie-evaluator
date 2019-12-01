@@ -7,12 +7,15 @@ class VideoPanel(wx.Panel):
     updateTimer = None
     callbacks={"onFrame": None}
     frame_count=0
+    current_frame=0
     state="play"
     def __init__(self, parent):
         super().__init__(parent, wx.ID_ANY, size=(320,200))
-        self.fps = 30
+        self.fps = 24
         self.frame = 0
         self.vidsrc = None
+        self.dc = None
+        self._Buffer = wx.Bitmap(*(320,200))
 
         #self.blank = np.zeros((320,200,3))
         self.blankMiniBuffer()
@@ -23,6 +26,7 @@ class VideoPanel(wx.Panel):
         self.updateTimer.Start(1000./self.fps)  
         self.Bind(wx.EVT_TIMER, self.update)
         self.Bind(wx.EVT_PAINT, self.onPaint)
+                
         #self.Bind(wx.EVT_CLOSE, self.onClose)
 
     
@@ -35,8 +39,8 @@ class VideoPanel(wx.Panel):
 
 
     def onPaint(self, evt):
-        self.dc = wx.BufferedPaintDC(self)
-        self.dc.DrawBitmap(self.miniBuffer, 0, 0)
+        self.dc = wx.BufferedPaintDC(self, self._Buffer)
+        #self.dc.DrawBitmap(self.miniBuffer, 0, 0)
 
     def blankMiniBuffer(self):
         frame = np.zeros((320,200,3))
@@ -45,10 +49,45 @@ class VideoPanel(wx.Panel):
         else:
             self.miniBuffer = self.miniBuffer = wx.Bitmap.FromBuffer(320, 200, frame)      
         self.Refresh()
+
+    def update(self, dcSrc):
+        dc = wx.MemoryDC()
+        dc.SelectObject(self._Buffer)
+        self.draw(dc)
+        dc.DrawBitmap(self.miniBuffer,0,0)
+        del dc
+        self.Refresh(eraseBackground=False)
+        self.Update()
         
-    def update(self, evt):
+    def draw(self, dc):
+        #self._Bitmap.CopyFromBuffer(frame)
         if self.vidsrc is None or (not self.vidsrc.isOpened()):
-            self.Refresh()
+            return
+            
+        if self.state == "stop":
+            frame = np.zeros((320,200,3))
+            self.miniBuffer.CopyFromBuffer(frame)
+            return
+
+        self.vidsrc.set(cv2.CAP_PROP_POS_FRAMES, self.frame-1)
+        ret, frame = self.vidsrc.read()
+        if ret:
+            
+            #fram = wx.Bitmap.FromBuffer(640, 480, self.camera.rgbFrame)
+            if self.callbacks["onFrame"]:
+                self.callbacks["onFrame"](frame)
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)     
+            frame = cv2.resize(frame, (320, 200))      
+            if self.state == "play": 
+                self.frame += 1            
+            #print(frame)
+            self.miniBuffer.CopyFromBuffer(frame)
+            #self._Buffer.CopyFromBuffer(frame)
+        #self.Refresh()
+
+    def update_old(self, evt):
+        if self.vidsrc is None or (not self.vidsrc.isOpened()):
+            self.Refresh(eraseBackground=False)
             return
         
         self.vidsrc.set(cv2.CAP_PROP_POS_FRAMES, self.frame-1)
@@ -69,6 +108,7 @@ class VideoPanel(wx.Panel):
 
     def stopVideo(self):
         self.state = "stop"
+        self.blankMiniBuffer()
 
     def playVideo(self):
         self.state = "play"
@@ -99,6 +139,11 @@ class VideoPlayerPanel(wx.Panel):
         
         v_sizer.Add(self.vidframe)
         v_sizer.Add(cpanel)
+        self.timeslider = wx.Slider(self, -1, 0, 0, 1000)
+        self.timeslider.SetRange(0, 1000)
+        self.timeslider.Disable()
+        v_sizer.Add(self.timeslider, 1, wx.EXPAND)
+
         self.SetSizer(v_sizer)
         self.Layout()
         self.bindActions()

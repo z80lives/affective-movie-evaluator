@@ -3,9 +3,9 @@ import wx
 from src.playback import RecordSystem, VLCPlayer
 from src.utils import SampleLoader, SampleController, MovieController, PersonController
 from src.wx.record import RecordTabPanel, CameraCaptureFrame
-from src.wx.test_screen import TestScreeningTab
+from src.wx.analyse_movie import AnalyseMovieTabPanel
 from src.wx.samples import SampleTabPanel, SampleTabFrame
-from src.wx.analyse import AnalyseTabPanel
+#from src.wx.analyse import AnalyseMovieTab
 from src.wx.movies import MoviesPanel
 from src.wx.person import PersonPanel
 from src.gsr import GSRSensor
@@ -71,16 +71,21 @@ class CPanelEventHandlers:
         idx = self.panel_notebook.AddPage(recordTab, "Record Screening")
         self.Layout()
 
-    def onNewScreening(self, event):
+    def onMovieAnalyse(self, event):
         class EmptyClass: pass
         controllers = EmptyClass()
         controllers.movieController = MovieController()
         controllers.sampleController = SampleController()
         controllers.mediaplayer = VLCPlayer
-        
-        screeningTab = TestScreeningTab(self.panel_notebook, self, controllers)
+
+        controllers.sampleController.read_dirs()
+
+        screeningTab = AnalyseMovieTabPanel(self.panel_notebook, self, controllers)
         idx = self.panel_notebook.AddPage(screeningTab, "Screening Tab")
         self.Layout()
+
+    def onNewScreening(self, event):
+        pass
 
     def onNew(self, event):
         #file selector dialog
@@ -212,7 +217,7 @@ class CPanelEventHandlers:
         _sid = pathname[:pathname.rindex("/")]
         _sid = _sid[_sid.rindex("/")+1:]
                 
-        analyseTab = AnalyseTabPanel(self.panel_notebook, self, _sid)
+        analyseTab = AnalyseMovieTabPanel(self.panel_notebook, self, _sid)
         self.panel_notebook.AddPage(analyseTab, "Analyse Sample")
         self.Layout()
         
